@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NeoPhase</title>
+    <meta name="description" content="NeoPhase, planlama, kalite, malzeme & ekipman, İSG ve maliyet süreçlerinizi tek ekrandan ve sahada çalışan yalın bir arayüzle yönetmenizi sağlar." />
+
+    <meta property="og:title" content="NeoPhase — Şantiyede yalın dijital yönetim" />
+    <meta property="og:description" content="Planlama, kalite, malzeme & ekipman, İSG ve maliyet tek platformda. Sahada kanıtlı, modüler ve hızlı kurulum." />
+    <meta property="og:image" content="/static/core/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'core/app.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="{% static 'core/app.js' %}" defer></script>
+    <style>
+      :root { --radius: 1.25rem }
+      html { scroll-behavior: smooth }
+      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; }
+      .container { max-width: 1280px; }
+      .btn-primary { @apply inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition; }
+      .btn-ghost { @apply inline-flex items-center justify-center px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50; }
+      .card { @apply rounded-2xl border p-5 bg-white; }
+      .muted { @apply text-gray-600; }
+      .chip { @apply inline-flex items-center gap-2 rounded-xl border px-3 py-1 text-sm text-gray-700 bg-white; }
+      
+      /* 3D Icon Styles */
+      .icon-3d {
+        @apply text-5xl mb-4;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        transition: all 0.3s ease;
+      }
+      
+      .icon-3d:hover {
+        transform: translateY(-2px) scale(1.05);
+        filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
+      }
+      
+      .icon-3d.blue {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .icon-3d.green {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .icon-3d.orange {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      .icon-3d.purple {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+       /* Sleek card + icon badge styling */
+       .fancy-card {
+         position: relative;
+         border: 1px solid rgba(2, 6, 23, 0.06);
+         --theme-rgb: 37,99,235;
+         --theme-tint: rgba(var(--theme-rgb), 0.06);
+         background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(249,250,251,0.92)),
+                     radial-gradient(100% 80% at 0% 0%, var(--theme-tint), transparent 60%);
+         box-shadow: 0 8px 24px rgba(17,24,39,0.06);
+         transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+         overflow: hidden;
+       }
+       .fancy-card:hover {
+         transform: translateY(-4px);
+         box-shadow: 0 16px 36px rgba(17,24,39,0.10);
+         border-color: rgba(var(--theme-rgb), 0.25);
+       }
+       .fancy-card::after {
+         content: "";
+         position: absolute;
+         inset: -1px;
+         border-radius: 1rem;
+         pointer-events: none;
+         background: radial-gradient(80% 60% at 100% 0%, rgba(var(--theme-rgb), 0.08), transparent 60%);
+         z-index: 0;
+       }
+       .fancy-card::before {
+         content: "";
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         height: 3px;
+         background: linear-gradient(90deg, rgba(var(--theme-rgb), 0.45), rgba(var(--theme-rgb), 0.15));
+         z-index: 1;
+       }
+       .theme-indigo { --theme-rgb: 79,70,229; }
+       .theme-emerald { --theme-rgb: 16,185,129; }
+       .theme-amber { --theme-rgb: 245,158,11; }
+       .theme-violet { --theme-rgb: 139,92,246; }
+       .theme-sky { --theme-rgb: 14,165,233; }
+       .theme-cyan { --theme-rgb: 6,182,212; }
+       .theme-rose { --theme-rgb: 244,63,94; }
+       .fancy-card > * { position: relative; z-index: 1; }
+
+       .icon-badge {
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         width: 72px;
+         height: 72px;
+         border-radius: 9999px;
+         box-shadow: 0 6px 18px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.35);
+         border: 1px solid rgba(255,255,255,0.25);
+         margin-bottom: 12px;
+       }
+       /* Theme the badge automatically to match the card */
+       .fancy-card .icon-badge {
+         background: linear-gradient(135deg, rgba(var(--theme-rgb), 0.95) 0%, rgba(var(--theme-rgb), 0.75) 100%);
+        }
+       .badge-blue { background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%); }
+       .badge-green { background: linear-gradient(135deg, #10b981 0%, #22d3ee 100%); }
+       .badge-orange { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
+       .badge-purple { background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%); }
+
+       .icon-white {
+         color: #ffffff;
+         -webkit-text-fill-color: #ffffff;
+         background: unset;
+       }
+
+       /* Modal base */
+       .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 50; }
+       .modal[aria-hidden="false"] { display: flex; }
+       .modal-backdrop { position: absolute; inset: 0; background: rgba(2,6,23,0.55); backdrop-filter: blur(6px); opacity: 0; transition: opacity .25s ease; }
+       .modal.show .modal-backdrop { opacity: 1; }
+       .modal-card {
+         position: relative; width: min(960px, 92vw); max-height: 86vh; overflow: auto;
+         border-radius: 1rem; border: 1px solid rgba(2,6,23,0.08);
+         background: linear-gradient(180deg, #ffffff, #F8FAFC);
+         box-shadow: 0 24px 60px rgba(2,6,23,0.25);
+         transform: translateY(8px) scale(.98); opacity: 0; transition: transform .25s ease, opacity .25s ease;
+       }
+       .modal.show .modal-card { transform: translateY(0) scale(1); opacity: 1; }
+       .modal-header { padding: 1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(2,6,23,0.06); }
+       .modal-title { font-weight: 700; font-size: 1.125rem; }
+       .modal-content { padding: 1rem 1.25rem 1.25rem; }
+       .modal-close { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: .75rem; border: 1px solid #e5e7eb; background: #fff; }
+       .modal-close:hover { background: #f3f4f6; }
+       .banner {
+         position: relative; border-radius: .875rem; overflow: hidden; padding: 24px; margin-bottom: 16px;
+         background: radial-gradient(120% 120% at 0% 0%, rgba(59,130,246,.18), transparent 50%),
+                     radial-gradient(120% 120% at 100% 0%, rgba(124,58,237,.18), transparent 50%),
+                     linear-gradient(180deg, #0ea5e9 0%, #3b82f6 20%, #7c3aed 100%);
+         color: white;
+       }
+       .banner h3 { font-size: 1.25rem; font-weight: 700; }
+       .banner p { opacity: .95; }
+       .banner .badge { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); color: #fff; }
+       .viz-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 12px; }
+       .viz-card { border: 1px solid #e5e7eb; border-radius: .75rem; background: #fff; padding: 12px; display: flex; gap: 10px; align-items: center; }
+       .viz-card i { font-size: 20px; }
+       .viz-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; margin-top: 12px; }
+       .mock {
+         border-radius: .75rem; border: 1px solid #e5e7eb; background: linear-gradient(180deg, #fff, #f9fafb);
+         min-height: 220px; display: grid; place-items: center; color: #64748b;
+       }
+       .stat {
+         display: grid; gap: 2px; padding: 12px; border-radius: .75rem; background: #fff; border: 1px solid #e5e7eb;
+       }
+       .stat .num { font-weight: 700; font-size: 1.5rem; }
+    </style>
+  </head>
+  <body class="min-h-screen bg-white text-gray-900">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:text-blue-700 focus:ring-2 focus:ring-blue-500 px-3 py-1 rounded">İçeriğe geç</a>
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
+      <nav class="container mx-auto px-5 h-14 flex items-center justify-between" aria-label="Birincil">
+        <a href="#" class="flex items-center" aria-label="Ana sayfa">
+          <img src="{% static 'logo/neophase.png' %}" alt="Logo" class="h-6 w-auto select-none transition-opacity hover:opacity-90" loading="lazy" decoding="async" />
+        </a>
+        <div class="hidden md:flex items-center gap-6">
+          <a href="#why" class="px-2 py-1 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Neden</a>
+          <a href="#what" class="px-2 py-1 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Ne sunuyoruz</a>
+          <a href="#proof" class="px-2 py-1 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Referanslar</a>
+          <a href="#start" class="btn-primary">Pilot başlat</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main" class="container mx-auto px-5">
+      <!-- HERO -->
+      <section id="hero" class="py-14 md:py-20">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <h1 class="text-3xl md:text-5xl font-bold leading-snug">Projelerinizde <span class="text-blue-700">net</span>, <span class="text-blue-700">hızlı</span> ve <span class="text-blue-700">ölçülebilir</span> dijital yönetim.</h1>
+            <p class="mt-4 text-lg muted">Planlama, kalite, malzeme ve ekipman, iş güvenliği ve maliyet yönetimi süreçlerini uçtan uca dijitalleştirir; veriyi tek platformda toplar ve yönetimi kolaylaştırır.</p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="chip">Hızlı devreye alma</span>
+              <span class="chip">Kolay entegrasyon</span>
+              <span class="chip">Ölçülebilir fayda</span>
+              <span class="chip">Modüler</span>
+            </div>
+
+          </div>
+          <div id="hero-slideshow" class="h-56 md:h-72 rounded-2xl border overflow-hidden bg-gray-50 flex items-center justify-center relative"
+               data-images="{% static 'dashboard/1.jpeg' %}|{% static 'dashboard/2.jpeg' %}|{% static 'dashboard/3.jpeg' %}|{% static 'dashboard/4.jpeg' %}|{% static 'dashboard/5.jpeg' %}|{% static 'dashboard/6.jpeg' %}">
+            <img data-slideshow-a alt="NeoPhase demo"
+                 src="{% static 'dashboard/1.jpeg' %}"
+                 class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-700 select-none" loading="eager" />
+            <img data-slideshow-b alt="NeoPhase demo"
+                 src="{% static 'dashboard/2.jpeg' %}"
+                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 select-none" aria-hidden="true" />
+          </div>
+        </div>
+      </section>
+
+             <!-- WHY -->
+       <section id="why" class="py-10">
+         <div class="grid md:grid-cols-3 gap-4">
+           <div class="card fancy-card theme-indigo cursor-pointer" role="button" tabindex="0" data-modal-target="modal-why-ease" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-blue"><i class="fas fa-mouse-pointer icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Kolay Kullanım</h3>
+             <p class="mt-2 muted text-sm">Hiç eğitim gerektirmez. Herkes ilk günden rahatça kullanır.</p>
+           </div>
+           <div class="card fancy-card theme-emerald cursor-pointer" role="button" tabindex="0" data-modal-target="modal-why-fast" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-green"><i class="fas fa-rocket icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Hızlı Başlangıç</h3>
+             <p class="mt-2 muted text-sm">Tüm süreçleri kısa sürede dijitale taşıyın.</p>
+           </div>
+           <div class="card fancy-card theme-amber cursor-pointer" role="button" tabindex="0" data-modal-target="modal-why-impact" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-orange"><i class="fas fa-chart-line icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Anında Katkı</h3>
+             <p class="mt-2 muted text-sm">Operasyon hızlanır, maliyetler düşer, ekibiniz rahatlar.</p>
+           </div>
+         </div>
+       </section>
+
+             <!-- WHAT -->
+       <section id="what" class="py-10">
+         <h2 class="text-2xl md:text-3xl font-bold">Ne sunuyoruz?</h2>
+         <p class="mt-2 muted">Tüm proje süreçlerinizi dijitalleştiriyoruz. Planlama, kalite, İSG, proje yönetimi, maliyet kontrolü — hepsi tek platformda.</p>
+         <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+           <div class="card fancy-card theme-indigo cursor-pointer" role="button" tabindex="0" data-modal-target="modal-what-planning" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-blue"><i class="fas fa-clipboard-check icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Planlama & Kalite</h3>
+             <p class="mt-2 muted text-sm">Proje planları, kalite kontrol/denetim, NCR takibi, kalite günlükleri, standart yönetimi.</p>
+           </div>
+           <div class="card fancy-card theme-emerald cursor-pointer" role="button" tabindex="0" data-modal-target="modal-what-hse" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-green"><i class="fas fa-shield-alt icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">İSG & Güvenlik</h3>
+             <p class="mt-2 muted text-sm">İş güvenliği denetimleri, risk değerlendirmeleri, eğitim takibi, kaza raporları, güvenlik protokolleri.</p>
+           </div>
+           <div class="card fancy-card theme-amber cursor-pointer" role="button" tabindex="0" data-modal-target="modal-what-project" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-orange"><i class="fas fa-tasks icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Proje Yönetimi</h3>
+             <p class="mt-2 muted text-sm">Görev atamaları, ilerleme takibi, kaynak yönetimi, zaman çizelgeleri, milestone kontrolü.</p>
+           </div>
+           <div class="card fancy-card theme-violet cursor-pointer" role="button" tabindex="0" data-modal-target="modal-what-cost" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-purple"><i class="fas fa-calculator icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Maliyet & Analiz</h3>
+             <p class="mt-2 muted text-sm">Bütçe takibi, maliyet analizi, ROI hesaplamaları, performans metrikleri, detaylı raporlama.</p>
+           </div>
+         </div>
+         <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+           <div class="card fancy-card theme-sky cursor-pointer" role="button" tabindex="0" data-modal-target="modal-what-mobile" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-blue"><i class="fas fa-mobile-alt icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Mobil & Offline</h3>
+             <p class="mt-2 muted text-sm">Sahada foto/video kayıt, QR kod tarama, offline veri girişi, anlık senkronizasyon.</p>
+           </div>
+           <div class="card fancy-card theme-cyan cursor-pointer" role="button" tabindex="0" data-modal-target="modal-what-integration" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-green"><i class="fas fa-plug icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Entegrasyon</h3>
+             <p class="mt-2 muted text-sm">REST/GraphQL API, Excel/CSV import/export, mevcut sistemlerle bağlantı, otomatik veri akışı.</p>
+           </div>
+           <div class="card fancy-card theme-rose cursor-pointer" role="button" tabindex="0" data-modal-target="modal-what-analytics" title="Detayları görmek için tıklayın">
+             <span class="icon-badge badge-orange"><i class="fas fa-chart-bar icon-3d icon-white"></i></span>
+             <h3 class="font-semibold">Akıllı Raporlama</h3>
+             <p class="mt-2 muted text-sm">Gerçek zamanlı dashboardlar, özelleştirilebilir raporlar, trend analizi, otomatik uyarılar.</p>
+           </div>
+         </div>
+       </section>
+
+             <!-- PROOF -->
+        <section id="proof" class="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
+          <h2 class="text-2xl md:text-3xl font-bold text-center">Referanslarımız</h2>
+          <p class="mt-3 md:mt-4 text-center muted max-w-3xl mx-auto text-base md:text-lg">Dünya çapında enerji ve endüstri liderleriyle aynı projelerde yer aldık; sahada kanıtlanmış kurulumlarımız kaliteyi yükseltir, riskleri azaltır ve ilk haftalardan itibaren ölçülebilir değer üretir.</p>
+          <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-14 items-center justify-items-center">
+            <div class="h-24 md:h-28 w-56 md:w-72 flex items-center justify-center border-b-2" style="border-color:#2563EB">
+              <img src="{% static 'logo/Socar.png' %}" alt="SOCAR" class="max-h-full max-w-full object-contain" />
+            </div>
+            <div class="h-24 md:h-28 w-56 md:w-72 flex items-center justify-center border-b-2" style="border-color:#0072BC">
+              <img src="{% static 'logo/Gazprom.png' %}" alt="GAZPROM" class="max-h-full max-w-full object-contain" />
+            </div>
+            <div class="h-24 md:h-28 w-56 md:w-72 flex items-center justify-center border-b-2" style="border-color:#111827">
+              <img src="{% static 'logo/Basf.png' %}" alt="BASF" class="max-h-full max-w-full object-contain" />
+            </div>
+            <div class="h-24 md:h-28 w-56 md:w-72 flex items-center justify-center border-b-2" style="border-color:#EF4444">
+              <img src="{% static 'logo/Botas.png' %}" alt="BOTAŞ" class="max-h-full max-w-full object-contain" />
+            </div>
+          </div>
+          <div class="mt-10 max-w-5xl mx-auto text-center rounded-2xl border bg-white/70 px-6 py-6 shadow-[0_8px_30px_rgba(11,27,59,0.06)] space-y-2">
+            <p class="text-gray-900">
+              <span class="font-semibold">Projelerinde yer aldığımız markalar:</span>
+              <span class="ml-2 text-gray-700">SOCAR • Gazprom • BASF • BOTAŞ</span>
+            </p>
+            <p class="text-gray-900">
+              <span class="font-semibold">Doğrudan hizmet verdiğimiz yüklenici şirketler:</span>
+              <span class="ml-2 text-gray-700">İlk İnşaat • Teknokon • Üstay • Kolin • Kalyon</span>
+            </p>
+          </div>
+          
+       </section>
+
+      <!-- CTA / START -->
+      <section id="start" class="py-12">
+        <div class="rounded-2xl border p-6 md:p-8 bg-gray-50">
+          <h2 class="text-2xl md:text-3xl font-bold">Pilot kurulum</h2>
+          <p class="mt-2 muted">Sahada gerçek fayda için küçük başlayın, ihtiyaca göre büyütün.</p>
+
+          {% if success %}
+          <div class="mt-6 rounded-xl border p-4 bg-green-50 text-green-800 flex items-start gap-3">
+            <span aria-hidden="true">✓</span>
+            <p class="font-medium">Teşekkürler! 24 saat içinde dönüş yapacağız.</p>
+          </div>
+          {% endif %}
+
+          <form method="post" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4" novalidate>
+            {% csrf_token %}
+            <div>
+              <label for="id_company" class="block text-sm font-medium">Şirket adı</label>
+              {{ form.company }}
+            </div>
+            <div>
+              <label for="id_email" class="block text-sm font-medium">E‑posta</label>
+              {{ form.email }}
+            </div>
+            <div class="md:col-span-2">
+              <label for="id_message" class="block text-sm font-medium">Mesaj (opsiyonel)</label>
+              {{ form.message }}
+              <div class="text-xs text-gray-500 mt-1">En fazla 240 karakter.</div>
+            </div>
+            <div class="md:col-span-2 flex items-center gap-2">
+              {{ form.kvkk }}
+              <label for="id_kvkk" class="text-sm">KVKK onayını kabul ediyorum</label>
+            </div>
+            <div class="md:col-span-2">
+              <button class="btn-primary" type="submit">Gönder</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODALS -->
+    <div class="modal" id="modal-why-ease" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-why-ease-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-why-ease-title">Kolay Kullanım</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">Dakikalar içinde öğrenilir</span><span class="badge">Sade iş akışları</span></div>
+            <h3>Sahada herkesin rahatça kullanabildiği yalın arayüz</h3>
+            <p>Buton sayısını ve adım sayısını minimumda tutan, net metinlerle ve büyük dokunmatik hedeflerle tasarlandı.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Form doldurma akışı (örnek ekran)</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Eğitim süresi</span><span class="num">≤ 30 dk</span></div>
+              <div class="stat"><span class="label">Kullanıcı memnuniyeti</span><span class="num">%92</span></div>
+              <div class="stat"><span class="label">Gerekli tıklama</span><span class="num">-35%</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-hand-pointer text-blue-600"></i><div><div>Tek dokunuş aksiyonlar</div><small>Hızlı kaydetme, foto ekleme.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-language text-indigo-600"></i><div><div>Açık, net dil</div><small>Jargonsuz, anlaşılır metinler.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-mobile-screen-button text-sky-600"></i><div><div>Mobil öncelikli</div><small>Eldivenle bile kullanılabilir.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-why-fast" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-why-fast-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-why-fast-title">Hızlı Başlangıç</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">Kurulum: Günler</span><span class="badge">Hazır şablonlar</span></div>
+            <h3>Provalar yerine doğrudan sahada hızlı devreye alma</h3>
+            <p>Ön tanımlı süreç şablonları ve içeri aktarma araçlarıyla başlangıç süresini kısaltıyoruz.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Kurulum sihirbazı (örnek ekran)</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">İlk canlı</span><span class="num">≤ 5 gün</span></div>
+              <div class="stat"><span class="label">Şablon kapsamı</span><span class="num">20+</span></div>
+              <div class="stat"><span class="label">Zaman tasarrufu</span><span class="num">%40</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-file-import text-green-600"></i><div><div>Excel/CSV içe aktarma</div><small>Mevcut veriyi taşıyın.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-rocket text-teal-600"></i><div><div>Pilot akışı</div><small>Küçük başla, hızla ölçekle.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-plug text-cyan-600"></i><div><div>Çevik entegrasyon</div><small>Hafif web kancaları.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-why-impact" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-why-impact-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-why-impact-title">Anında Katkı</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">Hız</span><span class="badge">Verimlilik</span></div>
+            <h3>İlk haftalardan itibaren ölçülebilir değer üretir</h3>
+            <p>Operasyon hızı artar, raporlama hataları azalır, saha-Ofis iletişimi netleşir.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Canlı ilerleme görselleştirme</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Raporlama süresi</span><span class="num">-55%</span></div>
+              <div class="stat"><span class="label">Geri bildirim döngüsü</span><span class="num">x2.1</span></div>
+              <div class="stat"><span class="label">Hata oranı</span><span class="num">-28%</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-bolt text-amber-600"></i><div><div>Anlık dashboard</div><small>Şantiye nabzını takip edin.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-diagram-project text-rose-600"></i><div><div>Akış netliği</div><small>Sorumluluklar görünür.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-bell text-indigo-600"></i><div><div>Otomatik uyarılar</div><small>Kritik eşiklerde bildirim.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-what-planning" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-what-planning-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-what-planning-title">Planlama & Kalite</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">NCR takibi</span><span class="badge">Standartlar</span></div>
+            <h3>Plan, denetim ve kalite kayıtları tek yerde</h3>
+            <p>İş paketleri, kontrol listeleri ve kalite günlükleri birbiriyle ilişkilidir.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Plan-Gantt + Kalite checklist</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">NCR kapanma</span><span class="num">%+37</span></div>
+              <div class="stat"><span class="label">Standart uyum</span><span class="num">%98</span></div>
+              <div class="stat"><span class="label">Revizyon izi</span><span class="num">Tam</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-clipboard-check text-blue-600"></i><div><div>Check-list</div><small>Adıma göre yönlendirme.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-images text-indigo-600"></i><div><div>Kanıt görselleri</div><small>Foto/Video ekleyin.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-link text-sky-600"></i><div><div>Kayıt ilişkileri</div><small>NCR-İş paketi bağlantısı.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-what-hse" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-what-hse-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-what-hse-title">İSG & Güvenlik</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">Risk değerlendirme</span><span class="badge">Denetim</span></div>
+            <h3>Tehlike yakalama, eğitim ve kaza yönetimi</h3>
+            <p>Risk kartları ve eğitim takvimi ile sürekli iyileştirme.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Risk matrisi + eğitim planı</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Kaza sıklığı</span><span class="num">-22%</span></div>
+              <div class="stat"><span class="label">Eğitim katılım</span><span class="num">%+31</span></div>
+              <div class="stat"><span class="label">İhlal bildirimi</span><span class="num">x1.8</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-shield-halved text-emerald-600"></i><div><div>Denetim turları</div><small>Checklist ile izleme.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-triangle-exclamation text-amber-600"></i><div><div>Tehlike bildir</div><small>Hızlı kayıt ve foto.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-graduation-cap text-teal-600"></i><div><div>Eğitim takibi</div><small>Yeterlilik kartları.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-what-project" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-what-project-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-what-project-title">Proje Yönetimi</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">Atama</span><span class="badge">Takvim</span></div>
+            <h3>Görevler, kaynaklar ve ilerleme aynı çizgide</h3>
+            <p>Atamalar ve onay süreçleriyle iş akışları görünür hale gelir.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Kanban + Takvim</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Tamamlanma hızı</span><span class="num">x1.6</span></div>
+              <div class="stat"><span class="label">Bloke iş</span><span class="num">-30%</span></div>
+              <div class="stat"><span class="label">Aşırı yüklenme</span><span class="num">-18%</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-tasks text-orange-600"></i><div><div>Kanban panoları</div><small>Durumlara göre takip.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-user-check text-blue-600"></i><div><div>Net sahiplik</div><small>Sorumlu ve izleyiciler.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-clock text-sky-600"></i><div><div>Zaman çizelgesi</div><small>Gantt/Timeline görünümü.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-what-cost" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-what-cost-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-what-cost-title">Maliyet & Analiz</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">Bütçe</span><span class="badge">ROI</span></div>
+            <h3>Bütçe, gerçekleşen ve tahmin aynı çerçevede</h3>
+            <p>Veri akışı otomatikleşir; kararlar sayısal zemin kazanır.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Maliyet dashboard + KPI</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Bütçe sapma</span><span class="num">-14%</span></div>
+              <div class="stat"><span class="label">ROI</span><span class="num">x2.4</span></div>
+              <div class="stat"><span class="label">Manuel rapor</span><span class="num">-50%</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-calculator text-violet-600"></i><div><div>Otomatik hesap</div><small>Formül ve kurallar.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-database text-cyan-600"></i><div><div>Veri entegrasyonu</div><small>ERP/Excel bağları.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-chart-line text-rose-600"></i><div><div>Trend analiz</div><small>Erken uyarı metrikleri.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-what-mobile" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-what-mobile-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-what-mobile-title">Mobil & Offline</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">QR</span><span class="badge">Offline</span></div>
+            <h3>Çekim yap, tarat, kaydet; bağlantı olmasa da</h3>
+            <p>Veriler bağlantı geldiğinde güvenle eşitlenir.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Mobil form + QR tarama</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Eşitleme</span><span class="num">Anlık</span></div>
+              <div class="stat"><span class="label">Medya limiti</span><span class="num">HD+</span></div>
+              <div class="stat"><span class="label">Hata kurtarma</span><span class="num">Otomatik</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-qrcode text-sky-600"></i><div><div>QR ile aç</div><small>İş paketine zıpla.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-camera text-rose-600"></i><div><div>Medya ekle</div><small>Foto/video kanıtı.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-cloud-arrow-up text-blue-600"></i><div><div>Akıllı eşitle</div><small>Bağlantı gelince yükle.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-what-integration" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-what-integration-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-what-integration-title">Entegrasyon</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">API</span><span class="badge">Webhook</span></div>
+            <h3>Mevcut sistemlerle çift yönlü veri akışı</h3>
+            <p>REST/GraphQL, hafif kuyruklar ve webhooklarla bağlanır.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">API explorer</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Bağlantı süresi</span><span class="num">≤ 1 gün</span></div>
+              <div class="stat"><span class="label">Endpoint</span><span class="num">60+</span></div>
+              <div class="stat"><span class="label">Başarım</span><span class="num">99.9%</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-sitemap text-indigo-600"></i><div><div>Haritalı veri</div><small>Alan eşlemeleri.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-file-arrow-down text-emerald-600"></i><div><div>Toplu aktarım</div><small>Excel/CSV.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-lock text-slate-700"></i><div><div>Güvenlik</div><small>Token/OAuth.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="modal-what-analytics" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-what-analytics-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-what-analytics-title">Akıllı Raporlama</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="banner">
+            <div class="flex items-center gap-3"><span class="badge">Dashboard</span><span class="badge">Otomasyon</span></div>
+            <h3>Karar vericiler için canlı görünürlük</h3>
+            <p>Özelleştirilebilir panolar, paylaşılabilir şablonlar.</p>
+          </div>
+          <div class="viz-hero">
+            <div class="mock">Dashboard örneği</div>
+            <div class="grid gap-3">
+              <div class="stat"><span class="label">Rapor hazırlama</span><span class="num">-60%</span></div>
+              <div class="stat"><span class="label">Paylaşım</span><span class="num">Tek tık</span></div>
+              <div class="stat"><span class="label">Sürüm</span><span class="num">İzlenebilir</span></div>
+            </div>
+          </div>
+          <div class="viz-grid">
+            <div class="viz-card"><i class="fa-solid fa-chart-pie text-pink-600"></i><div><div>Grafik bileşenleri</div><small>Çizgi/Bar/Pasta.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-sliders text-blue-600"></i><div><div>Filtreler</div><small>Proje/Alan/Zaman.</small></div></div>
+            <div class="viz-card"><i class="fa-solid fa-share-nodes text-emerald-600"></i><div><div>Paylaş</div><small>PDF/Link içi.</small></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="border-t py-10">
+      <div class="container mx-auto px-5 text-sm text-gray-600 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <p>NeoPhase — sahada kanıtlı dijital yönetim platformu.</p>
+        <p>
+          <a href="mailto:info@neophase.com" class="underline hover:no-underline">info@neophase.com</a>
+          <span class="mx-2">•</span>
+          © {{ year }}
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
