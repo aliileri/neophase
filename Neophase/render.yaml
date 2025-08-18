@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: neophase-web
+    env: python
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    startCommand: gunicorn Neophase.wsgi --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DJANGO_DEBUG
+        value: 0
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ALLOWED_HOSTS
+        value: neophasesoftware.com,www.neophasesoftware.com,neophasesoftware.de,www.neophasesoftware.de,neophasesoftware.online,www.neophasesoftware.online
