@@ -220,6 +220,26 @@
       document.querySelectorAll('.modal[aria-hidden="false"]').forEach(m => closeModal(m));
     }
   });
+
+  // Cookie consent banner
+  (function cookieConsent() {
+    try {
+      const key = 'np_cookie_consent_v1';
+      const accepted = localStorage.getItem(key) === '1';
+      const banner = document.getElementById('cookie-consent');
+      const acceptBtn = document.getElementById('cookie-accept');
+      if (!banner || !acceptBtn) return;
+      if (!accepted) {
+        banner.classList.remove('hidden');
+      }
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem(key, '1');
+        banner.classList.add('hidden');
+      });
+    } catch (_) {
+      // storage unavailable; fail silently
+    }
+  })();
 })();
 
 
