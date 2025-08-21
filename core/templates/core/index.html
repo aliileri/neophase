@@ -192,9 +192,9 @@
 
     <!-- NAVBAR -->
     <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
-      <nav class="container mx-auto px-5 h-14 flex items-center justify-between" aria-label="Birincil">
+      <nav class="container mx-auto px-5 h-28 md:h-32 flex items-center justify-between" aria-label="Birincil">
         <a href="#" class="flex items-center" aria-label="Ana sayfa">
-          <img src="{% static 'logo/neophase.png' %}" alt="Logo" class="h-6 w-auto select-none transition-opacity hover:opacity-90" loading="lazy" decoding="async" />
+          <img src="{% static 'logo/neophase.png' %}?v=2" alt="Logo" class="h-24 md:h-28 w-auto select-none transition-opacity hover:opacity-90" loading="lazy" decoding="async" />
         </a>
         <div class="hidden md:flex items-center gap-6">
           <a href="#why" class="px-2 py-1 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Neden</a>
@@ -687,10 +687,32 @@
         <div class="rounded-2xl border bg-white/95 backdrop-blur p-4 md:p-5 shadow-[0_8px_30px_rgba(11,27,59,0.10)] flex flex-col md:flex-row gap-3 md:gap-4 items-start md:items-center">
           <p class="text-sm text-gray-700">
             Deneyiminizi iyileştirmek için zorunlu ve anonim analitik çerezler kullanıyoruz. Devam ederek bunu kabul etmiş olursunuz.
-            <a href="#" class="underline hover:no-underline">Detaylar</a>
+            <a href="javascript:void(0)" class="underline hover:no-underline" data-modal-target="modal-cookie-details">Detaylar</a>
           </p>
           <div class="flex items-center gap-2 md:ml-auto">
             <button id="cookie-accept" class="btn-primary">Kabul et</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cookie Details Modal -->
+    <div class="modal" id="modal-cookie-details" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-cookie-details-title">
+      <div class="modal-backdrop" data-modal-close></div>
+      <div class="modal-card">
+        <div class="modal-header">
+          <div class="modal-title" id="modal-cookie-details-title">Çerez Kullanımı</div>
+          <button class="modal-close" aria-label="Kapat" data-modal-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-content">
+          <div class="space-y-3 text-sm text-gray-700">
+            <p>Bu sitede iki tür çerez kullanıyoruz:</p>
+            <ul class="list-disc pl-5">
+              <li><strong>Zorunlu çerezler</strong>: Site temel işlevleri için gereklidir ve devre dışı bırakılamaz.</li>
+              <li><strong>Analitik çerezler</strong>: Ziyaret deneyimini iyileştirmek amacıyla anonim olarak kullanım istatistikleri toplar.</li>
+            </ul>
+            <p>Analitik çerezler kişisel kimlik bilgisi içermez. Tarayıcınızın ayarlarından çerez tercihlerinizi yönetebilirsiniz.</p>
+            <p>Daha fazla bilgi için bizimle <a class="underline" href="mailto:info@neophase.com">iletişime geçin</a>.</p>
           </div>
         </div>
       </div>

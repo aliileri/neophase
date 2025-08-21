@@ -83,5 +83,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
+# Email configuration
+# Defaults are safe for development; override via environment for production
+EMAIL_BACKEND = os.environ.get('DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST', '')
+EMAIL_PORT = int(os.environ.get('DJANGO_EMAIL_PORT', '587')) if os.environ.get('DJANGO_EMAIL_PORT') else None
+EMAIL_HOST_USER = os.environ.get('DJANGO_EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('DJANGO_EMAIL_HOST_PASSWORD', '')
+EMAIL_USE_TLS = os.environ.get('DJANGO_EMAIL_USE_TLS', '1') == '1'
+EMAIL_USE_SSL = os.environ.get('DJANGO_EMAIL_USE_SSL', '0') == '1'
+DEFAULT_FROM_EMAIL = os.environ.get('DJANGO_DEFAULT_FROM_EMAIL', 'NeoPhase <no-reply@neophasesoftware.com>')
+SERVER_EMAIL = os.environ.get('DJANGO_SERVER_EMAIL', DEFAULT_FROM_EMAIL)
+
+
 
 
