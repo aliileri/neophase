@@ -176,51 +176,6 @@
     setInterval(swap, 5000);
   })();
 
-  // Modal handling
-  function openModalById(id) {
-    const modal = document.getElementById(id);
-    if (!modal) return;
-    modal.setAttribute('aria-hidden', 'false');
-    requestAnimationFrame(() => modal.classList.add('show'));
-    const focusable = modal.querySelector('.modal-close');
-    if (focusable) focusable.focus();
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal(modal) {
-    if (!modal) return;
-    modal.classList.remove('show');
-    setTimeout(() => modal.setAttribute('aria-hidden', 'true'), 200);
-    document.body.style.overflow = '';
-  }
-
-  document.addEventListener('click', (e) => {
-    const card = e.target.closest('[data-modal-target]');
-    if (card) {
-      const id = card.getAttribute('data-modal-target');
-      openModalById(id);
-      return;
-    }
-    const closeBtn = e.target.closest('[data-modal-close]');
-    if (closeBtn) {
-      const modal = e.target.closest('.modal');
-      closeModal(modal);
-      return;
-    }
-  });
-
-  // Backdrop click
-  document.querySelectorAll('.modal .modal-backdrop').forEach(backdrop => {
-    backdrop.addEventListener('click', () => closeModal(backdrop.closest('.modal')));
-  });
-
-  // ESC key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal[aria-hidden="false"]').forEach(m => closeModal(m));
-    }
-  });
-
   // Cookie consent banner
   (function cookieConsent() {
     try {
