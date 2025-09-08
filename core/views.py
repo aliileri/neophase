@@ -27,7 +27,11 @@ class ContactForm(forms.Form):
         max_length=240,
         widget=forms.Textarea(attrs={'rows': 3, 'class': 'control', 'placeholder': 'Opsiyonel kısa not'}),
     )
-    kvkk = forms.BooleanField(label='KVKK onayını kabul ediyorum', required=True)
+    kvkk = forms.BooleanField(
+        label='KVKK onayını kabul ediyorum',
+        required=True,
+        error_messages={'required': 'KVKK onayını kabul etmelisiniz.'},
+    )
 
 
 def index(request: HttpRequest) -> HttpResponse:
