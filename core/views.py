@@ -7,6 +7,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.core.mail import EmailMessage
+from .models import Lead
 
 
 class ContactForm(forms.Form):
@@ -43,6 +44,13 @@ def index(request: HttpRequest) -> HttpResponse:
             success = True
             # E-posta gönderimi
             cleaned = form.cleaned_data
+            # Save to DB
+            Lead.objects.create(
+                company=cleaned.get('company'),
+                email=cleaned.get('email'),
+                message=cleaned.get('message') or '',
+                kvkk=cleaned.get('kvkk', False),
+            )
             subject = 'NeoPhase — Yeni pilot başvuru'
             lines = [
                 'Yeni bir pilot başvuru alındı:\n',
