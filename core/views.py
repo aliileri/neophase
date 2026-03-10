@@ -3,11 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from django import forms
 from django.contrib import messages
-from django.http import HttpRequest, HttpResponse, HttpResponsePermanentRedirect
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.core.mail import EmailMessage
-from .models import Lead
 
 
 class ContactForm(forms.Form):
@@ -44,13 +43,6 @@ def index(request: HttpRequest) -> HttpResponse:
             success = True
             # E-posta gönderimi
             cleaned = form.cleaned_data
-            # Save to DB
-            Lead.objects.create(
-                company=cleaned.get('company'),
-                email=cleaned.get('email'),
-                message=cleaned.get('message') or '',
-                kvkk=cleaned.get('kvkk', False),
-            )
             subject = 'NeoPhase — Yeni pilot başvuru'
             lines = [
                 'Yeni bir pilot başvuru alındı:\n',
@@ -87,11 +79,9 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, 'core/index.html', context)
 
 
-def robots_txt(request: HttpRequest) -> HttpResponse:
-    content = "User-agent: *\nDisallow: \n"
-    return HttpResponse(content, content_type='text/plain')
-
-
-def favicon(request: HttpRequest) -> HttpResponsePermanentRedirect:
-    return HttpResponsePermanentRedirect('/static/core/logo/neophase.png')
-
+def st_automobile(request: HttpRequest) -> HttpResponse:
+    """ST AUTOMOBILE web page view."""
+    context = {
+        'year': timezone.now().year,
+    }
+    return render(request, 'core/st.html', context)

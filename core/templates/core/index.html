@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="tr" data-theme="light">
+<html lang="tr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>NeoPhase</title>
-    <meta name="description" content="NeoPhase, planlama, kalite, malzeme & ekipman, İSG ve maliyet süreçlerinizi tek ekrandan ve sahada çalışan yalın bir arayüzle yönetmenizi sağlar." />
+    <title>NeoPhase — Şantiyede Yalın Dijital Yönetim</title>
+    <meta name="description" content="NeoPhase, planlama, kalite, malzeme &amp; ekipman, İSG ve maliyet süreçlerinizi tek ekrandan ve sahada çalışan yalın bir arayüzle yönetmenizi sağlar." />
     <link rel="canonical" href="https://www.neophasesoftware.com/" />
 
     <meta property="og:title" content="NeoPhase — Şantiyede yalın dijital yönetim" />
-    <meta property="og:description" content="Planlama, kalite, malzeme & ekipman, İSG ve maliyet tek platformda. Sahada kanıtlı, modüler ve hızlı kurulum." />
+    <meta property="og:description" content="Planlama, kalite, malzeme &amp; ekipman, İSG ve maliyet tek platformda. Sahada kanıtlı, modüler ve hızlı kurulum." />
     <meta property="og:image" content="/static/core/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -19,332 +19,351 @@
     <link rel="apple-touch-icon" href="{% static 'logo/neophase.png' %}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'core/app.css' %}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="{% static 'core/app.js' %}" defer></script>
-    <style>
-      :root { --radius: 1.25rem }
-      html { scroll-behavior: smooth }
-      body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; }
-      .container { max-width: 1280px; }
-      .btn-primary { @apply inline-flex items-center justify-center px-5 py-3 rounded-2xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition; }
-      .btn-ghost { @apply inline-flex items-center justify-center px-4 py-2 rounded-xl border border-gray-200 hover:bg-gray-50; }
-      .card { @apply rounded-2xl border p-5 bg-white; }
-      .muted { @apply text-gray-600; }
-      .chip { @apply inline-flex items-center gap-2 rounded-xl border px-3 py-1 text-sm text-gray-700 bg-white; }
-      
-      /* 3D Icon Styles */
-      .icon-3d {
-        @apply text-5xl mb-4;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-        transition: all 0.3s ease;
-      }
-      
-      .icon-3d:hover {
-        transform: translateY(-2px) scale(1.05);
-        filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15));
-      }
-      
-      .icon-3d.blue {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      
-      .icon-3d.green {
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      
-      .icon-3d.orange {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-      
-      .icon-3d.purple {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-       /* Sleek card + icon badge styling */
-       .fancy-card {
-         position: relative;
-         border: 1px solid rgba(2, 6, 23, 0.06);
-         --theme-rgb: 37,99,235;
-         --theme-tint: rgba(var(--theme-rgb), 0.06);
-         background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(249,250,251,0.92)),
-                     radial-gradient(100% 80% at 0% 0%, var(--theme-tint), transparent 60%);
-         box-shadow: 0 8px 24px rgba(17,24,39,0.06);
-         transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-         overflow: hidden;
-       }
-       .fancy-card:hover {
-         transform: translateY(-4px);
-         box-shadow: 0 16px 36px rgba(17,24,39,0.10);
-         border-color: rgba(var(--theme-rgb), 0.25);
-       }
-       .fancy-card::after {
-         content: "";
-         position: absolute;
-         inset: -1px;
-         border-radius: 1rem;
-         pointer-events: none;
-         background: radial-gradient(80% 60% at 100% 0%, rgba(var(--theme-rgb), 0.08), transparent 60%);
-         z-index: 0;
-       }
-       .fancy-card::before {
-         content: "";
-         position: absolute;
-         top: 0;
-         left: 0;
-         right: 0;
-         height: 3px;
-         background: linear-gradient(90deg, rgba(var(--theme-rgb), 0.45), rgba(var(--theme-rgb), 0.15));
-         z-index: 1;
-       }
-       .theme-indigo { --theme-rgb: 79,70,229; }
-       .theme-emerald { --theme-rgb: 16,185,129; }
-       .theme-amber { --theme-rgb: 245,158,11; }
-       .theme-violet { --theme-rgb: 139,92,246; }
-       .theme-sky { --theme-rgb: 14,165,233; }
-       .theme-cyan { --theme-rgb: 6,182,212; }
-       .theme-rose { --theme-rgb: 244,63,94; }
-       .fancy-card > * { position: relative; z-index: 1; }
-
-       .icon-badge {
-         display: inline-flex;
-         align-items: center;
-         justify-content: center;
-         width: 72px;
-         height: 72px;
-         border-radius: 9999px;
-         box-shadow: 0 6px 18px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.35);
-         border: 1px solid rgba(255,255,255,0.25);
-         margin-bottom: 12px;
-       }
-       /* Theme the badge automatically to match the card */
-       .fancy-card .icon-badge {
-         background: linear-gradient(135deg, rgba(var(--theme-rgb), 0.95) 0%, rgba(var(--theme-rgb), 0.75) 100%);
-        }
-       .badge-blue { background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%); }
-       .badge-green { background: linear-gradient(135deg, #10b981 0%, #22d3ee 100%); }
-       .badge-orange { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
-       .badge-purple { background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%); }
-
-       .icon-white {
-         color: #ffffff;
-         -webkit-text-fill-color: #ffffff;
-         background: unset;
-       }
-       .banner {
-         position: relative; border-radius: .875rem; overflow: hidden; padding: 24px; margin-bottom: 16px;
-         background: radial-gradient(120% 120% at 0% 0%, rgba(59,130,246,.18), transparent 50%),
-                     radial-gradient(120% 120% at 100% 0%, rgba(124,58,237,.18), transparent 50%),
-                     linear-gradient(180deg, #0ea5e9 0%, #3b82f6 20%, #7c3aed 100%);
-         color: white;
-       }
-       .banner h3 { font-size: 1.25rem; font-weight: 700; }
-       .banner p { opacity: .95; }
-       .banner .badge { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); color: #fff; }
-       .viz-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 12px; }
-       .viz-card { border: 1px solid #e5e7eb; border-radius: .75rem; background: #fff; padding: 12px; display: flex; gap: 10px; align-items: center; }
-       .viz-card i { font-size: 20px; }
-       .viz-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; margin-top: 12px; }
-       .mock {
-         border-radius: .75rem; border: 1px solid #e5e7eb; background: linear-gradient(180deg, #fff, #f9fafb);
-         min-height: 220px; display: grid; place-items: center; color: #64748b;
-       }
-       .stat {
-         display: grid; gap: 2px; padding: 12px; border-radius: .75rem; background: #fff; border: 1px solid #e5e7eb;
-       }
-       .stat .num { font-weight: 700; font-size: 1.5rem; }
-    </style>
   </head>
-  <body class="min-h-screen bg-white text-gray-900">
-    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:bg-white focus:text-blue-700 focus:ring-2 focus:ring-blue-500 px-3 py-1 rounded">İçeriğe geç</a>
+  <body>
+    <a href="#main" class="sr-only">İçeriğe geç</a>
 
-    <!-- NAVBAR -->
-    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b">
-      <nav class="container mx-auto px-5 h-28 md:h-32 flex items-center justify-between" aria-label="Birincil">
-        <a href="#" class="flex items-center" aria-label="Ana sayfa">
-          <img src="{% static 'logo/neophase.png' %}?v=2" alt="Logo" class="h-24 md:h-28 w-auto select-none transition-opacity hover:opacity-90" loading="lazy" decoding="async" />
+    <!-- ═══════════════ NAVBAR ═══════════════ -->
+    <header class="navbar" id="navbar">
+      <nav class="container navbar-inner" aria-label="Birincil navigasyon">
+        <a href="#" class="navbar-logo" aria-label="Ana sayfa">
+          <img src="{% static 'logo/neophase.png' %}?v=2" alt="NeoPhase Logo" loading="eager" decoding="async" />
         </a>
-        <div class="hidden md:flex items-center gap-6">
-          <a href="#why" class="px-2 py-1 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Neden</a>
-          <a href="#what" class="px-2 py-1 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Ne sunuyoruz</a>
-          <a href="#proof" class="px-2 py-1 rounded-md text-gray-800 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Referanslar</a>
+
+        <div class="navbar-links">
+          <a href="#why" data-i18n="nav_why">Neden</a>
+          <a href="#stats" data-i18n="nav_stats">Rakamlar</a>
+          <a href="#what" data-i18n="nav_modules">Modüller</a>
+          <a href="#proof" data-i18n="nav_refs">Referanslar</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <!-- Language Switcher -->
+          <div class="lang-switcher" id="lang-switcher">
+            <button class="lang-btn" id="lang-toggle" aria-label="Dil seç" aria-expanded="false">
+              <i class="fas fa-globe"></i>
+              <span id="current-lang">TR</span>
+              <i class="fas fa-chevron-down lang-arrow"></i>
+            </button>
+            <div class="lang-dropdown" id="lang-dropdown">
+              <button class="lang-option active" data-lang="tr">
+                <span class="lang-flag">🇹🇷</span>
+                <span>Türkçe</span>
+              </button>
+              <button class="lang-option" data-lang="en">
+                <span class="lang-flag">🇬🇧</span>
+                <span>English</span>
+              </button>
+              <button class="lang-option" data-lang="de">
+                <span class="lang-flag">🇩🇪</span>
+                <span>Deutsch</span>
+              </button>
+            </div>
+          </div>
+
+          <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Menüyü aç/kapat" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+          </button>
         </div>
       </nav>
     </header>
 
-    <main id="main" class="container mx-auto px-5">
-      <!-- HERO -->
-      <section id="hero" class="py-14 md:py-20">
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 class="text-3xl md:text-5xl font-bold leading-snug">Projelerinizde <span class="text-blue-700">net</span>, <span class="text-blue-700">hızlı</span> ve <span class="text-blue-700">ölçülebilir</span> dijital yönetim.</h1>
-            <p class="mt-4 text-lg muted">Planlama, kalite, malzeme ve ekipman, iş güvenliği ve maliyet yönetimi süreçlerini uçtan uca dijitalleştirir; veriyi tek platformda toplar ve yönetimi kolaylaştırır.</p>
-            <div class="mt-6 flex flex-wrap gap-2">
-              <span class="chip">Hızlı devreye alma</span>
-              <span class="chip">Kolay entegrasyon</span>
-              <span class="chip">Ölçülebilir fayda</span>
-              <span class="chip">Modüler</span>
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+      <a href="#why" data-mobile-link data-i18n="nav_why">Neden</a>
+      <a href="#stats" data-mobile-link data-i18n="nav_stats">Rakamlar</a>
+      <a href="#what" data-mobile-link data-i18n="nav_modules">Modüller</a>
+      <a href="#proof" data-mobile-link data-i18n="nav_refs">Referanslar</a>
+    </div>
+
+    <!-- ═══════════════ MAIN ═══════════════ -->
+    <main id="main">
+
+      <!-- ────── HERO ────── -->
+      <section class="hero relative">
+        <!-- Animated Grid Background (Magic UI) -->
+        <div class="animated-grid" aria-hidden="true"></div>
+        <!-- Particle Canvas (Magic UI) -->
+        <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+        <div class="container" style="position:relative; z-index:2">
+          <div class="hero-grid">
+            <!-- Left -->
+            <div>
+              <div class="glass-badge hero-anim hero-anim-d1">
+                <span class="pulse-dot"></span>
+                <span data-i18n="hero_badge">Şantiye dijital yönetim platformu</span>
+              </div>
+
+              <h1 class="hero-anim hero-anim-d2 text-shimmer" style="margin-top:1.25rem" data-i18n-html="hero_title">
+                Projelerinizde
+                <span class="text-gradient">net, hızlı</span> ve
+                <span class="text-gradient">ölçülebilir</span>
+                dijital yönetim.
+              </h1>
+
+              <p class="hero-description hero-anim hero-anim-d3" data-i18n="hero_desc">
+                Planlama, kalite, malzeme ve ekipman, iş güvenliği ve maliyet yönetimi süreçlerini
+                uçtan uca dijitalleştirir; veriyi tek platformda toplar ve yönetimi kolaylaştırır.
+              </p>
+
+              <div class="hero-actions hero-anim hero-anim-d4">
+                <!-- Ripple Button (Magic UI) -->
+                <div class="ripple-container">
+                  <span class="ripple-ring" aria-hidden="true"></span>
+                  <span class="ripple-ring" aria-hidden="true"></span>
+                  <span class="ripple-ring" aria-hidden="true"></span>
+                  <a href="#what" class="shimmer-btn">
+                    <i class="fas fa-arrow-down" style="font-size:0.8rem"></i>
+                    <span data-i18n="hero_explore">Keşfet</span>
+                  </a>
+                </div>
+              </div>
+
+              <div class="hero-chips hero-anim hero-anim-d5">
+                <span class="feature-chip"><i class="fas fa-bolt"></i> <span data-i18n="chip_fast">Hızlı devreye alma</span></span>
+                <span class="feature-chip"><i class="fas fa-plug"></i> <span data-i18n="chip_integrate">Kolay entegrasyon</span></span>
+                <span class="feature-chip"><i class="fas fa-chart-line"></i> <span data-i18n="chip_measurable">Ölçülebilir fayda</span></span>
+                <span class="feature-chip"><i class="fas fa-cubes"></i> <span data-i18n="chip_modular">Modüler</span></span>
+              </div>
             </div>
 
-          </div>
-          <div id="hero-slideshow" class="h-56 md:h-72 rounded-2xl border overflow-hidden bg-gray-50 flex items-center justify-center relative"
-               data-images="{% static 'dashboard/1.jpeg' %}|{% static 'dashboard/2.jpeg' %}|{% static 'dashboard/3.jpeg' %}|{% static 'dashboard/4.jpeg' %}|{% static 'dashboard/5.jpeg' %}|{% static 'dashboard/6.jpeg' %}">
-            <img data-slideshow-a alt="NeoPhase demo"
-                 src="{% static 'dashboard/1.jpeg' %}"
-                 class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-700 select-none" loading="eager" />
-            <img data-slideshow-b alt="NeoPhase demo"
-                 src="{% static 'dashboard/2.jpeg' %}"
-                 class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 select-none" aria-hidden="true" />
+            <!-- Right: Dashboard visual with glow -->
+            <div class="hero-visual-wrapper hero-anim hero-anim-d3">
+              <div class="glow-bg" aria-hidden="true"></div>
+              <div class="hero-visual"
+                   id="hero-slideshow"
+                   data-images="{% static 'dashboard/1.jpeg' %}|{% static 'dashboard/2.jpeg' %}|{% static 'dashboard/3.jpeg' %}|{% static 'dashboard/4.jpeg' %}|{% static 'dashboard/5.jpeg' %}|{% static 'dashboard/6.jpeg' %}">
+                <img data-slideshow-a alt="NeoPhase dashboard"
+                     src="{% static 'dashboard/1.jpeg' %}"
+                     style="opacity:1; z-index:2" loading="eager" />
+                <img data-slideshow-b alt="NeoPhase dashboard"
+                     src="{% static 'dashboard/2.jpeg' %}"
+                     style="opacity:0; z-index:1" aria-hidden="true" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-             <!-- WHY -->
-       <section id="why" class="py-10">
-         <div class="grid md:grid-cols-3 gap-4">
-          <div class="card fancy-card theme-indigo">
-             <span class="icon-badge badge-blue"><i class="fas fa-mouse-pointer icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Kolay Kullanım</h3>
-             <p class="mt-2 muted text-sm">Hiç eğitim gerektirmez. Herkes ilk günden rahatça kullanır.</p>
-           </div>
-           <div class="card fancy-card theme-emerald">
-             <span class="icon-badge badge-green"><i class="fas fa-rocket icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Hızlı Başlangıç</h3>
-             <p class="mt-2 muted text-sm">Tüm süreçleri kısa sürede dijitale taşıyın.</p>
-           </div>
-           <div class="card fancy-card theme-amber">
-             <span class="icon-badge badge-orange"><i class="fas fa-chart-line icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Anında Katkı</h3>
-             <p class="mt-2 muted text-sm">Operasyon hızlanır, maliyetler düşer, ekibiniz rahatlar.</p>
-           </div>
-         </div>
-       </section>
+      <hr class="section-divider" />
 
-             <!-- WHAT -->
-       <section id="what" class="py-10">
-         <h2 class="text-2xl md:text-3xl font-bold">Ne sunuyoruz?</h2>
-         <p class="mt-2 muted">Tüm proje süreçlerinizi dijitalleştiriyoruz. Planlama, kalite, İSG, proje yönetimi, maliyet kontrolü — hepsi tek platformda.</p>
-         <div class="mt-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div class="card fancy-card theme-indigo">
-             <span class="icon-badge badge-blue"><i class="fas fa-clipboard-check icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Planlama & Kalite</h3>
-             <p class="mt-2 muted text-sm">Proje planları, kalite kontrol/denetim, NCR takibi, kalite günlükleri, standart yönetimi.</p>
-           </div>
-           <div class="card fancy-card theme-emerald">
-             <span class="icon-badge badge-green"><i class="fas fa-shield-alt icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">İSG & Güvenlik</h3>
-             <p class="mt-2 muted text-sm">İş güvenliği denetimleri, risk değerlendirmeleri, eğitim takibi, kaza raporları, güvenlik protokolleri.</p>
-           </div>
-           <div class="card fancy-card theme-amber">
-             <span class="icon-badge badge-orange"><i class="fas fa-tasks icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Proje Yönetimi</h3>
-             <p class="mt-2 muted text-sm">Görev atamaları, ilerleme takibi, kaynak yönetimi, zaman çizelgeleri, milestone kontrolü.</p>
-           </div>
-           <div class="card fancy-card theme-violet">
-             <span class="icon-badge badge-purple"><i class="fas fa-calculator icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Maliyet & Analiz</h3>
-             <p class="mt-2 muted text-sm">Bütçe takibi, maliyet analizi, ROI hesaplamaları, performans metrikleri, detaylı raporlama.</p>
-           </div>
-         </div>
-         <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="card fancy-card theme-sky">
-             <span class="icon-badge badge-blue"><i class="fas fa-mobile-alt icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Mobil & Offline</h3>
-             <p class="mt-2 muted text-sm">Sahada foto/video kayıt, QR kod tarama, offline veri girişi, anlık senkronizasyon.</p>
-           </div>
-          <div class="card fancy-card theme-cyan">
-             <span class="icon-badge badge-green"><i class="fas fa-plug icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Entegrasyon</h3>
-             <p class="mt-2 muted text-sm">REST/GraphQL API, Excel/CSV import/export, mevcut sistemlerle bağlantı, otomatik veri akışı.</p>
-           </div>
-          <div class="card fancy-card theme-rose">
-             <span class="icon-badge badge-orange"><i class="fas fa-chart-bar icon-3d icon-white"></i></span>
-             <h3 class="font-semibold">Akıllı Raporlama</h3>
-             <p class="mt-2 muted text-sm">Gerçek zamanlı dashboardlar, özelleştirilebilir raporlar, trend analizi, otomatik uyarılar.</p>
-           </div>
-         </div>
-       </section>
+      <!-- ────── WHY (Animated Border Cards + Glow Pulse) ────── -->
+      <section id="why" class="section">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <span class="section-pill"><i class="fas fa-sparkles"></i> <span data-i18n="why_pill">Neden NeoPhase</span></span>
+            <h2 class="text-shimmer" data-i18n-html="why_title">Operasyonunuzu <span class="text-gradient">dönüştürün</span></h2>
+            <p data-i18n="why_desc">NeoPhase ile sahada zaman kaybını azaltın, kaliteyi artırın ve proje risklerini minimuma indirin.</p>
+          </div>
 
-             <!-- PROOF -->
-        <section id="proof" class="py-12 md:py-16 bg-gradient-to-b from-white to-gray-50">
-          <h2 class="text-2xl md:text-3xl font-bold text-center">Referanslarımız</h2>
-          <p class="mt-3 md:mt-4 text-center muted max-w-3xl mx-auto text-base md:text-lg">Dünya çapında enerji ve endüstri liderleriyle aynı projelerde yer aldık; sahada kanıtlanmış kurulumlarımız kaliteyi yükseltir, riskleri azaltır ve ilk haftalardan itibaren ölçülebilir değer üretir.</p>
-          <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 md:gap-14 items-center justify-items-center">
-            <div class="h-44 sm:h-48 md:h-28 w-full sm:w-56 md:w-72 pb-4 sm:pb-6 flex items-center justify-center border-b-2" style="border-color:#2563EB">
-              <img src="{% static 'logo/Socar.png' %}" alt="SOCAR" class="max-h-full max-w-full object-contain" />
+          <div class="bento-grid stagger">
+            <div class="animated-border-card animate-on-scroll">
+              <div class="animated-border-card-inner">
+                <div class="icon-box indigo">
+                  <i class="fas fa-mouse-pointer"></i>
+                </div>
+                <h3 data-i18n="why_card1_title">Kolay Kullanım</h3>
+                <p style="color:var(--text-secondary); font-size:0.875rem; line-height:1.6" data-i18n="why_card1_desc">Hiç eğitim gerektirmez. Herkes ilk günden rahatça kullanır. Sezgisel arayüz, hızlı adaptasyon.</p>
+              </div>
             </div>
-            <div class="h-44 sm:h-48 md:h-28 w-full sm:w-56 md:w-72 pb-4 sm:pb-6 flex items-center justify-center border-b-2" style="border-color:#0072BC">
-              <img src="{% static 'logo/Gazprom.png' %}" alt="GAZPROM" class="max-h-full max-w-full object-contain" />
+
+            <div class="animated-border-card animate-on-scroll">
+              <div class="animated-border-card-inner">
+                <div class="icon-box emerald">
+                  <i class="fas fa-rocket"></i>
+                </div>
+                <h3 data-i18n="why_card2_title">Hızlı Başlangıç</h3>
+                <p style="color:var(--text-secondary); font-size:0.875rem; line-height:1.6" data-i18n="why_card2_desc">Tüm süreçleri kısa sürede dijitale taşıyın. Kurulum günler değil, saatler alır.</p>
+              </div>
             </div>
-            <div class="h-44 sm:h-48 md:h-28 w-full sm:w-56 md:w-72 pb-4 sm:pb-6 flex items-center justify-center border-b-2" style="border-color:#111827">
-              <img src="{% static 'logo/Basf.png' %}" alt="BASF" class="max-h-full max-w-full object-contain" />
-            </div>
-            <div class="h-44 sm:h-48 md:h-28 w-full sm:w-56 md:w-72 pb-4 sm:pb-6 flex items-center justify-center border-b-2" style="border-color:#EF4444">
-              <img src="{% static 'logo/Botas.png' %}" alt="BOTAŞ" class="max-h-full max-w-full object-contain" />
+
+            <div class="animated-border-card animate-on-scroll">
+              <div class="animated-border-card-inner">
+                <div class="icon-box amber">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 data-i18n="why_card3_title">Anında Katkı</h3>
+                <p style="color:var(--text-secondary); font-size:0.875rem; line-height:1.6" data-i18n="why_card3_desc">Operasyon hızlanır, maliyetler düşer, ekibiniz rahatlar. İlk haftadan ölçülebilir sonuç.</p>
+              </div>
             </div>
           </div>
-          <div class="mt-10 max-w-5xl mx-auto text-center rounded-2xl border bg-white/70 px-6 py-6 shadow-[0_8px_30px_rgba(11,27,59,0.06)] space-y-2">
-            <p class="text-gray-900">
-              <span class="font-semibold">Projelerinde yer aldığımız markalar:</span>
-              <span class="ml-2 text-gray-700">SOCAR • Gazprom • BASF • BOTAŞ</span>
+        </div>
+      </section>
+
+      <!-- ────── STATS (Number Ticker — Magic UI) ────── -->
+      <section id="stats" class="stats-section">
+        <div class="container">
+          <div class="stats-grid stagger">
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-icon indigo"><i class="fas fa-hard-hat"></i></div>
+              <div class="stat-number">
+                <span class="ticker-value" data-ticker="50">0</span><span class="ticker-suffix">+</span>
+              </div>
+              <div class="stat-label" data-i18n="stat1_label">Tamamlanan Proje</div>
+            </div>
+
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-icon emerald"><i class="fas fa-users"></i></div>
+              <div class="stat-number">
+                <span class="ticker-value" data-ticker="1200">0</span><span class="ticker-suffix">+</span>
+              </div>
+              <div class="stat-label" data-i18n="stat2_label">Aktif Kullanıcı</div>
+            </div>
+
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-icon violet"><i class="fas fa-cubes"></i></div>
+              <div class="stat-number">
+                <span class="ticker-value" data-ticker="7">0</span>
+              </div>
+              <div class="stat-label" data-i18n="stat3_label">Modül</div>
+            </div>
+
+            <div class="stat-card animate-on-scroll">
+              <div class="stat-icon amber"><i class="fas fa-percentage"></i></div>
+              <div class="stat-number">
+                <span class="ticker-suffix">%</span><span class="ticker-value" data-ticker="30">0</span>
+              </div>
+              <div class="stat-label" data-i18n="stat4_label">Maliyet Tasarrufu</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ────── WHAT (Bento Grid with Spotlight) ────── -->
+      <section id="what" class="section">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <span class="section-pill"><i class="fas fa-cubes"></i> <span data-i18n="what_pill">Modüller</span></span>
+            <h2 class="text-shimmer" data-i18n-html="what_title">Ne <span class="text-gradient">sunuyoruz</span>?</h2>
+            <p data-i18n="what_desc">Tüm proje süreçlerinizi dijitalleştiriyoruz. Planlama, kalite, İSG, proje yönetimi, maliyet kontrolü — hepsi tek platformda.</p>
+          </div>
+
+          <div class="bento-grid-4 stagger">
+            <div class="bento-card animate-on-scroll">
+              <div class="spotlight"></div>
+              <div class="icon-box indigo"><i class="fas fa-clipboard-check"></i></div>
+              <h3 data-i18n="mod1_title">Planlama &amp; Kalite</h3>
+              <p data-i18n="mod1_desc">Proje planları, kalite kontrol/denetim, NCR takibi, kalite günlükleri, standart yönetimi.</p>
+            </div>
+
+            <div class="bento-card animate-on-scroll">
+              <div class="spotlight"></div>
+              <div class="icon-box emerald"><i class="fas fa-shield-alt"></i></div>
+              <h3 data-i18n="mod2_title">İSG &amp; Güvenlik</h3>
+              <p data-i18n="mod2_desc">İş güvenliği denetimleri, risk değerlendirmeleri, eğitim takibi, kaza raporları, güvenlik protokolleri.</p>
+            </div>
+
+            <div class="bento-card animate-on-scroll">
+              <div class="spotlight"></div>
+              <div class="icon-box amber"><i class="fas fa-tasks"></i></div>
+              <h3 data-i18n="mod3_title">Proje Yönetimi</h3>
+              <p data-i18n="mod3_desc">Görev atamaları, ilerleme takibi, kaynak yönetimi, zaman çizelgeleri, milestone kontrolü.</p>
+            </div>
+
+            <div class="bento-card animate-on-scroll">
+              <div class="spotlight"></div>
+              <div class="icon-box violet"><i class="fas fa-calculator"></i></div>
+              <h3 data-i18n="mod4_title">Maliyet &amp; Analiz</h3>
+              <p data-i18n="mod4_desc">Bütçe takibi, maliyet analizi, ROI hesaplamaları, performans metrikleri, detaylı raporlama.</p>
+            </div>
+          </div>
+
+          <div class="bento-grid stagger" style="margin-top: 1rem;">
+            <div class="bento-card animate-on-scroll">
+              <div class="spotlight"></div>
+              <div class="icon-box cyan"><i class="fas fa-mobile-alt"></i></div>
+              <h3 data-i18n="mod5_title">Mobil &amp; Offline</h3>
+              <p data-i18n="mod5_desc">Sahada foto/video kayıt, QR kod tarama, offline veri girişi, anlık senkronizasyon.</p>
+            </div>
+
+            <div class="bento-card animate-on-scroll">
+              <div class="spotlight"></div>
+              <div class="icon-box emerald"><i class="fas fa-plug"></i></div>
+              <h3 data-i18n="mod6_title">Entegrasyon</h3>
+              <p data-i18n="mod6_desc">REST/GraphQL API, Excel/CSV import/export, mevcut sistemlerle bağlantı, otomatik veri akışı.</p>
+            </div>
+
+            <div class="bento-card animate-on-scroll">
+              <div class="spotlight"></div>
+              <div class="icon-box rose"><i class="fas fa-chart-bar"></i></div>
+              <h3 data-i18n="mod7_title">Akıllı Raporlama</h3>
+              <p data-i18n="mod7_desc">Gerçek zamanlı dashboardlar, özelleştirilebilir raporlar, trend analizi, otomatik uyarılar.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ────── REFERENCES (Marquee) ────── -->
+      <section id="proof" class="section">
+        <div class="container">
+          <div class="section-header animate-on-scroll">
+            <span class="section-pill"><i class="fas fa-award"></i> <span data-i18n="ref_pill">Referanslar</span></span>
+            <h2 class="text-shimmer" data-i18n-html="ref_title">Sahada <span class="text-gradient">kanıtlanmış</span> çözümler</h2>
+            <p data-i18n="ref_desc">Dünya çapında enerji ve endüstri liderleriyle aynı projelerde yer aldık; sahada kanıtlanmış kurulumlarımız kaliteyi yükseltir, riskleri azaltır.</p>
+          </div>
+        </div>
+
+        <div class="marquee-container animate-on-scroll" style="margin-bottom: 2rem;">
+          <div class="marquee-track">
+            <div class="marquee-item"><img src="{% static 'logo/Socar.png' %}" alt="SOCAR" /></div>
+            <div class="marquee-item"><img src="{% static 'logo/Gazprom.png' %}" alt="GAZPROM" /></div>
+            <div class="marquee-item"><img src="{% static 'logo/Basf.png' %}" alt="BASF" /></div>
+            <div class="marquee-item"><img src="{% static 'logo/Botas.png' %}" alt="BOTAŞ" /></div>
+            <div class="marquee-item"><img src="{% static 'logo/Socar.png' %}" alt="SOCAR" /></div>
+            <div class="marquee-item"><img src="{% static 'logo/Gazprom.png' %}" alt="GAZPROM" /></div>
+            <div class="marquee-item"><img src="{% static 'logo/Basf.png' %}" alt="BASF" /></div>
+            <div class="marquee-item"><img src="{% static 'logo/Botas.png' %}" alt="BOTAŞ" /></div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="info-banner animate-on-scroll">
+            <p>
+              <strong data-i18n="ref_brands_label">Projelerinde yer aldığımız markalar:</strong>
+              <span style="margin-left: 0.25rem;">SOCAR • Gazprom • BASF • BOTAŞ</span>
             </p>
-            <p class="text-gray-900">
-              <span class="font-semibold">Doğrudan hizmet verdiğimiz yüklenici şirketler:</span>
-              <span class="ml-2 text-gray-700">İlk İnşaat • Teknokon • Üstay • Kolin • Kalyon</span>
+            <p style="margin-top: 0.375rem;">
+              <strong data-i18n="ref_contractors_label">Doğrudan hizmet verdiğimiz yüklenici şirketler:</strong>
+              <span style="margin-left: 0.25rem;">İlk İnşaat • Teknokon • Üstay • Kolin • Kalyon</span>
             </p>
           </div>
-          
-       </section>
+        </div>
+      </section>
 
-      
     </main>
-    
-    <!-- FOOTER -->
-    <footer class="border-t bg-white" role="contentinfo">
-      <div class="container mx-auto px-5 py-10 md:py-14">
-        <div class="grid gap-10 md:gap-8 md:grid-cols-1">
-          <div>
-            <div class="flex items-center gap-3">
-              <img src="{% static 'logo/neophase.png' %}?v=2" alt="NeoPhase" class="h-10 w-auto select-none" loading="lazy" decoding="async" />
-            </div>
-            <p class="mt-4 text-sm text-gray-600 max-w-xl">
-              Şantiyede yalın dijital yönetim. Planlama, kalite, malzeme & ekipman, İSG ve maliyet süreçlerinizi tek ekrandan yönetin.
-            </p>
-            <div class="mt-4 flex items-center gap-3 text-gray-600">
-              <a href="https://www.linkedin.com/company/neophase-software" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="inline-flex h-9 w-9 items-center justify-center rounded-full border hover:bg-gray-50">
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <img src="{% static 'logo/neophase.png' %}?v=2" alt="NeoPhase" loading="lazy" decoding="async" />
+            <p data-i18n="footer_desc">Şantiyede yalın dijital yönetim. Planlama, kalite, malzeme &amp; ekipman, İSG ve maliyet süreçlerinizi tek ekrandan yönetin.</p>
+            <div class="footer-social">
+              <a href="https://www.linkedin.com/company/neophase-software" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
                 <i class="fab fa-linkedin-in"></i>
               </a>
-              <a href="mailto:info@neophasesoftware.com" aria-label="E‑posta" class="inline-flex h-9 px-3 items-center justify-center rounded-full border hover:bg-gray-50 text-sm">
+              <a href="mailto:info@neophasesoftware.com" class="footer-email">
+                <i class="fas fa-envelope"></i>
                 info@neophasesoftware.com
               </a>
             </div>
           </div>
-          
         </div>
 
-        <div class="mt-10 pt-6 border-t flex items-center justify-center">
-          <p class="text-xs text-gray-500">© 2025 NeoPhase. Tüm hakları saklıdır.</p>
+        <div class="footer-bottom">
+          <p data-i18n="footer_rights">© {{ year }} NeoPhase. Tüm hakları saklıdır.</p>
         </div>
       </div>
     </footer>
-    
-    </body>
-    </html>
+  </body>
+</html>

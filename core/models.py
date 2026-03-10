@@ -19,3 +19,4 @@ class Lead(models.Model):
         return f"{self.company} <{self.email}>"
 
 
+

@@ -10,3 +10,4 @@ class LeadAdmin(admin.ModelAdmin):
     search_fields = ("company", "email", "message")
 
 
+

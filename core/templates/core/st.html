@@ -1,0 +1,935 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ST AUTOMOBILE - Zuverlässiger Gebrauchtwagenkauf und -verkauf</title>
+    <meta name="description" content="ST AUTOMOBILE - Premium Gebrauchtwagen An- und Verkauf. Zuverlässig, transparent und professionell.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --black: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --light-gray: #2A2A2A;
+            --white: #FFFFFF;
+            --text-gray: #CCCCCC;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            background: transparent;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+            padding: 10px;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 5px 15px rgba(212, 175, 55, 0.4));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            animation: gradientShift 10s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .hero-text {
+            max-width: 900px;
+            margin-top: 4rem;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            color: #FFD700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px rgba(212, 175, 55, 0.5);
+            word-wrap: break-word;
+            white-space: normal;
+            display: block;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #FFFFFF;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            font-weight: 400;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            letter-spacing: 1px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--black);
+            transform: translateY(-3px);
+        }
+
+        /* Car Section */
+        .hero-car {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .car-scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .luxury-car {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            animation: carMove 6s ease-in-out infinite;
+        }
+
+        @keyframes carMove {
+            0% {
+                transform: translateX(-80px);
+            }
+            50% {
+                transform: translateX(80px);
+            }
+            100% {
+                transform: translateX(-80px);
+            }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 2rem;
+            background: var(--dark-gray);
+            position: relative;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            font-weight: 300;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: var(--light-gray);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--dark-gold));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border-color: var(--gold);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 2rem;
+            background: var(--black);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--dark-gray);
+            padding: 4rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            border-radius: 50%;
+            opacity: 0.1;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background: var(--light-gray);
+            border-color: var(--gold);
+        }
+
+        .service-card:hover::after {
+            opacity: 0.3;
+            transform: scale(1.2);
+        }
+
+        .service-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 8rem 2rem;
+            background: var(--dark-gray);
+            position: relative;
+        }
+
+        .contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--light-gray);
+            padding: 4rem;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-gray);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .contact-item-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-item h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .contact-item p {
+            color: var(--text-gray);
+            font-weight: 300;
+            word-break: break-word;
+        }
+
+        .contact-item a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        footer p {
+            color: var(--text-gray);
+            font-weight: 300;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-links a {
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+                line-height: 1.4;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .luxury-car {
+                width: 400px;
+            }
+
+            .hero-car {
+                height: 300px;
+            }
+
+            .logo-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="#home" class="logo">
+                <div class="logo-icon">
+                    <img src="{% static 'core/st-logo.jpeg' %}" alt="ST AUTOMOBILE Logo">
+                </div>
+                <span>AUTOMOBILE</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Startseite</a></li>
+                <li><a href="#features">Vorteile</a></li>
+                <li><a href="#services">Dienstleistungen</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text fade-in">
+                <h1>Premium<br>Gebrauchtwagen-<br>Erlebnis</h1>
+                <p>Vertrauen, Transparenz und Qualität - wir bieten Ihnen den besten Service für An- und Verkauf von Gebrauchtwagen. Finden Sie Ihr Traumauto oder verkaufen Sie Ihr Fahrzeug zum besten Preis.</p>
+                <div class="cta-buttons">
+                    <a href="#services" class="btn btn-primary">Unsere Dienstleistungen</a>
+                    <a href="#contact" class="btn btn-secondary">Kontakt aufnehmen</a>
+                </div>
+            </div>
+            <div class="hero-car">
+                <div class="car-scene">
+                    <!-- Modern Luxury Sedan -->
+                    <svg class="luxury-car" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="bodyGold" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#FFE55C"/>
+                                <stop offset="25%" stop-color="#D4AF37"/>
+                                <stop offset="75%" stop-color="#B8941F"/>
+                                <stop offset="100%" stop-color="#8B7520"/>
+                            </linearGradient>
+                            <linearGradient id="bodyGoldDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#B8941F"/>
+                                <stop offset="100%" stop-color="#6B5610"/>
+                            </linearGradient>
+                            <linearGradient id="windowDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#2a2a2a"/>
+                                <stop offset="100%" stop-color="#0a0a0a"/>
+                            </linearGradient>
+                            <linearGradient id="wheelRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#C0C0C0"/>
+                                <stop offset="50%" stop-color="#808080"/>
+                                <stop offset="100%" stop-color="#404040"/>
+                            </linearGradient>
+                            <filter id="carShadow">
+                                <feDropShadow dx="0" dy="20" stdDeviation="25" flood-color="#000" flood-opacity="0.6"/>
+                            </filter>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="5" result="blur"/>
+                                <feMerge>
+                                    <feMergeNode in="blur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Ground Shadow -->
+                        <ellipse cx="450" cy="270" rx="350" ry="25" fill="rgba(0,0,0,0.4)"/>
+                        
+                        <!-- Car Body -->
+                        <g filter="url(#carShadow)">
+                            <!-- Main Body -->
+                            <path d="M 100 200 
+                                     L 150 190
+                                     L 250 185
+                                     L 650 185
+                                     L 750 190
+                                     L 800 200
+                                     L 800 230
+                                     L 100 230
+                                     Z" 
+                                  fill="url(#bodyGold)"/>
+                            
+                            <!-- Roof -->
+                            <path d="M 280 185
+                                     L 320 150
+                                     L 580 150
+                                     L 620 185
+                                     Z" 
+                                  fill="url(#bodyGold)"/>
+                            
+                            <!-- Windshield -->
+                            <path d="M 330 155
+                                     L 570 155
+                                     L 600 185
+                                     L 300 185
+                                     Z" 
+                                  fill="url(#windowDark)"/>
+                            
+                            <!-- Side Windows -->
+                            <rect x="200" y="190" width="80" height="40" rx="5" fill="url(#windowDark)"/>
+                            <rect x="620" y="190" width="80" height="40" rx="5" fill="url(#windowDark)"/>
+                            
+                            <!-- Body Line -->
+                            <line x1="150" y1="215" x2="750" y2="215" stroke="#B8941F" stroke-width="2"/>
+                            
+                            <!-- Door Line -->
+                            <line x1="450" y1="150" x2="450" y2="230" stroke="#B8941F" stroke-width="2"/>
+                        </g>
+                        
+                        <!-- Headlights -->
+                        <ellipse cx="790" cy="200" rx="15" ry="10" fill="#FFFFFF" filter="url(#glow)">
+                            <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite"/>
+                        </ellipse>
+                        <ellipse cx="790" cy="220" rx="15" ry="10" fill="#FFFFFF" filter="url(#glow)">
+                            <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite"/>
+                        </ellipse>
+                        
+                        <!-- Taillights -->
+                        <rect x="105" y="200" width="18" height="12" rx="3" fill="#FF0000" filter="url(#glow)">
+                            <animate attributeName="opacity" values="1;0.6;1" dur="1s" repeatCount="indefinite"/>
+                        </rect>
+                        <rect x="105" y="218" width="18" height="12" rx="3" fill="#FF0000" filter="url(#glow)">
+                            <animate attributeName="opacity" values="1;0.6;1" dur="1s" repeatCount="indefinite"/>
+                        </rect>
+                        
+                        <!-- Front Wheel -->
+                        <g>
+                            <circle cx="700" cy="240" r="45" fill="#0a0a0a"/>
+                            <circle cx="700" cy="240" r="40" fill="#1a1a1a" stroke="#333" stroke-width="3"/>
+                            <circle cx="700" cy="240" r="30" fill="url(#wheelRim)"/>
+                            <circle cx="700" cy="240" r="20" fill="#2a2a2a"/>
+                            <circle cx="700" cy="240" r="6" fill="#D4AF37"/>
+                            <!-- Simple 5-spoke -->
+                            <g stroke="#999" stroke-width="4">
+                                <line x1="700" y1="220" x2="700" y2="230"/>
+                                <line x1="715" y1="235" x2="708" y2="240"/>
+                                <line x1="710" y1="255" x2="703" y2="248"/>
+                                <line x1="690" y1="255" x2="697" y2="248"/>
+                                <line x1="685" y1="235" x2="692" y2="240"/>
+                            </g>
+                        </g>
+                        
+                        <!-- Rear Wheel -->
+                        <g>
+                            <circle cx="200" cy="240" r="45" fill="#0a0a0a"/>
+                            <circle cx="200" cy="240" r="40" fill="#1a1a1a" stroke="#333" stroke-width="3"/>
+                            <circle cx="200" cy="240" r="30" fill="url(#wheelRim)"/>
+                            <circle cx="200" cy="240" r="20" fill="#2a2a2a"/>
+                            <circle cx="200" cy="240" r="6" fill="#D4AF37"/>
+                            <!-- Simple 5-spoke -->
+                            <g stroke="#999" stroke-width="4">
+                                <line x1="200" y1="220" x2="200" y2="230"/>
+                                <line x1="215" y1="235" x2="208" y2="240"/>
+                                <line x1="210" y1="255" x2="203" y2="248"/>
+                                <line x1="190" y1="255" x2="197" y2="248"/>
+                                <line x1="185" y1="235" x2="192" y2="240"/>
+                            </g>
+                        </g>
+                        
+                        <!-- Body Shine -->
+                        <ellipse cx="450" cy="170" rx="200" ry="25" fill="rgba(255,255,255,0.1)"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Warum ST AUTOMOBILE?</h2>
+                <p>Mit 15 Jahren Branchenerfahrung bieten wir Ihnen den besten Service</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🛡️</span>
+                    <h3>Zuverlässige Abwicklung</h3>
+                    <p>Alle unsere Fahrzeuge verfügen über detaillierte Gutachten und rechtliche Absicherung. Kaufen Sie mit Vertrauen.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">💎</span>
+                    <h3>Premium-Qualität</h3>
+                    <p>Wir nehmen nur die hochwertigsten und gepflegtesten Fahrzeuge in unseren Bestand auf. Jedes Auto wird sorgfältig ausgewählt.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Schnelle Abwicklung</h3>
+                    <p>Sofortige Bewertung, schnelle Zahlung. Alle erforderlichen Vorgänge für den Verkauf oder Kauf Ihres Fahrzeugs innerhalb von 24 Stunden.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🤝</span>
+                    <h3>Transparente Preisgestaltung</h3>
+                    <p>Keine versteckten Kosten. Wir bieten faire und marktgerechte Preise.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🔧</span>
+                    <h3>After-Sales-Support</h3>
+                    <p>Volle Unterstützung nach dem Verkauf. Garantierte Abwicklung und 24/7 Kundenservice.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Breites Fahrzeugportfolio</h3>
+                    <p>Große Auswahl an Fahrzeugen vom Kompaktwagen bis zur Luxusklasse.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Unsere Dienstleistungen</h2>
+                <p>Professionelle Lösungen nach Ihren Bedürfnissen</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in">
+                    <h3>🚗 Fahrzeugankauf</h3>
+                    <p>Wir kaufen Ihr Fahrzeug sofort zum besten Preis in bar. Sofortige Bewertung, sofortige Zahlung. Gültig für alle Marken und Modelle. Schnelle, sichere und problemlose Abwicklungsgarantie.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>🏎️ Fahrzeugverkauf</h3>
+                    <p>Finden Sie Ihr Traumauto in unserem umfangreichen Fahrzeugportfolio. Alle unsere Fahrzeuge sind mit detaillierten Gutachten, gepflegt und mit Garantie. Finanzierungsoptionen mit günstigen Ratenzahlungen.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>🔄 Inzahlungnahme</h3>
+                    <p>Werden Sie mit Ihrem aktuellen Fahrzeug Besitzer eines neuen Autos. Faire Bewertung, schnelle Abwicklung und professioneller Service. Kostenlose Bewertung für alle Inzahlungnahmen.</p>
+                </div>
+                <div class="service-card fade-in">
+                    <h3>📋 Beratung</h3>
+                    <p>Erhalten Sie kostenlose Beratung von unserem Expertenteam während des Kauf- und Verkaufsprozesses. Professionelle Unterstützung für Marktanalysen, Preisbewertungen und rechtliche Verfahren.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Kontaktieren Sie uns</h2>
+                <p>Wir sind hier, um Ihnen zu helfen</p>
+            </div>
+            <div class="contact-content fade-in">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📱</span>
+                        <h3>Telefon</h3>
+                        <p><a href="tel:+491607601261">+49 160 760 1261</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📧</span>
+                        <h3>E-Mail</h3>
+                        <p><a href="mailto:Serhantetik9876@outlook.com">Serhantetik9876@outlook.com</a></p>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📍</span>
+                        <h3>Adresse</h3>
+                        <p>Nelsonallee 24<br>89231 Neu-Ulm<br>Deutschland</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="tel:+491607601261" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem;">
+                        ☎️ Jetzt anrufen
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; {{ year }} ST AUTOMOBILE. Alle Rechte vorbehalten.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Zuverlässiger Gebrauchtwagen An- und Verkauf</p>
+            <div class="social-links">
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="WhatsApp">💬</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initial animation trigger for hero
+        setTimeout(() => {
+            document.querySelector('.hero .fade-in').classList.add('visible');
+        }, 200);
+    </script>
+</body>
+</html>

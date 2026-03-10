@@ -1,11 +1,10 @@
 from django.urls import path
-from .views import index, robots_txt, favicon
+from .views import index, st_automobile
 
 
 urlpatterns = [
     path('', index, name='index'),
-    path('robots.txt', robots_txt, name='robots_txt'),
-    path('favicon.ico', favicon, name='favicon'),
+    path('st/', st_automobile, name='st_automobile'),
 ]
 
 
