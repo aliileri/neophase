@@ -22,14 +22,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'core/app.css' %}" />
-    {% if spline_scene_url %}
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.72/build/spline-viewer.js"></script>
-    {% endif %}
     <script src="{% static 'core/app.js' %}" defer></script>
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.72/build/spline-viewer.js"></script>
   </head>
   <body>
     <a href="#main" class="sr-only">İçeriğe geç</a>
 
+    <!-- ===== SPLASH: Tam ekran 3D, tıkla ve gir ===== -->
+    <section class="splash" id="splash">
+      <canvas id="splash-particles" aria-hidden="true"></canvas>
+      <div class="splash-spline" id="splash-spline-wrap">
+        <spline-viewer
+          id="splash-spline"
+          url="https://prod.spline.design/eygTQzMK1YSbRT3j/scene.splinecode"
+          background="transparent"
+        ></spline-viewer>
+      </div>
+      <div class="splash-hint" id="splash-hint">
+        <span class="splash-hint-pill" data-i18n="splash_hint">Keşfetmek için tıklayın</span>
+        <i class="fas fa-chevron-down splash-hint-arrow"></i>
+      </div>
+    </section>
+
+    <!-- ===== NAVBAR ===== -->
     <header class="navbar" id="navbar">
       <nav class="container navbar-inner" aria-label="Birincil navigasyon">
         <a href="#" class="navbar-logo" aria-label="Ana sayfa">
@@ -38,9 +53,7 @@
 
         <div class="navbar-links">
           <a href="#why" data-i18n="nav_why">Neden</a>
-          <a href="#stats" data-i18n="nav_stats">Rakamlar</a>
           <a href="#what" data-i18n="nav_modules">Modüller</a>
-          <a href="#partnership" data-i18n="nav_partner">İş modeli</a>
           <a href="#contact" data-i18n="nav_contact">İletişim</a>
         </div>
 
@@ -76,140 +89,77 @@
 
     <div class="mobile-nav" id="mobile-nav">
       <a href="#why" data-mobile-link data-i18n="nav_why">Neden</a>
-      <a href="#stats" data-mobile-link data-i18n="nav_stats">Rakamlar</a>
       <a href="#what" data-mobile-link data-i18n="nav_modules">Modüller</a>
-      <a href="#partnership" data-mobile-link data-i18n="nav_partner">İş modeli</a>
       <a href="#contact" data-mobile-link data-i18n="nav_contact">İletişim</a>
     </div>
 
-    <main id="main">
+    <!-- ===== MAIN: splash bittikten sonra sırayla belirir ===== -->
+    <main id="main" class="main--hidden">
 
-      <section class="hero relative">
+      <!-- HERO -->
+      <section class="hero" id="hero-top">
         <div class="animated-grid" aria-hidden="true"></div>
         <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-        <div class="container" style="position:relative; z-index:2">
-          <div class="hero-grid{% if spline_scene_url %} hero-grid--with-spline{% else %} hero-grid--single{% endif %}">
-            <div class="hero-copy">
-              <h1 class="hero-anim hero-anim-d2" data-i18n-html="hero_title">
-                Şantiye ve İmalat Operasyonlarında <span class="text-gradient">«Sıfır Hata, Tam Kontrol»</span> Dönemi
-              </h1>
-
-              <p class="hero-description hero-anim hero-anim-d3" data-i18n="hero_desc">
-                Projelerinizde net, hızlı ve ölçülebilir dijital yönetim. Endüstriyel boru imalatı, kalite kontrol ve montaj süreçlerinizi manuel Excel tablolarından kurtarın. Veriyi sahada doğduğu an dijitalleştirin, ofisten tek tıkla yönetin.
-              </p>
-
-              <div class="hero-actions hero-anim hero-anim-d4">
-                <div class="ripple-container">
-                  <span class="ripple-ring" aria-hidden="true"></span>
-                  <span class="ripple-ring" aria-hidden="true"></span>
-                  <span class="ripple-ring" aria-hidden="true"></span>
-                  <a href="#contact" class="shimmer-btn">
-                    <i class="fas fa-play" style="font-size:0.75rem"></i>
-                    <span data-i18n="hero_cta">Demo Talep Edin</span>
-                  </a>
-                </div>
-              </div>
+<div class="container hero-content">
+          <div class="hero-text reveal-item" data-reveal="1">
+            <h1 class="text-shimmer" data-i18n-html="hero_title">
+              Şantiye ve İmalat Operasyonlarında <span class="text-gradient">«Sıfır Hata, Tam Kontrol»</span> Dönemi
+            </h1>
+            <p class="hero-description" data-i18n="hero_desc">
+              Projelerinizde net, hızlı ve ölçülebilir dijital yönetim. Endüstriyel boru imalatı, kalite kontrol ve montaj süreçlerinizi manuel Excel tablolarından kurtarın.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="shimmer-btn">
+                <i class="fas fa-play" style="font-size:0.75rem"></i>
+                <span data-i18n="hero_cta">Demo Talep Edin</span>
+              </a>
             </div>
-            {% if spline_scene_url %}
-            <div class="hero-spline" aria-hidden="true">
-              <spline-viewer url="{{ spline_scene_url }}" loading="eager" background="rgba(255,255,255,0)"></spline-viewer>
-            </div>
-            {% endif %}
           </div>
         </div>
       </section>
 
       <hr class="section-divider" />
 
-      <section id="why" class="section">
+      <!-- NEDEN -->
+      <section id="why" class="section reveal-item" data-reveal="2">
         <div class="container">
-          <div class="section-header animate-on-scroll">
+          <div class="section-header">
             <span class="section-pill"><i class="fas fa-sparkles"></i> <span data-i18n="why_pill">Neden NeoPhase &amp; TERMINAL?</span></span>
             <h2 class="text-shimmer" data-i18n-html="why_title">Operasyonunuzu Gider Merkezinden, <span class="text-gradient">Kâr Merkezine</span> Dönüştürün.</h2>
-            <p data-i18n="why_desc">Paket bir yazılım değil, projenizin hızına ayak uyduran yaşayan bir teknoloji ortağıyız. TERMINAL ile sahada zaman kaybını sıfırlayın, kaliteyi garanti altına alın ve proje risklerini yapay zeka ile önceden tespit edin.</p>
           </div>
 
           <div class="bento-grid-4 stagger">
             <div class="animated-border-card animate-on-scroll">
               <div class="animated-border-card-inner">
-                <div class="icon-box indigo">
-                  <i class="fas fa-file-contract"></i>
-                </div>
+                <div class="icon-box indigo"><i class="fas fa-file-contract"></i></div>
                 <h3 data-i18n="why_card1_title">Günlerden Dakikalara İnen Raporlama</h3>
-                <p style="color:var(--text-secondary); font-size:0.875rem; line-height:1.6" data-i18n="why_card1_desc">Kalite ekiplerinizin saatlerini alan İmalat Onay Formları ve NDT raporları tek tıkla, saniyeler içinde hazır. Yılda yaklaşık 700 adam/saat tasarruf edin.</p>
+                <p data-i18n="why_card1_desc">Kalite ekiplerinizin saatlerini alan İmalat Onay Formları ve NDT raporları tek tıkla, saniyeler içinde hazır.</p>
               </div>
             </div>
 
             <div class="animated-border-card animate-on-scroll">
               <div class="animated-border-card-inner">
-                <div class="icon-box emerald">
-                  <i class="fas fa-tablet-screen-button"></i>
-                </div>
+                <div class="icon-box emerald"><i class="fas fa-tablet-screen-button"></i></div>
                 <h3 data-i18n="why_card2_title">Sahadan Anlık, «Temiz» Veri</h3>
-                <p style="color:var(--text-secondary); font-size:0.875rem; line-height:1.6" data-i18n="why_card2_desc">Tablet ve telefon üzerinden kolayca veri girişi yapın. Sıfır eğitim gerektiren sezgisel arayüz ile formenleriniz sistemi ilk günden benimser.</p>
+                <p data-i18n="why_card2_desc">Tablet ve telefon üzerinden kolayca veri girişi. Sıfır eğitim gerektiren sezgisel arayüz.</p>
               </div>
             </div>
 
             <div class="animated-border-card animate-on-scroll">
               <div class="animated-border-card-inner">
-                <div class="icon-box amber">
-                  <i class="fas fa-shield-halved"></i>
-                </div>
+                <div class="icon-box amber"><i class="fas fa-shield-halved"></i></div>
                 <h3 data-i18n="why_card3_title">Anında Validasyon ile Hata Önleme</h3>
-                <p style="color:var(--text-secondary); font-size:0.875rem; line-height:1.6" data-i18n="why_card3_desc">Üretim anında sertifika veya malzeme uyuşmazlığını sistem anında yakalar ve uyarır. %100 hatalı üretim iadesinin önüne geçin.</p>
+                <p data-i18n="why_card3_desc">Sertifika veya malzeme uyuşmazlığını sistem anında yakalar ve uyarır.</p>
               </div>
             </div>
 
             <div class="animated-border-card animate-on-scroll">
               <div class="animated-border-card-inner">
-                <div class="icon-box violet">
-                  <i class="fas fa-receipt"></i>
-                </div>
-                <h3 data-i18n="why_card4_title">Gizli Maliyet Yok, Sürpriz Fatura Yok</h3>
-                <p style="color:var(--text-secondary); font-size:0.875rem; line-height:1.6" data-i18n="why_card4_desc">Klasik kullanıcı başı lisans ücreti ödemezsiniz. Proje süresince tüm geliştirmeler ve sınırsız kullanıcı erişimi aylık sabit hizmet bedeline dahildir.</p>
+                <div class="icon-box violet"><i class="fas fa-receipt"></i></div>
+                <h3 data-i18n="why_card4_title">Gizli Maliyet Yok</h3>
+                <p data-i18n="why_card4_desc">Kullanıcı başı lisans ücreti yok. Sınırsız kullanıcı, aylık sabit hizmet bedeli.</p>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="stats" class="stats-section">
-        <div class="container">
-          <div class="section-header animate-on-scroll" style="margin-bottom:2rem;text-align:center">
-            <h2 class="text-shimmer" style="font-size:1.5rem;margin:0" data-i18n="stats_heading">Rakamlarla TERMINAL Etkisi</h2>
-          </div>
-          <div class="stats-grid stagger">
-            <div class="stat-card animate-on-scroll">
-              <div class="stat-icon indigo"><i class="fas fa-layer-group"></i></div>
-              <div class="stat-number">
-                <span class="ticker-value" data-ticker="21">0</span><span class="ticker-suffix">+</span>
-              </div>
-              <div class="stat-label stat-label--long" data-i18n="stat1_label">Özelleştirilebilir Saha Modülü</div>
-            </div>
-
-            <div class="stat-card animate-on-scroll">
-              <div class="stat-icon emerald"><i class="fas fa-diagram-project"></i></div>
-              <div class="stat-number">
-                <span class="ticker-suffix">%</span><span class="ticker-value" data-ticker="100">0</span>
-              </div>
-              <div class="stat-label stat-label--long" data-i18n="stat2_label">Dijital İzlenebilirlik (Traceability) ve Kağıtsız Saha</div>
-            </div>
-
-            <div class="stat-card animate-on-scroll">
-              <div class="stat-icon violet"><i class="fas fa-user-slash"></i></div>
-              <div class="stat-number stat-number--static">
-                <span data-i18n="stat3_value">Sıfır</span>
-              </div>
-              <div class="stat-label stat-label--long" data-i18n="stat3_label">Kullanıcı Başı Lisans Maliyeti</div>
-            </div>
-
-            <div class="stat-card animate-on-scroll">
-              <div class="stat-icon amber"><i class="fas fa-database"></i></div>
-              <div class="stat-number">
-                <span class="ticker-suffix">%</span><span class="ticker-value" data-ticker="100">0</span>
-              </div>
-              <div class="stat-label stat-label--long" data-i18n="stat4_label">Veri Özgürlüğü (Dilediğiniz an verilerinizle ayrılma garantisi)</div>
             </div>
           </div>
         </div>
@@ -217,11 +167,11 @@
 
       <hr class="section-divider" />
 
-      <section id="what" class="section">
+      <!-- MODÜLLER -->
+      <section id="what" class="section reveal-item" data-reveal="3">
         <div class="container">
-          <div class="section-header animate-on-scroll">
+          <div class="section-header">
             <span class="section-pill"><i class="fas fa-cubes"></i> <span data-i18n="what_pill">Modüllerimiz</span></span>
-            <p class="what-lead" data-i18n="what_lead">Uçtan Uca Kesintisiz Süreç Yönetimi</p>
             <h2 class="text-shimmer" data-i18n-html="what_title">Ne <span class="text-gradient">Sunuyoruz</span>?</h2>
           </div>
 
@@ -230,42 +180,42 @@
               <div class="spotlight"></div>
               <div class="icon-box indigo"><i class="fas fa-fire-flame-simple"></i></div>
               <h3 data-i18n="mod1_title">Kalite ve Kaynak Yönetimi (Weld Log &amp; NDT)</h3>
-              <p data-i18n="mod1_desc">Kaynakçı performansları, WQT yeterlilikleri ve test paketlerinizi tek merkezden yönetin. RT/UT ve MT/PT red oranlarını anlık olarak izleyerek kalite standartlarınızı koruyun.</p>
+              <p data-i18n="mod1_desc">Kaynakçı performansları, WQT yeterlilikleri ve test paketlerinizi tek merkezden yönetin.</p>
             </div>
 
             <div class="bento-card animate-on-scroll">
               <div class="spotlight"></div>
               <div class="icon-box emerald"><i class="fas fa-barcode"></i></div>
               <h3 data-i18n="mod2_title">Malzeme ve «Heat No» İzlenebilirliği</h3>
-              <p data-i18n="mod2_desc">Kullanılan her sac, profil ve sarf malzemenin Heat No (Döküm No) takibini yapın. İmalattaki her parçanın sertifikası sistemde otomatik eşleşir.</p>
+              <p data-i18n="mod2_desc">Her sac, profil ve sarf malzemenin Heat No takibini yapın. Sertifikalar otomatik eşleşir.</p>
             </div>
 
             <div class="bento-card animate-on-scroll">
               <div class="spotlight"></div>
               <div class="icon-box amber"><i class="fas fa-drafting-compass"></i></div>
               <h3 data-i18n="mod3_title">Spool &amp; İzometri Takibi</h3>
-              <p data-i18n="mod3_desc">Üretim, boya, nakliye ve sahaya varış adımlarını izometrik çizim bazlı olarak anlık takip edin. «Hangi parça nerede?» sorusu tarih oluyor.</p>
+              <p data-i18n="mod3_desc">Üretim, boya, nakliye ve sahaya varışı izometrik çizim bazlı olarak anlık takip edin.</p>
             </div>
 
             <div class="bento-card animate-on-scroll">
               <div class="spotlight"></div>
               <div class="icon-box violet"><i class="fas fa-folder-tree"></i></div>
-              <h3 data-i18n="mod4_title">«Zero-Touch» Dokümantasyon &amp; Arşivleme</h3>
-              <p data-i18n="mod4_desc">Konteyner veya test paketi tamamlandığında; sistem ilgili NDT raporlarını, sertifikaları ve kontrol formlarını otomatik çeker ve tek bir dosya halinde paketler.</p>
+              <h3 data-i18n="mod4_title">«Zero-Touch» Dokümantasyon</h3>
+              <p data-i18n="mod4_desc">NDT raporları, sertifikalar ve kontrol formları otomatik paketlenir.</p>
             </div>
 
             <div class="bento-card animate-on-scroll">
               <div class="spotlight"></div>
               <div class="icon-box cyan"><i class="fas fa-link"></i></div>
-              <h3 data-i18n="mod5_title">Mevcut Sistemlerle (SAP/ERP) Kusursuz Entegrasyon</h3>
-              <p data-i18n="mod5_desc">TERMINAL sahanın karmaşık verisini toplar, temizler ve özet, onaylanmış veriyi SAP sisteminize (REST API ile) zahmetsizce aktarır. SAP ekibinizin yükü artmaz, hafifler.</p>
+              <h3 data-i18n="mod5_title">SAP/ERP Entegrasyonu</h3>
+              <p data-i18n="mod5_desc">Saha verisini toplar, temizler ve REST API ile SAP'ye aktarır.</p>
             </div>
 
             <div class="bento-card animate-on-scroll">
               <div class="spotlight"></div>
               <div class="icon-box rose"><i class="fas fa-wand-magic-sparkles"></i></div>
-              <h3 data-i18n="mod6_title">Yapay Zeka (AI) Destekli Akıllı Dashboardlar</h3>
-              <p data-i18n="mod6_desc">Yönetim ekibi, projenin Ahead/Behind durumunu cepten canlı olarak izler. Google Gemini API entegrasyonu olası kalite risklerini sizin için analiz edip raporlar.</p>
+              <h3 data-i18n="mod6_title">AI Destekli Dashboardlar</h3>
+              <p data-i18n="mod6_desc">Projenin Ahead/Behind durumunu canlı izleyin. AI olası riskleri önceden analiz eder.</p>
             </div>
           </div>
         </div>
@@ -273,54 +223,17 @@
 
       <hr class="section-divider" />
 
-      <section id="partnership" class="section">
-        <div class="container">
-          <div class="section-header animate-on-scroll">
-            <span class="section-pill"><i class="fas fa-handshake"></i> <span data-i18n="partner_pill">İş birliği</span></span>
-            <h2 class="text-shimmer" data-i18n-html="partner_title">Yeni Nesil <span class="text-gradient">İş Birliği</span> Modelimiz</h2>
-            <p data-i18n="partner_lead">Bir paket yazılım satın almıyorsunuz; bütünleşik bir yazılım departmanı kiralıyorsunuz.</p>
-          </div>
-
-          <div class="bento-grid stagger">
-            <div class="bento-card animate-on-scroll">
-              <div class="spotlight"></div>
-              <div class="icon-box indigo"><i class="fas fa-key"></i></div>
-              <h3 data-i18n="partner_card1_title">Lisanslama Yok</h3>
-              <p data-i18n="partner_card1_desc">Kurumunuza özel «Hizmet ve Çözüm Ortaklığı» modeliyle çalışırız.</p>
-            </div>
-
-            <div class="bento-card animate-on-scroll">
-              <div class="spotlight"></div>
-              <div class="icon-box emerald"><i class="fas fa-sliders"></i></div>
-              <h3 data-i18n="partner_card2_title">Esneklik</h3>
-              <p data-i18n="partner_card2_desc">Yeni bir rapor formatı mı gerekti? Sahadan yeni bir veri alanı talebi mi geldi? Ek fatura çıkarılmadan paket kapsamında anında geliştirilir.</p>
-            </div>
-
-            <div class="bento-card animate-on-scroll">
-              <div class="spotlight"></div>
-              <div class="icon-box amber"><i class="fas fa-door-open"></i></div>
-              <h3 data-i18n="partner_card3_title">Güvenli Çıkış</h3>
-              <p data-i18n="partner_card3_desc">Bizi denemekten korkmayın. Taahhüt yok; sistemi dilediğiniz zaman kapatabilir ve tüm verilerinizi eksiksiz (SQL/Excel) teslim alabilirsiniz.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="section cta-section">
+      <!-- İLETİŞİM -->
+      <section id="contact" class="section cta-section reveal-item" data-reveal="4">
         <div class="container container--narrow">
-          <div class="cta-panel animate-on-scroll">
+          <div class="cta-panel">
             <h2 class="text-shimmer" data-i18n-html="cta_title">Sahadaki Karmaşaya Son Vermeye <span class="text-gradient">Hazır Mısınız?</span></h2>
-            <p class="cta-desc" data-i18n="cta_desc">Operasyonel çevikliğe adım atın. Süreçlerinizi nasıl %100 izlenebilir hale getireceğimizi görmek için 30 dakikalık bir sistem demosu planlayalım.</p>
+            <p class="cta-desc" data-i18n="cta_desc">30 dakikalık bir sistem demosu planlayalım.</p>
             <div class="hero-actions" style="justify-content:center;margin-top:1.25rem">
-              <div class="ripple-container">
-                <span class="ripple-ring" aria-hidden="true"></span>
-                <span class="ripple-ring" aria-hidden="true"></span>
-                <span class="ripple-ring" aria-hidden="true"></span>
-                <a href="mailto:info@neophasesoftware.com" class="shimmer-btn">
-                  <i class="fas fa-envelope" style="font-size:0.8rem"></i>
-                  <span data-i18n="cta_btn">Bizimle İletişime Geçin</span>
-                </a>
-              </div>
+              <a href="mailto:info@neophasesoftware.com" class="shimmer-btn">
+                <i class="fas fa-envelope" style="font-size:0.8rem"></i>
+                <span data-i18n="cta_btn">Bizimle İletişime Geçin</span>
+              </a>
             </div>
             <ul class="contact-list">
               <li>
@@ -332,11 +245,6 @@
                 <i class="fab fa-whatsapp" aria-hidden="true"></i>
                 <span data-i18n="contact_phone_label">WhatsApp / Telefon:</span>
                 <a href="https://wa.me/4917664088854" target="_blank" rel="noopener noreferrer">+49 176 640 888 54</a>
-              </li>
-              <li>
-                <i class="fas fa-globe" aria-hidden="true"></i>
-                <span data-i18n="contact_web_label">Web:</span>
-                <a href="https://www.neophasesoftware.com" target="_blank" rel="noopener noreferrer">https://www.neophasesoftware.com</a>
               </li>
             </ul>
           </div>
@@ -350,7 +258,7 @@
         <div class="footer-content">
           <div class="footer-brand">
             <img src="{% static 'logo/neophase.png' %}?v=2" alt="NeoPhase" loading="lazy" decoding="async" />
-            <p data-i18n="footer_desc">TERMINAL ile şantiye ve imalat operasyonlarında sıfır hata, tam kontrol. Weld Log, NDT, Heat No ve SAP entegrasyonu tek platformda.</p>
+            <p data-i18n="footer_desc">TERMINAL ile şantiye ve imalat operasyonlarında sıfır hata, tam kontrol.</p>
             <div class="footer-social">
               <a href="https://www.linkedin.com/company/neophase-software" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
                 <i class="fab fa-linkedin-in"></i>

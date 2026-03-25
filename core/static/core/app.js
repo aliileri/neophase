@@ -1,7 +1,6 @@
 /* ============================================
-   NeoPhase — Magic UI Inspired Interactions
-   Particle system, number ticker, blur fade,
-   spotlight, language switcher, text shimmer
+   NeoPhase — Splash-first Experience
+   3D intro → click → animated transition → sequential content reveal
    ============================================ */
 
 (function () {
@@ -14,180 +13,123 @@
      ========================================== */
   const translations = {
     tr: {
+      splash_hint: 'Keşfetmek için tıklayın',
       nav_why: 'Neden',
-      nav_stats: 'Rakamlar',
       nav_modules: 'Modüller',
-      nav_partner: 'İş modeli',
       nav_contact: 'İletişim',
       hero_title: 'Şantiye ve İmalat Operasyonlarında <span class="text-gradient">«Sıfır Hata, Tam Kontrol»</span> Dönemi',
-      hero_desc: 'Projelerinizde net, hızlı ve ölçülebilir dijital yönetim. Endüstriyel boru imalatı, kalite kontrol ve montaj süreçlerinizi manuel Excel tablolarından kurtarın. Veriyi sahada doğduğu an dijitalleştirin, ofisten tek tıkla yönetin.',
+      hero_desc: 'Projelerinizde net, hızlı ve ölçülebilir dijital yönetim. Endüstriyel boru imalatı, kalite kontrol ve montaj süreçlerinizi manuel Excel tablolarından kurtarın.',
       hero_cta: 'Demo Talep Edin',
       why_pill: 'Neden NeoPhase & TERMINAL?',
       why_title: 'Operasyonunuzu Gider Merkezinden, <span class="text-gradient">Kâr Merkezine</span> Dönüştürün.',
-      why_desc: 'Paket bir yazılım değil, projenizin hızına ayak uyduran yaşayan bir teknoloji ortağıyız. TERMINAL ile sahada zaman kaybını sıfırlayın, kaliteyi garanti altına alın ve proje risklerini yapay zeka ile önceden tespit edin.',
       why_card1_title: 'Günlerden Dakikalara İnen Raporlama',
-      why_card1_desc: 'Kalite ekiplerinizin saatlerini alan İmalat Onay Formları ve NDT raporları tek tıkla, saniyeler içinde hazır. Yılda yaklaşık 700 adam/saat tasarruf edin.',
+      why_card1_desc: 'Kalite ekiplerinizin saatlerini alan İmalat Onay Formları ve NDT raporları tek tıkla, saniyeler içinde hazır.',
       why_card2_title: 'Sahadan Anlık, «Temiz» Veri',
-      why_card2_desc: 'Tablet ve telefon üzerinden kolayca veri girişi yapın. Sıfır eğitim gerektiren sezgisel arayüz ile formenleriniz sistemi ilk günden benimser.',
+      why_card2_desc: 'Tablet ve telefon üzerinden kolayca veri girişi. Sıfır eğitim gerektiren sezgisel arayüz.',
       why_card3_title: 'Anında Validasyon ile Hata Önleme',
-      why_card3_desc: 'Üretim anında sertifika veya malzeme uyuşmazlığını sistem anında yakalar ve uyarır. %100 hatalı üretim iadesinin önüne geçin.',
-      why_card4_title: 'Gizli Maliyet Yok, Sürpriz Fatura Yok',
-      why_card4_desc: 'Klasik kullanıcı başı lisans ücreti ödemezsiniz. Proje süresince tüm geliştirmeler ve sınırsız kullanıcı erişimi aylık sabit hizmet bedeline dahildir.',
-      stats_heading: 'Rakamlarla TERMINAL Etkisi',
-      stat1_label: 'Özelleştirilebilir Saha Modülü',
-      stat2_label: 'Dijital İzlenebilirlik (Traceability) ve Kağıtsız Saha',
-      stat3_value: 'Sıfır',
-      stat3_label: 'Kullanıcı Başı Lisans Maliyeti',
-      stat4_label: 'Veri Özgürlüğü (Dilediğiniz an verilerinizle ayrılma garantisi)',
+      why_card3_desc: 'Sertifika veya malzeme uyuşmazlığını sistem anında yakalar ve uyarır.',
+      why_card4_title: 'Gizli Maliyet Yok',
+      why_card4_desc: 'Kullanıcı başı lisans ücreti yok. Sınırsız kullanıcı, aylık sabit hizmet bedeli.',
       what_pill: 'Modüllerimiz',
-      what_lead: 'Uçtan Uca Kesintisiz Süreç Yönetimi',
       what_title: 'Ne <span class="text-gradient">Sunuyoruz</span>?',
       mod1_title: 'Kalite ve Kaynak Yönetimi (Weld Log & NDT)',
-      mod1_desc: 'Kaynakçı performansları, WQT yeterlilikleri ve test paketlerinizi tek merkezden yönetin. RT/UT ve MT/PT red oranlarını anlık olarak izleyerek kalite standartlarınızı koruyun.',
+      mod1_desc: 'Kaynakçı performansları, WQT yeterlilikleri ve test paketlerinizi tek merkezden yönetin.',
       mod2_title: 'Malzeme ve «Heat No» İzlenebilirliği',
-      mod2_desc: 'Kullanılan her sac, profil ve sarf malzemenin Heat No (Döküm No) takibini yapın. İmalattaki her parçanın sertifikası sistemde otomatik eşleşir.',
+      mod2_desc: 'Her sac, profil ve sarf malzemenin Heat No takibini yapın. Sertifikalar otomatik eşleşir.',
       mod3_title: 'Spool & İzometri Takibi',
-      mod3_desc: 'Üretim, boya, nakliye ve sahaya varış adımlarını izometrik çizim bazlı olarak anlık takip edin. «Hangi parça nerede?» sorusu tarih oluyor.',
-      mod4_title: '«Zero-Touch» Dokümantasyon & Arşivleme',
-      mod4_desc: 'Konteyner veya test paketi tamamlandığında; sistem ilgili NDT raporlarını, sertifikaları ve kontrol formlarını otomatik çeker ve tek bir dosya halinde paketler.',
-      mod5_title: 'Mevcut Sistemlerle (SAP/ERP) Kusursuz Entegrasyon',
-      mod5_desc: 'TERMINAL sahanın karmaşık verisini toplar, temizler ve özet, onaylanmış veriyi SAP sisteminize (REST API ile) zahmetsizce aktarır. SAP ekibinizin yükü artmaz, hafifler.',
-      mod6_title: 'Yapay Zeka (AI) Destekli Akıllı Dashboardlar',
-      mod6_desc: 'Yönetim ekibi, projenin Ahead/Behind durumunu cepten canlı olarak izler. Google Gemini API entegrasyonu olası kalite risklerini sizin için analiz edip raporlar.',
-      partner_pill: 'İş birliği',
-      partner_title: 'Yeni Nesil <span class="text-gradient">İş Birliği</span> Modelimiz',
-      partner_lead: 'Bir paket yazılım satın almıyorsunuz; bütünleşik bir yazılım departmanı kiralıyorsunuz.',
-      partner_card1_title: 'Lisanslama Yok',
-      partner_card1_desc: 'Kurumunuza özel «Hizmet ve Çözüm Ortaklığı» modeliyle çalışırız.',
-      partner_card2_title: 'Esneklik',
-      partner_card2_desc: 'Yeni bir rapor formatı mı gerekti? Sahadan yeni bir veri alanı talebi mi geldi? Ek fatura çıkarılmadan paket kapsamında anında geliştirilir.',
-      partner_card3_title: 'Güvenli Çıkış',
-      partner_card3_desc: 'Bizi denemekten korkmayın. Taahhüt yok; sistemi dilediğiniz zaman kapatabilir ve tüm verilerinizi eksiksiz (SQL/Excel) teslim alabilirsiniz.',
+      mod3_desc: 'Üretim, boya, nakliye ve sahaya varışı izometrik çizim bazlı olarak anlık takip edin.',
+      mod4_title: '«Zero-Touch» Dokümantasyon',
+      mod4_desc: 'NDT raporları, sertifikalar ve kontrol formları otomatik paketlenir.',
+      mod5_title: 'SAP/ERP Entegrasyonu',
+      mod5_desc: 'Saha verisini toplar, temizler ve REST API ile SAP\'ye aktarır.',
+      mod6_title: 'AI Destekli Dashboardlar',
+      mod6_desc: 'Projenin Ahead/Behind durumunu canlı izleyin. AI olası riskleri önceden analiz eder.',
       cta_title: 'Sahadaki Karmaşaya Son Vermeye <span class="text-gradient">Hazır Mısınız?</span>',
-      cta_desc: 'Operasyonel çevikliğe adım atın. Süreçlerinizi nasıl %100 izlenebilir hale getireceğimizi görmek için 30 dakikalık bir sistem demosu planlayalım.',
+      cta_desc: '30 dakikalık bir sistem demosu planlayalım.',
       cta_btn: 'Bizimle İletişime Geçin',
       contact_email_label: 'E-posta:',
       contact_phone_label: 'WhatsApp / Telefon:',
-      contact_web_label: 'Web:',
-      footer_desc: 'TERMINAL ile şantiye ve imalat operasyonlarında sıfır hata, tam kontrol. Weld Log, NDT, Heat No ve SAP entegrasyonu tek platformda.',
+      footer_desc: 'TERMINAL ile şantiye ve imalat operasyonlarında sıfır hata, tam kontrol.',
       footer_rights: 'Tüm hakları saklıdır.'
     },
     en: {
+      splash_hint: 'Click to explore',
       nav_why: 'Why',
-      nav_stats: 'Numbers',
       nav_modules: 'Modules',
-      nav_partner: 'Partnership',
       nav_contact: 'Contact',
-      hero_title: 'The <span class="text-gradient">«Zero Error, Full Control»</span> Era for Site & Manufacturing Operations',
-      hero_desc: 'Clear, fast, measurable digital management for your projects. Move industrial pipe fabrication, quality control and assembly out of manual Excel. Capture data where it is born and manage it from the office in one click.',
+      hero_title: 'The <span class="text-gradient">«Zero Error, Full Control»</span> Era for Site & Manufacturing',
+      hero_desc: 'Clear, fast, measurable digital management for your projects. Move industrial pipe fabrication, quality control and assembly out of manual Excel.',
       hero_cta: 'Request a Demo',
       why_pill: 'Why NeoPhase & TERMINAL?',
       why_title: 'Turn Your Operation from a <span class="text-gradient">Cost</span> Centre into a <span class="text-gradient">Profit</span> Centre.',
-      why_desc: 'We are not an off-the-shelf product but a living technology partner that keeps pace with your project. With TERMINAL, cut time waste on site, lock in quality and spot project risks early with AI.',
       why_card1_title: 'Reporting from Days to Minutes',
-      why_card1_desc: 'Manufacturing approval forms and NDT reports that used to take hours are ready in seconds, one click. Save around 700 person-hours per year.',
-      why_card2_title: 'Instant, “Clean” Data from the Field',
-      why_card2_desc: 'Easy data entry on tablet and phone. Supervisors adopt the system from day one thanks to a zero-training, intuitive UI.',
+      why_card1_desc: 'Manufacturing approval forms and NDT reports ready in seconds, one click.',
+      why_card2_title: 'Instant, "Clean" Data from the Field',
+      why_card2_desc: 'Easy data entry on tablet and phone. Zero-training, intuitive UI.',
       why_card3_title: 'Validation That Prevents Errors',
-      why_card3_desc: 'The system catches certificate or material mismatches at production time and alerts immediately. Prevent defective rework and returns.',
-      why_card4_title: 'No Hidden Costs, No Surprise Invoices',
-      why_card4_desc: 'No classic per-user licence fees. For the project duration, all enhancements and unlimited user access are included in a fixed monthly service fee.',
-      stats_heading: 'TERMINAL impact in numbers',
-      stat1_label: 'Customisable field modules',
-      stat2_label: 'Digital traceability & paperless site',
-      stat3_value: 'Zero',
-      stat3_label: 'Per-user licence cost',
-      stat4_label: 'Data freedom (leave with your data whenever you choose)',
+      why_card3_desc: 'The system catches certificate or material mismatches and alerts immediately.',
+      why_card4_title: 'No Hidden Costs',
+      why_card4_desc: 'No per-user licence fees. Unlimited users, fixed monthly service fee.',
       what_pill: 'Our modules',
-      what_lead: 'End-to-end continuous process management',
       what_title: 'What do we <span class="text-gradient">offer</span>?',
       mod1_title: 'Quality & welding management (Weld Log & NDT)',
-      mod1_desc: 'Manage welder performance, WQT qualifications and test packages from one place. Track RT/UT and MT/PT reject rates live to protect your standards.',
-      mod2_title: 'Materials & “Heat No” traceability',
-      mod2_desc: 'Track Heat No (cast number) for every plate, profile and consumable. Certificates for each part automatically match in the system.',
+      mod1_desc: 'Manage welder performance, WQT qualifications and test packages from one place.',
+      mod2_title: 'Materials & "Heat No" traceability',
+      mod2_desc: 'Track Heat No for every plate, profile and consumable. Certificates auto-match.',
       mod3_title: 'Spool & isometric tracking',
-      mod3_desc: 'Follow fabrication, paint, logistics and site arrival against isometrics. “Which part is where?” becomes history.',
-      mod4_title: '“Zero-touch” documentation & archiving',
-      mod4_desc: 'When a container or test package is complete, the system pulls NDT reports, certificates and checklists into one file automatically.',
-      mod5_title: 'Seamless integration with SAP/ERP',
-      mod5_desc: 'TERMINAL collects complex field data, cleans it and pushes approved summaries to SAP via REST API—without overloading your SAP team.',
-      mod6_title: 'AI-powered smart dashboards',
-      mod6_desc: 'Management sees Ahead/Behind status live on the phone. Google Gemini integration analyses quality risks and reports them for you.',
-      partner_pill: 'Partnership',
-      partner_title: 'Our next-generation <span class="text-gradient">partnership</span> model',
-      partner_lead: 'You are not buying software off the shelf—you are renting a fully embedded software department.',
-      partner_card1_title: 'No licensing',
-      partner_card1_desc: 'We work in a bespoke “service & solution partnership” model for your organisation.',
-      partner_card2_title: 'Flexibility',
-      partner_card2_desc: 'Need a new report format or a new field from site? Developed in scope immediately—no extra invoice.',
-      partner_card3_title: 'Safe exit',
-      partner_card3_desc: 'No fear to try. No long-term lock-in; switch off anytime and receive your full data in SQL/Excel.',
+      mod3_desc: 'Follow fabrication, paint, logistics and site arrival against isometrics.',
+      mod4_title: '"Zero-touch" documentation',
+      mod4_desc: 'NDT reports, certificates and checklists auto-packaged.',
+      mod5_title: 'SAP/ERP integration',
+      mod5_desc: 'Collects field data, cleans it and pushes to SAP via REST API.',
+      mod6_title: 'AI-powered dashboards',
+      mod6_desc: 'See Ahead/Behind status live. AI analyses quality risks proactively.',
       cta_title: 'Ready to end <span class="text-gradient">field chaos</span>?',
-      cta_desc: 'Move to operational agility. Let’s schedule a 30-minute system demo to show how we make your processes 100% traceable.',
+      cta_desc: 'Let\'s schedule a 30-minute system demo.',
       cta_btn: 'Contact us',
       contact_email_label: 'Email:',
       contact_phone_label: 'WhatsApp / phone:',
-      contact_web_label: 'Web:',
-      footer_desc: 'TERMINAL: zero-error, full-control site and manufacturing operations. Weld Log, NDT, Heat No and SAP integration on one platform.',
+      footer_desc: 'TERMINAL: zero-error, full-control site and manufacturing operations.',
       footer_rights: 'All rights reserved.'
     },
     de: {
+      splash_hint: 'Klicken zum Entdecken',
       nav_why: 'Warum',
-      nav_stats: 'Zahlen',
       nav_modules: 'Module',
-      nav_partner: 'Modell',
       nav_contact: 'Kontakt',
-      hero_title: 'Das Zeitalter <span class="text-gradient">«Null Fehler, volle Kontrolle»</span> auf der Baustelle und in der Fertigung',
-      hero_desc: 'Klares, schnelles und messbares digitales Management für Ihre Projekte. Rohrleitungsfertigung, Qualitätskontrolle und Montage aus dem Excel-Alltag holen. Daten entstehen, wo sie anfallen – und werden vom Büro aus in einem Klick gesteuert.',
+      hero_title: 'Das Zeitalter <span class="text-gradient">«Null Fehler, volle Kontrolle»</span> auf der Baustelle',
+      hero_desc: 'Klares, schnelles und messbares digitales Management. Rohrleitungsfertigung, Qualitätskontrolle und Montage aus dem Excel-Alltag holen.',
       hero_cta: 'Demo anfragen',
       why_pill: 'Warum NeoPhase & TERMINAL?',
       why_title: 'Vom <span class="text-gradient">Kosten-</span> zum <span class="text-gradient">Ertrags-</span>zentrum',
-      why_desc: 'Kein Standardprodukt, sondern ein lebendiger Technologiepartner im Takt Ihres Projekts. Mit TERMINAL Zeitverluste vor Ort minimieren, Qualität sichern und Risiken mit KI früh erkennen.',
       why_card1_title: 'Reporting: von Tagen zu Minuten',
-      why_card1_desc: 'Fertigungsfreigaben und NDT-Berichte in Sekunden – ein Klick. Rund 700 Personenstunden pro Jahr einsparen.',
-      why_card2_title: 'Sofortige, „saubere“ Daten vom Feld',
-      why_card2_desc: 'Erfassung auf Tablet und Smartphone. Intuitive Oberfläche ohne Schulungsaufwand – Ihre Vorarbeiter sind vom ersten Tag an dabei.',
+      why_card1_desc: 'Fertigungsfreigaben und NDT-Berichte in Sekunden – ein Klick.',
+      why_card2_title: 'Sofortige, „saubere" Daten vom Feld',
+      why_card2_desc: 'Erfassung auf Tablet und Smartphone. Intuitive Oberfläche ohne Schulung.',
       why_card3_title: 'Validierung verhindert Fehler',
-      why_card3_desc: 'Zertifikats- oder Materialabweichungen werden in der Produktion erkannt und gemeldet. Fehlerhafte Nacharbeiten und Retouren reduzieren.',
-      why_card4_title: 'Keine versteckten Kosten, keine Überraschungsrechnungen',
-      why_card4_desc: 'Keine klassischen Nutzerlizenzen. Alle Weiterentwicklungen und unbegrenzte Nutzer sind im monatlichen Festpreis enthalten.',
-      stats_heading: 'TERMINAL in Zahlen',
-      stat1_label: 'Anpassbare Feldmodule',
-      stat2_label: 'Digitale Rückverfolgbarkeit & papierlose Baustelle',
-      stat3_value: 'Null',
-      stat3_label: 'Lizenzkosten pro Nutzer',
-      stat4_label: 'Datenfreiheit (jederzeit mit Ihren Daten gehen)',
+      why_card3_desc: 'Zertifikats- oder Materialabweichungen werden sofort erkannt und gemeldet.',
+      why_card4_title: 'Keine versteckten Kosten',
+      why_card4_desc: 'Keine Nutzerlizenzen. Unbegrenzte Nutzer, monatlicher Festpreis.',
       what_pill: 'Unsere Module',
-      what_lead: 'Durchgängiges Prozessmanagement von Anfang bis Ende',
       what_title: 'Was <span class="text-gradient">bieten</span> wir?',
       mod1_title: 'Qualität & Schweißmanagement (Weld Log & NDT)',
-      mod1_desc: 'Schweißerleistung, WQT-Qualifikationen und Testpakete zentral steuern. RT/UT- und MT/PT-Ablehnungen live verfolgen.',
-      mod2_title: 'Material & „Heat No“-Rückverfolgbarkeit',
-      mod2_desc: 'Heat No (Schmelznummer) für Blech, Profile und Verbrauchsmaterial. Zertifikate werden automatisch zugeordnet.',
+      mod1_desc: 'Schweißerleistung, WQT-Qualifikationen und Testpakete zentral steuern.',
+      mod2_title: 'Material & „Heat No"-Rückverfolgbarkeit',
+      mod2_desc: 'Heat No für Blech, Profile und Verbrauchsmaterial. Zertifikate automatisch zugeordnet.',
       mod3_title: 'Spool- & Isometrie-Tracking',
-      mod3_desc: 'Fertigung, Lack, Logistik und Anlieferung isometriebasiert verfolgen. „Welches Teil ist wo?“ gehört der Vergangenheit an.',
-      mod4_title: '„Zero-touch“-Dokumentation & Archiv',
-      mod4_desc: 'Nach Container oder Testpaket zieht das System NDT-Berichte, Zertifikate und Prüfungen automatisch in einem Paket zusammen.',
-      mod5_title: 'Nahtlose Integration mit SAP/ERP',
-      mod5_desc: 'TERMINAL sammelt komplexe Felddaten, bereinigt sie und übergibt freigegebene Summaries per REST API an SAP – ohne Mehrbelastung für Ihr SAP-Team.',
+      mod3_desc: 'Fertigung, Lack, Logistik und Anlieferung isometriebasiert verfolgen.',
+      mod4_title: '„Zero-touch"-Dokumentation',
+      mod4_desc: 'NDT-Berichte, Zertifikate und Prüfungen automatisch paketiert.',
+      mod5_title: 'SAP/ERP-Integration',
+      mod5_desc: 'Felddaten sammeln, bereinigen und per REST API an SAP übergeben.',
       mod6_title: 'KI-gestützte Dashboards',
-      mod6_desc: 'Management sieht Ahead/Behind live auf dem Smartphone. Google Gemini analysiert Qualitätsrisiken und liefert Berichte.',
-      partner_pill: 'Partnerschaft',
-      partner_title: 'Unser neues <span class="text-gradient">Partnerschafts-</span>modell',
-      partner_lead: 'Sie kaufen keine Software – Sie „mieten“ eine eingebettete Softwareabteilung.',
-      partner_card1_title: 'Keine Lizenzierung',
-      partner_card1_desc: 'Wir arbeiten im Modell „Dienst- und Lösungspartnerschaft“ für Ihr Unternehmen.',
-      partner_card2_title: 'Flexibilität',
-      partner_card2_desc: 'Neues Reportformat oder neues Feld von der Baustelle? Im Paket sofort umgesetzt – ohne Zusatzrechnung.',
-      partner_card3_title: 'Sicherer Ausstieg',
-      partner_card3_desc: 'Kein Risiko beim Testen. Jederzeit abschaltbar – alle Daten vollständig als SQL/Excel.',
-      cta_title: 'Bereit, dem <span class="text-gradient">Chaos vor Ort</span> ein Ende zu setzen?',
-      cta_desc: 'Operative Agilität. Wir planen eine 30-minütige Systemdemo, um 100% Rückverfolgbarkeit zu zeigen.',
+      mod6_desc: 'Ahead/Behind live sehen. KI analysiert Qualitätsrisiken proaktiv.',
+      cta_title: 'Bereit, dem <span class="text-gradient">Chaos</span> ein Ende zu setzen?',
+      cta_desc: '30-minütige Systemdemo planen.',
       cta_btn: 'Kontakt aufnehmen',
       contact_email_label: 'E-Mail:',
       contact_phone_label: 'WhatsApp / Telefon:',
-      contact_web_label: 'Web:',
-      footer_desc: 'TERMINAL: Null Fehler, volle Kontrolle auf Baustelle und in der Fertigung. Weld Log, NDT, Heat No und SAP – eine Plattform.',
+      footer_desc: 'TERMINAL: Null Fehler, volle Kontrolle auf Baustelle und in der Fertigung.',
       footer_rights: 'Alle Rechte vorbehalten.'
     }
   };
@@ -253,7 +195,151 @@
     });
   }
 
-  /* ─── Particle System (Magic UI style) ─── */
+
+  /* ==========================================================
+     SPLASH — Full-screen 3D, click → 3s transition → site
+     ========================================================== */
+  function initSplash() {
+    const splash = document.getElementById('splash');
+    const navbar = document.getElementById('navbar');
+    const main = document.getElementById('main');
+    if (!splash || !navbar || !main) return;
+
+    // Skip splash if already done this session
+    if (sessionStorage.getItem('np-splash-done')) {
+      splash.classList.add('splash--done');
+      navbar.classList.add('show');
+      main.classList.remove('main--hidden');
+      main.classList.add('main--visible');
+      revealAllItems();
+      return;
+    }
+
+    // Lock scroll
+    document.body.style.overflow = 'hidden';
+
+    let entered = false;
+    function enter() {
+      if (entered) return;
+      entered = true;
+      sessionStorage.setItem('np-splash-done', '1');
+
+      // Phase 1: 3D büyüyerek erir, arka plan beyaz olur (2.4s)
+      splash.classList.add('splash--transitioning');
+
+      // Phase 2 (3.7s): splash overlay kaybolur, içerik başlar
+      setTimeout(() => {
+        splash.classList.add('splash--exit');
+        document.body.style.overflow = '';
+
+        main.classList.remove('main--hidden');
+        main.classList.add('main--visible');
+        navbar.classList.add('show');
+        revealSequentially(400);
+      }, 3700);
+
+      // Phase 3 (4.2s): splash tamamen kaldırılır
+      setTimeout(() => {
+        splash.classList.add('splash--done');
+      }, 4200);
+    }
+
+    splash.addEventListener('click', enter);
+    splash.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); enter(); }
+    });
+
+    // Splash particles
+    initSplashParticles();
+  }
+
+  function revealSequentially(interval) {
+    const items = document.querySelectorAll('.reveal-item');
+    const hero = document.getElementById('hero-top');
+    items.forEach((item, i) => {
+      setTimeout(() => {
+        item.classList.add('revealed');
+        // Light up hero glow on first reveal
+        if (i === 0 && hero) hero.classList.add('hero--lit');
+      }, i * interval);
+    });
+  }
+
+  function revealAllItems() {
+    document.querySelectorAll('.reveal-item').forEach(el => el.classList.add('revealed'));
+    const hero = document.getElementById('hero-top');
+    if (hero) hero.classList.add('hero--lit');
+  }
+
+  /* ─── Splash Particles (dark bg) ─── */
+  function initSplashParticles() {
+    if (prefersReduced) return;
+    const canvas = document.getElementById('splash-particles');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let particles = [], w, h, raf;
+    const COUNT = 50, MAX_SPEED = 0.25, CONNECTION_DIST = 130;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    function mkP() {
+      return {
+        x: Math.random() * w, y: Math.random() * h,
+        vx: (Math.random() - 0.5) * MAX_SPEED,
+        vy: (Math.random() - 0.5) * MAX_SPEED,
+        size: 1 + Math.random() * 1.5,
+        opacity: 0.2 + Math.random() * 0.3
+      };
+    }
+
+    resize();
+    for (let i = 0; i < COUNT; i++) particles.push(mkP());
+    window.addEventListener('resize', resize);
+
+    function draw() {
+      const splash = document.getElementById('splash');
+      if (!splash || splash.classList.contains('splash--done')) {
+        cancelAnimationFrame(raf);
+        return;
+      }
+      ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const d = Math.sqrt(dx * dx + dy * dy);
+          if (d < CONNECTION_DIST) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(99,102,241,${(1 - d / CONNECTION_DIST) * 0.15})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      particles.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(140,130,255,${p.opacity})`;
+        ctx.fill();
+      });
+      raf = requestAnimationFrame(draw);
+    }
+    draw();
+  }
+
+
+  /* ─── Hero Particle System (light bg) ─── */
   function initParticles() {
     if (prefersReduced) return;
     const canvas = document.getElementById('particle-canvas');
@@ -263,11 +349,7 @@
 
     let particles = [];
     let w, h;
-    const PARTICLE_COUNT = 40;
-    const MAX_SPEED = 0.3;
-    const SIZE_MIN = 1;
-    const SIZE_MAX = 2.5;
-    const CONNECTION_DISTANCE = 120;
+    const COUNT = 40, MAX_SPEED = 0.3, SIZE_MIN = 1, SIZE_MAX = 2.5, CONN_DIST = 120;
 
     function resize() {
       const hero = canvas.parentElement;
@@ -278,10 +360,9 @@
       canvas.height = h;
     }
 
-    function createParticle() {
+    function mkP() {
       return {
-        x: Math.random() * w,
-        y: Math.random() * h,
+        x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - 0.5) * MAX_SPEED,
         vy: (Math.random() - 0.5) * MAX_SPEED,
         size: SIZE_MIN + Math.random() * (SIZE_MAX - SIZE_MIN),
@@ -289,101 +370,45 @@
       };
     }
 
-    function init() {
-      resize();
-      particles = [];
-      for (let i = 0; i < PARTICLE_COUNT; i++) {
-        particles.push(createParticle());
-      }
-    }
+    resize();
+    for (let i = 0; i < COUNT; i++) particles.push(mkP());
 
     function draw() {
       ctx.clearRect(0, 0, w, h);
-
-      // Draw connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECTION_DISTANCE) {
-            const alpha = (1 - dist / CONNECTION_DISTANCE) * 0.08;
+          if (dist < CONN_DIST) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${alpha})`;
+            ctx.strokeStyle = `rgba(99,102,241,${(1 - dist / CONN_DIST) * 0.08})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       }
-
-      // Draw and move particles
       particles.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
-
         if (p.x < 0 || p.x > w) p.vx *= -1;
         if (p.y < 0 || p.y > h) p.vy *= -1;
-
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 102, 241, ${p.opacity})`;
+        ctx.fillStyle = `rgba(99,102,241,${p.opacity})`;
         ctx.fill();
       });
-
       requestAnimationFrame(draw);
     }
 
-    init();
     draw();
-    window.addEventListener('resize', () => { resize(); });
+    window.addEventListener('resize', resize);
   }
 
-  /* ─── Number Ticker (Magic UI style) ─── */
-  function initNumberTicker() {
-    const tickers = document.querySelectorAll('[data-ticker]');
-    if (!tickers.length) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.getAttribute('data-ticker'), 10);
-          if (isNaN(target)) return;
-          animateNumber(el, target);
-          observer.unobserve(el);
-        }
-      });
-    }, { threshold: 0.5 });
-
-    tickers.forEach(el => observer.observe(el));
-  }
-
-  function animateNumber(el, target) {
-    const duration = 1800;
-    const start = performance.now();
-    const startVal = 0;
-
-    function easeOutExpo(t) {
-      return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-    }
-
-    function step(now) {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = easeOutExpo(progress);
-      const current = Math.round(startVal + (target - startVal) * eased);
-      el.textContent = current.toLocaleString('tr-TR');
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      }
-    }
-
-    requestAnimationFrame(step);
-  }
-
-  /* ─── Scroll Animations (Blur Fade In) ─── */
+  /* ─── Scroll Animations (cards inside sections) ─── */
   function initScrollAnimations() {
     if (prefersReduced) {
       document.querySelectorAll('.animate-on-scroll').forEach(el => el.classList.add('visible'));
@@ -404,6 +429,7 @@
 
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   }
+
 
   /* ─── Mobile Navigation ─── */
   function initMobileNav() {
@@ -432,6 +458,7 @@
     });
   }
 
+
   /* ─── Smooth Scroll ─── */
   function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -447,6 +474,7 @@
       });
     });
   }
+
 
   /* ─── Active Nav Link Highlight ─── */
   function initActiveNavHighlight() {
@@ -471,7 +499,8 @@
     sections.forEach(section => observer.observe(section));
   }
 
-  /* ─── Bento Card Spotlight Effect ─── */
+
+  /* ─── Bento Card Spotlight ─── */
   function initSpotlightEffect() {
     if (prefersReduced) return;
     document.querySelectorAll('.bento-card').forEach(card => {
@@ -488,19 +517,6 @@
     });
   }
 
-  /* ─── Spline viewer: “Built with Spline” rozeti (shadow içi #logo) ─── */
-  function initSplineBrandingHide() {
-    document.querySelectorAll('spline-viewer').forEach((viewer) => {
-      const hide = () => {
-        try {
-          const logo = viewer.shadowRoot && viewer.shadowRoot.querySelector('#logo');
-          if (logo) logo.style.setProperty('display', 'none', 'important');
-        } catch (_) { /* ignore */ }
-      };
-      viewer.addEventListener('load-complete', hide);
-      hide();
-    });
-  }
 
   /* ─── Navbar Scroll Enhancement ─── */
   function initNavbarScroll() {
@@ -516,17 +532,29 @@
     }, { passive: true });
   }
 
-  /* ─── Init All ─── */
+
+  /* ─── Spline Viewer branding hide ─── */
+  function initSplineBranding() {
+    document.querySelectorAll('spline-viewer').forEach(viewer => {
+      viewer.addEventListener('load-complete', () => {
+        const logo = viewer.shadowRoot?.querySelector('#logo');
+        if (logo) logo.style.setProperty('display', 'none', 'important');
+      });
+    });
+  }
+
+
+  /* ─── Init ─── */
   document.addEventListener('DOMContentLoaded', () => {
+    initSplash();
     initLanguageSwitcher();
     initParticles();
     initScrollAnimations();
-    initNumberTicker();
     initMobileNav();
     initSmoothScroll();
     initActiveNavHighlight();
     initSpotlightEffect();
+    initSplineBranding();
     initNavbarScroll();
-    initSplineBrandingHide();
   });
 })();
