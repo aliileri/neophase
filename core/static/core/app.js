@@ -219,12 +219,13 @@
     document.body.style.overflow = 'hidden';
 
     let entered = false;
-    function enter() {
+    function enter(e) {
+      if (e && e.type === 'touchend') e.preventDefault();
       if (entered) return;
       entered = true;
       sessionStorage.setItem('np-splash-done', '1');
 
-      // Phase 1: 3D büyüyerek erir, arka plan beyaz olur (2.4s)
+      // Phase 1: 3D büyüyerek erir, arka plan beyaz olur (4s)
       splash.classList.add('splash--transitioning');
 
       // Phase 2 (3.7s): splash overlay kaybolur, içerik başlar
@@ -244,10 +245,17 @@
       }, 4200);
     }
 
-    splash.addEventListener('click', enter);
+    const overlay = document.getElementById('splash-overlay');
+    const target = overlay || splash;
+
+    target.addEventListener('click', enter);
+    target.addEventListener('touchend', enter, { passive: false });
     splash.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); enter(); }
     });
+
+    // Auto-skip after 12s if user doesn't tap (mobile Spline load timeout)
+    setTimeout(() => { if (!entered) enter(); }, 12000);
 
     // Splash particles
     initSplashParticles();
