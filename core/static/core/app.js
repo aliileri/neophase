@@ -215,8 +215,8 @@
       return;
     }
 
-    // Lock scroll
-    document.body.style.overflow = 'hidden';
+    // Lock scroll (iOS fix: use class instead of just overflow)
+    document.body.classList.add('splash-open');
 
     let entered = false;
     function enter(e) {
@@ -231,7 +231,7 @@
       // Phase 2 (3.7s): splash overlay kaybolur, içerik başlar
       setTimeout(() => {
         splash.classList.add('splash--exit');
-        document.body.style.overflow = '';
+        document.body.classList.remove('splash-open');
 
         main.classList.remove('main--hidden');
         main.classList.add('main--visible');
@@ -542,12 +542,31 @@
 
 
   /* ─── Spline Viewer branding hide ─── */
+  function hideSplineBranding(viewer) {
+    const sr = viewer.shadowRoot;
+    if (!sr) return;
+    // Try all known selectors for the badge
+    ['#logo', 'a[href*="spline"]', '[class*="logo"]', '[class*="brand"]', '[class*="watermark"]'].forEach(sel => {
+      sr.querySelectorAll(sel).forEach(el => el.style.setProperty('display', 'none', 'important'));
+    });
+    // Inject a style tag into shadow root as a fallback
+    if (!sr.querySelector('style[data-np]')) {
+      const s = document.createElement('style');
+      s.setAttribute('data-np', '1');
+      s.textContent = '#logo,a[href*="spline"],[class*="logo"],[class*="brand"],[class*="watermark"]{display:none!important}';
+      sr.appendChild(s);
+    }
+  }
+
   function initSplineBranding() {
     document.querySelectorAll('spline-viewer').forEach(viewer => {
-      viewer.addEventListener('load-complete', () => {
-        const logo = viewer.shadowRoot?.querySelector('#logo');
-        if (logo) logo.style.setProperty('display', 'none', 'important');
-      });
+      // On load
+      viewer.addEventListener('load-complete', () => hideSplineBranding(viewer));
+      // Also watch shadow DOM mutations
+      const tryHide = () => { if (viewer.shadowRoot) hideSplineBranding(viewer); };
+      setTimeout(tryHide, 500);
+      setTimeout(tryHide, 1500);
+      setTimeout(tryHide, 3000);
     });
   }
 
