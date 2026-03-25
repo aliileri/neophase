@@ -17,154 +17,178 @@
       nav_why: 'Neden',
       nav_stats: 'Rakamlar',
       nav_modules: 'Modüller',
-      nav_refs: 'Referanslar',
-      hero_badge: 'Şantiye dijital yönetim platformu',
-      hero_title: 'Projelerinizde <span class="text-gradient">net, hızlı</span> ve <span class="text-gradient">ölçülebilir</span> dijital yönetim.',
-      hero_desc: 'Planlama, kalite, malzeme ve ekipman, iş güvenliği ve maliyet yönetimi süreçlerini uçtan uca dijitalleştirir; veriyi tek platformda toplar ve yönetimi kolaylaştırır.',
-      hero_explore: 'Keşfet',
-      chip_fast: 'Hızlı devreye alma',
-      chip_integrate: 'Kolay entegrasyon',
-      chip_measurable: 'Ölçülebilir fayda',
-      chip_modular: 'Modüler',
-      why_pill: 'Neden NeoPhase',
-      why_title: 'Operasyonunuzu <span class="text-gradient">dönüştürün</span>',
-      why_desc: 'NeoPhase ile sahada zaman kaybını azaltın, kaliteyi artırın ve proje risklerini minimuma indirin.',
-      why_card1_title: 'Kolay Kullanım',
-      why_card1_desc: 'Hiç eğitim gerektirmez. Herkes ilk günden rahatça kullanır. Sezgisel arayüz, hızlı adaptasyon.',
-      why_card2_title: 'Hızlı Başlangıç',
-      why_card2_desc: 'Tüm süreçleri kısa sürede dijitale taşıyın. Kurulum günler değil, saatler alır.',
-      why_card3_title: 'Anında Katkı',
-      why_card3_desc: 'Operasyon hızlanır, maliyetler düşer, ekibiniz rahatlar. İlk haftadan ölçülebilir sonuç.',
-      stat1_label: 'Tamamlanan Proje',
-      stat2_label: 'Aktif Kullanıcı',
-      stat3_label: 'Modül',
-      stat4_label: 'Maliyet Tasarrufu',
-      what_pill: 'Modüller',
-      what_title: 'Ne <span class="text-gradient">sunuyoruz</span>?',
-      what_desc: 'Tüm proje süreçlerinizi dijitalleştiriyoruz. Planlama, kalite, İSG, proje yönetimi, maliyet kontrolü — hepsi tek platformda.',
-      mod1_title: 'Planlama & Kalite',
-      mod1_desc: 'Proje planları, kalite kontrol/denetim, NCR takibi, kalite günlükleri, standart yönetimi.',
-      mod2_title: 'İSG & Güvenlik',
-      mod2_desc: 'İş güvenliği denetimleri, risk değerlendirmeleri, eğitim takibi, kaza raporları, güvenlik protokolleri.',
-      mod3_title: 'Proje Yönetimi',
-      mod3_desc: 'Görev atamaları, ilerleme takibi, kaynak yönetimi, zaman çizelgeleri, milestone kontrolü.',
-      mod4_title: 'Maliyet & Analiz',
-      mod4_desc: 'Bütçe takibi, maliyet analizi, ROI hesaplamaları, performans metrikleri, detaylı raporlama.',
-      mod5_title: 'Mobil & Offline',
-      mod5_desc: 'Sahada foto/video kayıt, QR kod tarama, offline veri girişi, anlık senkronizasyon.',
-      mod6_title: 'Entegrasyon',
-      mod6_desc: 'REST/GraphQL API, Excel/CSV import/export, mevcut sistemlerle bağlantı, otomatik veri akışı.',
-      mod7_title: 'Akıllı Raporlama',
-      mod7_desc: 'Gerçek zamanlı dashboardlar, özelleştirilebilir raporlar, trend analizi, otomatik uyarılar.',
-      ref_pill: 'Referanslar',
-      ref_title: 'Sahada <span class="text-gradient">kanıtlanmış</span> çözümler',
-      ref_desc: 'Dünya çapında enerji ve endüstri liderleriyle aynı projelerde yer aldık; sahada kanıtlanmış kurulumlarımız kaliteyi yükseltir, riskleri azaltır.',
-      ref_brands_label: 'Projelerinde yer aldığımız markalar:',
-      ref_contractors_label: 'Doğrudan hizmet verdiğimiz yüklenici şirketler:',
-      footer_desc: 'Şantiyede yalın dijital yönetim. Planlama, kalite, malzeme & ekipman, İSG ve maliyet süreçlerinizi tek ekrandan yönetin.',
-      footer_rights: '© 2026 NeoPhase. Tüm hakları saklıdır.'
+      nav_partner: 'İş modeli',
+      nav_contact: 'İletişim',
+      hero_title: 'Şantiye ve İmalat Operasyonlarında <span class="text-gradient">«Sıfır Hata, Tam Kontrol»</span> Dönemi',
+      hero_desc: 'Projelerinizde net, hızlı ve ölçülebilir dijital yönetim. Endüstriyel boru imalatı, kalite kontrol ve montaj süreçlerinizi manuel Excel tablolarından kurtarın. Veriyi sahada doğduğu an dijitalleştirin, ofisten tek tıkla yönetin.',
+      hero_cta: 'Demo Talep Edin',
+      why_pill: 'Neden NeoPhase & TERMINAL?',
+      why_title: 'Operasyonunuzu Gider Merkezinden, <span class="text-gradient">Kâr Merkezine</span> Dönüştürün.',
+      why_desc: 'Paket bir yazılım değil, projenizin hızına ayak uyduran yaşayan bir teknoloji ortağıyız. TERMINAL ile sahada zaman kaybını sıfırlayın, kaliteyi garanti altına alın ve proje risklerini yapay zeka ile önceden tespit edin.',
+      why_card1_title: 'Günlerden Dakikalara İnen Raporlama',
+      why_card1_desc: 'Kalite ekiplerinizin saatlerini alan İmalat Onay Formları ve NDT raporları tek tıkla, saniyeler içinde hazır. Yılda yaklaşık 700 adam/saat tasarruf edin.',
+      why_card2_title: 'Sahadan Anlık, «Temiz» Veri',
+      why_card2_desc: 'Tablet ve telefon üzerinden kolayca veri girişi yapın. Sıfır eğitim gerektiren sezgisel arayüz ile formenleriniz sistemi ilk günden benimser.',
+      why_card3_title: 'Anında Validasyon ile Hata Önleme',
+      why_card3_desc: 'Üretim anında sertifika veya malzeme uyuşmazlığını sistem anında yakalar ve uyarır. %100 hatalı üretim iadesinin önüne geçin.',
+      why_card4_title: 'Gizli Maliyet Yok, Sürpriz Fatura Yok',
+      why_card4_desc: 'Klasik kullanıcı başı lisans ücreti ödemezsiniz. Proje süresince tüm geliştirmeler ve sınırsız kullanıcı erişimi aylık sabit hizmet bedeline dahildir.',
+      stats_heading: 'Rakamlarla TERMINAL Etkisi',
+      stat1_label: 'Özelleştirilebilir Saha Modülü',
+      stat2_label: 'Dijital İzlenebilirlik (Traceability) ve Kağıtsız Saha',
+      stat3_value: 'Sıfır',
+      stat3_label: 'Kullanıcı Başı Lisans Maliyeti',
+      stat4_label: 'Veri Özgürlüğü (Dilediğiniz an verilerinizle ayrılma garantisi)',
+      what_pill: 'Modüllerimiz',
+      what_lead: 'Uçtan Uca Kesintisiz Süreç Yönetimi',
+      what_title: 'Ne <span class="text-gradient">Sunuyoruz</span>?',
+      mod1_title: 'Kalite ve Kaynak Yönetimi (Weld Log & NDT)',
+      mod1_desc: 'Kaynakçı performansları, WQT yeterlilikleri ve test paketlerinizi tek merkezden yönetin. RT/UT ve MT/PT red oranlarını anlık olarak izleyerek kalite standartlarınızı koruyun.',
+      mod2_title: 'Malzeme ve «Heat No» İzlenebilirliği',
+      mod2_desc: 'Kullanılan her sac, profil ve sarf malzemenin Heat No (Döküm No) takibini yapın. İmalattaki her parçanın sertifikası sistemde otomatik eşleşir.',
+      mod3_title: 'Spool & İzometri Takibi',
+      mod3_desc: 'Üretim, boya, nakliye ve sahaya varış adımlarını izometrik çizim bazlı olarak anlık takip edin. «Hangi parça nerede?» sorusu tarih oluyor.',
+      mod4_title: '«Zero-Touch» Dokümantasyon & Arşivleme',
+      mod4_desc: 'Konteyner veya test paketi tamamlandığında; sistem ilgili NDT raporlarını, sertifikaları ve kontrol formlarını otomatik çeker ve tek bir dosya halinde paketler.',
+      mod5_title: 'Mevcut Sistemlerle (SAP/ERP) Kusursuz Entegrasyon',
+      mod5_desc: 'TERMINAL sahanın karmaşık verisini toplar, temizler ve özet, onaylanmış veriyi SAP sisteminize (REST API ile) zahmetsizce aktarır. SAP ekibinizin yükü artmaz, hafifler.',
+      mod6_title: 'Yapay Zeka (AI) Destekli Akıllı Dashboardlar',
+      mod6_desc: 'Yönetim ekibi, projenin Ahead/Behind durumunu cepten canlı olarak izler. Google Gemini API entegrasyonu olası kalite risklerini sizin için analiz edip raporlar.',
+      partner_pill: 'İş birliği',
+      partner_title: 'Yeni Nesil <span class="text-gradient">İş Birliği</span> Modelimiz',
+      partner_lead: 'Bir paket yazılım satın almıyorsunuz; bütünleşik bir yazılım departmanı kiralıyorsunuz.',
+      partner_card1_title: 'Lisanslama Yok',
+      partner_card1_desc: 'Kurumunuza özel «Hizmet ve Çözüm Ortaklığı» modeliyle çalışırız.',
+      partner_card2_title: 'Esneklik',
+      partner_card2_desc: 'Yeni bir rapor formatı mı gerekti? Sahadan yeni bir veri alanı talebi mi geldi? Ek fatura çıkarılmadan paket kapsamında anında geliştirilir.',
+      partner_card3_title: 'Güvenli Çıkış',
+      partner_card3_desc: 'Bizi denemekten korkmayın. Taahhüt yok; sistemi dilediğiniz zaman kapatabilir ve tüm verilerinizi eksiksiz (SQL/Excel) teslim alabilirsiniz.',
+      cta_title: 'Sahadaki Karmaşaya Son Vermeye <span class="text-gradient">Hazır Mısınız?</span>',
+      cta_desc: 'Operasyonel çevikliğe adım atın. Süreçlerinizi nasıl %100 izlenebilir hale getireceğimizi görmek için 30 dakikalık bir sistem demosu planlayalım.',
+      cta_btn: 'Bizimle İletişime Geçin',
+      contact_email_label: 'E-posta:',
+      contact_phone_label: 'WhatsApp / Telefon:',
+      contact_web_label: 'Web:',
+      footer_desc: 'TERMINAL ile şantiye ve imalat operasyonlarında sıfır hata, tam kontrol. Weld Log, NDT, Heat No ve SAP entegrasyonu tek platformda.',
+      footer_rights: 'Tüm hakları saklıdır.'
     },
     en: {
       nav_why: 'Why',
       nav_stats: 'Numbers',
       nav_modules: 'Modules',
-      nav_refs: 'References',
-      hero_badge: 'Construction site digital management platform',
-      hero_title: 'Achieve <span class="text-gradient">clear, fast</span> and <span class="text-gradient">measurable</span> digital management in your projects.',
-      hero_desc: 'Digitize planning, quality, materials & equipment, safety and cost management processes end-to-end; collect data on a single platform and simplify management.',
-      hero_explore: 'Explore',
-      chip_fast: 'Quick deployment',
-      chip_integrate: 'Easy integration',
-      chip_measurable: 'Measurable impact',
-      chip_modular: 'Modular',
-      why_pill: 'Why NeoPhase',
-      why_title: 'Transform your <span class="text-gradient">operations</span>',
-      why_desc: 'Reduce time waste on site, increase quality, and minimize project risks with NeoPhase.',
-      why_card1_title: 'Easy to Use',
-      why_card1_desc: 'No training required. Anyone can use it comfortably from day one. Intuitive interface, fast adaptation.',
-      why_card2_title: 'Quick Start',
-      why_card2_desc: 'Move all processes to digital in a short time. Setup takes hours, not days.',
-      why_card3_title: 'Instant Impact',
-      why_card3_desc: 'Operations speed up, costs decrease, your team is relieved. Measurable results from the first week.',
-      stat1_label: 'Completed Projects',
-      stat2_label: 'Active Users',
-      stat3_label: 'Modules',
-      stat4_label: 'Cost Savings',
-      what_pill: 'Modules',
+      nav_partner: 'Partnership',
+      nav_contact: 'Contact',
+      hero_title: 'The <span class="text-gradient">«Zero Error, Full Control»</span> Era for Site & Manufacturing Operations',
+      hero_desc: 'Clear, fast, measurable digital management for your projects. Move industrial pipe fabrication, quality control and assembly out of manual Excel. Capture data where it is born and manage it from the office in one click.',
+      hero_cta: 'Request a Demo',
+      why_pill: 'Why NeoPhase & TERMINAL?',
+      why_title: 'Turn Your Operation from a <span class="text-gradient">Cost</span> Centre into a <span class="text-gradient">Profit</span> Centre.',
+      why_desc: 'We are not an off-the-shelf product but a living technology partner that keeps pace with your project. With TERMINAL, cut time waste on site, lock in quality and spot project risks early with AI.',
+      why_card1_title: 'Reporting from Days to Minutes',
+      why_card1_desc: 'Manufacturing approval forms and NDT reports that used to take hours are ready in seconds, one click. Save around 700 person-hours per year.',
+      why_card2_title: 'Instant, “Clean” Data from the Field',
+      why_card2_desc: 'Easy data entry on tablet and phone. Supervisors adopt the system from day one thanks to a zero-training, intuitive UI.',
+      why_card3_title: 'Validation That Prevents Errors',
+      why_card3_desc: 'The system catches certificate or material mismatches at production time and alerts immediately. Prevent defective rework and returns.',
+      why_card4_title: 'No Hidden Costs, No Surprise Invoices',
+      why_card4_desc: 'No classic per-user licence fees. For the project duration, all enhancements and unlimited user access are included in a fixed monthly service fee.',
+      stats_heading: 'TERMINAL impact in numbers',
+      stat1_label: 'Customisable field modules',
+      stat2_label: 'Digital traceability & paperless site',
+      stat3_value: 'Zero',
+      stat3_label: 'Per-user licence cost',
+      stat4_label: 'Data freedom (leave with your data whenever you choose)',
+      what_pill: 'Our modules',
+      what_lead: 'End-to-end continuous process management',
       what_title: 'What do we <span class="text-gradient">offer</span>?',
-      what_desc: 'We digitize all your project processes. Planning, quality, OHS, project management, cost control — all on one platform.',
-      mod1_title: 'Planning & Quality',
-      mod1_desc: 'Project plans, quality control/inspection, NCR tracking, quality logs, standards management.',
-      mod2_title: 'OHS & Safety',
-      mod2_desc: 'Safety inspections, risk assessments, training tracking, accident reports, safety protocols.',
-      mod3_title: 'Project Management',
-      mod3_desc: 'Task assignments, progress tracking, resource management, timelines, milestone control.',
-      mod4_title: 'Cost & Analysis',
-      mod4_desc: 'Budget tracking, cost analysis, ROI calculations, performance metrics, detailed reporting.',
-      mod5_title: 'Mobile & Offline',
-      mod5_desc: 'On-site photo/video recording, QR code scanning, offline data entry, instant sync.',
-      mod6_title: 'Integration',
-      mod6_desc: 'REST/GraphQL API, Excel/CSV import/export, connect to existing systems, automated data flow.',
-      mod7_title: 'Smart Reporting',
-      mod7_desc: 'Real-time dashboards, customizable reports, trend analysis, automatic alerts.',
-      ref_pill: 'References',
-      ref_title: 'Field-<span class="text-gradient">proven</span> solutions',
-      ref_desc: 'We have participated in projects with global energy and industry leaders; our field-proven installations increase quality and reduce risks.',
-      ref_brands_label: 'Brands we have worked with:',
-      ref_contractors_label: 'Contractors we directly serve:',
-      footer_desc: 'Lean digital management on the construction site. Manage planning, quality, materials & equipment, OHS and cost processes from a single screen.',
-      footer_rights: '© 2026 NeoPhase. All rights reserved.'
+      mod1_title: 'Quality & welding management (Weld Log & NDT)',
+      mod1_desc: 'Manage welder performance, WQT qualifications and test packages from one place. Track RT/UT and MT/PT reject rates live to protect your standards.',
+      mod2_title: 'Materials & “Heat No” traceability',
+      mod2_desc: 'Track Heat No (cast number) for every plate, profile and consumable. Certificates for each part automatically match in the system.',
+      mod3_title: 'Spool & isometric tracking',
+      mod3_desc: 'Follow fabrication, paint, logistics and site arrival against isometrics. “Which part is where?” becomes history.',
+      mod4_title: '“Zero-touch” documentation & archiving',
+      mod4_desc: 'When a container or test package is complete, the system pulls NDT reports, certificates and checklists into one file automatically.',
+      mod5_title: 'Seamless integration with SAP/ERP',
+      mod5_desc: 'TERMINAL collects complex field data, cleans it and pushes approved summaries to SAP via REST API—without overloading your SAP team.',
+      mod6_title: 'AI-powered smart dashboards',
+      mod6_desc: 'Management sees Ahead/Behind status live on the phone. Google Gemini integration analyses quality risks and reports them for you.',
+      partner_pill: 'Partnership',
+      partner_title: 'Our next-generation <span class="text-gradient">partnership</span> model',
+      partner_lead: 'You are not buying software off the shelf—you are renting a fully embedded software department.',
+      partner_card1_title: 'No licensing',
+      partner_card1_desc: 'We work in a bespoke “service & solution partnership” model for your organisation.',
+      partner_card2_title: 'Flexibility',
+      partner_card2_desc: 'Need a new report format or a new field from site? Developed in scope immediately—no extra invoice.',
+      partner_card3_title: 'Safe exit',
+      partner_card3_desc: 'No fear to try. No long-term lock-in; switch off anytime and receive your full data in SQL/Excel.',
+      cta_title: 'Ready to end <span class="text-gradient">field chaos</span>?',
+      cta_desc: 'Move to operational agility. Let’s schedule a 30-minute system demo to show how we make your processes 100% traceable.',
+      cta_btn: 'Contact us',
+      contact_email_label: 'Email:',
+      contact_phone_label: 'WhatsApp / phone:',
+      contact_web_label: 'Web:',
+      footer_desc: 'TERMINAL: zero-error, full-control site and manufacturing operations. Weld Log, NDT, Heat No and SAP integration on one platform.',
+      footer_rights: 'All rights reserved.'
     },
     de: {
       nav_why: 'Warum',
       nav_stats: 'Zahlen',
       nav_modules: 'Module',
-      nav_refs: 'Referenzen',
-      hero_badge: 'Digitale Management-Plattform für Baustellen',
-      hero_title: 'Erreichen Sie <span class="text-gradient">klares, schnelles</span> und <span class="text-gradient">messbares</span> digitales Management in Ihren Projekten.',
-      hero_desc: 'Digitalisieren Sie Planungs-, Qualitäts-, Material- & Geräte-, Sicherheits- und Kostenmanagementprozesse durchgängig; sammeln Sie Daten auf einer einzigen Plattform und vereinfachen Sie das Management.',
-      hero_explore: 'Entdecken',
-      chip_fast: 'Schnelle Inbetriebnahme',
-      chip_integrate: 'Einfache Integration',
-      chip_measurable: 'Messbarer Nutzen',
-      chip_modular: 'Modular',
-      why_pill: 'Warum NeoPhase',
-      why_title: 'Transformieren Sie Ihre <span class="text-gradient">Abläufe</span>',
-      why_desc: 'Reduzieren Sie Zeitverluste vor Ort, steigern Sie die Qualität und minimieren Sie Projektrisiken mit NeoPhase.',
-      why_card1_title: 'Einfache Bedienung',
-      why_card1_desc: 'Keine Schulung erforderlich. Jeder kann es ab dem ersten Tag bequem nutzen. Intuitive Benutzeroberfläche, schnelle Anpassung.',
-      why_card2_title: 'Schneller Start',
-      why_card2_desc: 'Stellen Sie alle Prozesse in kurzer Zeit auf digital um. Die Einrichtung dauert Stunden, nicht Tage.',
-      why_card3_title: 'Sofortiger Beitrag',
-      why_card3_desc: 'Der Betrieb beschleunigt sich, die Kosten sinken, Ihr Team wird entlastet. Messbare Ergebnisse ab der ersten Woche.',
-      stat1_label: 'Abgeschlossene Projekte',
-      stat2_label: 'Aktive Nutzer',
-      stat3_label: 'Module',
-      stat4_label: 'Kosteneinsparung',
-      what_pill: 'Module',
+      nav_partner: 'Modell',
+      nav_contact: 'Kontakt',
+      hero_title: 'Das Zeitalter <span class="text-gradient">«Null Fehler, volle Kontrolle»</span> auf der Baustelle und in der Fertigung',
+      hero_desc: 'Klares, schnelles und messbares digitales Management für Ihre Projekte. Rohrleitungsfertigung, Qualitätskontrolle und Montage aus dem Excel-Alltag holen. Daten entstehen, wo sie anfallen – und werden vom Büro aus in einem Klick gesteuert.',
+      hero_cta: 'Demo anfragen',
+      why_pill: 'Warum NeoPhase & TERMINAL?',
+      why_title: 'Vom <span class="text-gradient">Kosten-</span> zum <span class="text-gradient">Ertrags-</span>zentrum',
+      why_desc: 'Kein Standardprodukt, sondern ein lebendiger Technologiepartner im Takt Ihres Projekts. Mit TERMINAL Zeitverluste vor Ort minimieren, Qualität sichern und Risiken mit KI früh erkennen.',
+      why_card1_title: 'Reporting: von Tagen zu Minuten',
+      why_card1_desc: 'Fertigungsfreigaben und NDT-Berichte in Sekunden – ein Klick. Rund 700 Personenstunden pro Jahr einsparen.',
+      why_card2_title: 'Sofortige, „saubere“ Daten vom Feld',
+      why_card2_desc: 'Erfassung auf Tablet und Smartphone. Intuitive Oberfläche ohne Schulungsaufwand – Ihre Vorarbeiter sind vom ersten Tag an dabei.',
+      why_card3_title: 'Validierung verhindert Fehler',
+      why_card3_desc: 'Zertifikats- oder Materialabweichungen werden in der Produktion erkannt und gemeldet. Fehlerhafte Nacharbeiten und Retouren reduzieren.',
+      why_card4_title: 'Keine versteckten Kosten, keine Überraschungsrechnungen',
+      why_card4_desc: 'Keine klassischen Nutzerlizenzen. Alle Weiterentwicklungen und unbegrenzte Nutzer sind im monatlichen Festpreis enthalten.',
+      stats_heading: 'TERMINAL in Zahlen',
+      stat1_label: 'Anpassbare Feldmodule',
+      stat2_label: 'Digitale Rückverfolgbarkeit & papierlose Baustelle',
+      stat3_value: 'Null',
+      stat3_label: 'Lizenzkosten pro Nutzer',
+      stat4_label: 'Datenfreiheit (jederzeit mit Ihren Daten gehen)',
+      what_pill: 'Unsere Module',
+      what_lead: 'Durchgängiges Prozessmanagement von Anfang bis Ende',
       what_title: 'Was <span class="text-gradient">bieten</span> wir?',
-      what_desc: 'Wir digitalisieren alle Ihre Projektprozesse. Planung, Qualität, Arbeitssicherheit, Projektmanagement, Kostenkontrolle — alles auf einer Plattform.',
-      mod1_title: 'Planung & Qualität',
-      mod1_desc: 'Projektpläne, Qualitätskontrolle/-prüfung, NCR-Verfolgung, Qualitätsprotokolle, Standardmanagement.',
-      mod2_title: 'Arbeitssicherheit',
-      mod2_desc: 'Sicherheitsinspektionen, Risikobewertungen, Schulungsverfolgung, Unfallberichte, Sicherheitsprotokolle.',
-      mod3_title: 'Projektmanagement',
-      mod3_desc: 'Aufgabenzuweisung, Fortschrittsverfolgung, Ressourcenmanagement, Zeitpläne, Meilenstein-Kontrolle.',
-      mod4_title: 'Kosten & Analyse',
-      mod4_desc: 'Budgetverfolgung, Kostenanalyse, ROI-Berechnungen, Leistungskennzahlen, detaillierte Berichterstattung.',
-      mod5_title: 'Mobil & Offline',
-      mod5_desc: 'Foto-/Videoaufnahme vor Ort, QR-Code-Scanning, Offline-Dateneingabe, sofortige Synchronisation.',
-      mod6_title: 'Integration',
-      mod6_desc: 'REST/GraphQL-API, Excel/CSV-Import/Export, Anbindung an bestehende Systeme, automatischer Datenfluss.',
-      mod7_title: 'Intelligente Berichte',
-      mod7_desc: 'Echtzeit-Dashboards, anpassbare Berichte, Trendanalyse, automatische Warnmeldungen.',
-      ref_pill: 'Referenzen',
-      ref_title: 'In der Praxis <span class="text-gradient">bewährte</span> Lösungen',
-      ref_desc: 'Wir haben an Projekten mit weltweit führenden Energie- und Industrieunternehmen teilgenommen; unsere praxiserprobten Installationen steigern die Qualität und reduzieren Risiken.',
-      ref_brands_label: 'Marken, in deren Projekten wir tätig waren:',
-      ref_contractors_label: 'Auftragnehmer, die wir direkt betreuen:',
-      footer_desc: 'Schlankes digitales Management auf der Baustelle. Verwalten Sie Planungs-, Qualitäts-, Material- & Geräte-, Arbeitssicherheits- und Kostenprozesse über einen einzigen Bildschirm.',
-      footer_rights: '© 2026 NeoPhase. Alle Rechte vorbehalten.'
+      mod1_title: 'Qualität & Schweißmanagement (Weld Log & NDT)',
+      mod1_desc: 'Schweißerleistung, WQT-Qualifikationen und Testpakete zentral steuern. RT/UT- und MT/PT-Ablehnungen live verfolgen.',
+      mod2_title: 'Material & „Heat No“-Rückverfolgbarkeit',
+      mod2_desc: 'Heat No (Schmelznummer) für Blech, Profile und Verbrauchsmaterial. Zertifikate werden automatisch zugeordnet.',
+      mod3_title: 'Spool- & Isometrie-Tracking',
+      mod3_desc: 'Fertigung, Lack, Logistik und Anlieferung isometriebasiert verfolgen. „Welches Teil ist wo?“ gehört der Vergangenheit an.',
+      mod4_title: '„Zero-touch“-Dokumentation & Archiv',
+      mod4_desc: 'Nach Container oder Testpaket zieht das System NDT-Berichte, Zertifikate und Prüfungen automatisch in einem Paket zusammen.',
+      mod5_title: 'Nahtlose Integration mit SAP/ERP',
+      mod5_desc: 'TERMINAL sammelt komplexe Felddaten, bereinigt sie und übergibt freigegebene Summaries per REST API an SAP – ohne Mehrbelastung für Ihr SAP-Team.',
+      mod6_title: 'KI-gestützte Dashboards',
+      mod6_desc: 'Management sieht Ahead/Behind live auf dem Smartphone. Google Gemini analysiert Qualitätsrisiken und liefert Berichte.',
+      partner_pill: 'Partnerschaft',
+      partner_title: 'Unser neues <span class="text-gradient">Partnerschafts-</span>modell',
+      partner_lead: 'Sie kaufen keine Software – Sie „mieten“ eine eingebettete Softwareabteilung.',
+      partner_card1_title: 'Keine Lizenzierung',
+      partner_card1_desc: 'Wir arbeiten im Modell „Dienst- und Lösungspartnerschaft“ für Ihr Unternehmen.',
+      partner_card2_title: 'Flexibilität',
+      partner_card2_desc: 'Neues Reportformat oder neues Feld von der Baustelle? Im Paket sofort umgesetzt – ohne Zusatzrechnung.',
+      partner_card3_title: 'Sicherer Ausstieg',
+      partner_card3_desc: 'Kein Risiko beim Testen. Jederzeit abschaltbar – alle Daten vollständig als SQL/Excel.',
+      cta_title: 'Bereit, dem <span class="text-gradient">Chaos vor Ort</span> ein Ende zu setzen?',
+      cta_desc: 'Operative Agilität. Wir planen eine 30-minütige Systemdemo, um 100% Rückverfolgbarkeit zu zeigen.',
+      cta_btn: 'Kontakt aufnehmen',
+      contact_email_label: 'E-Mail:',
+      contact_phone_label: 'WhatsApp / Telefon:',
+      contact_web_label: 'Web:',
+      footer_desc: 'TERMINAL: Null Fehler, volle Kontrolle auf Baustelle und in der Fertigung. Weld Log, NDT, Heat No und SAP – eine Plattform.',
+      footer_rights: 'Alle Rechte vorbehalten.'
     }
   };
 
@@ -381,34 +405,6 @@
     document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
   }
 
-  /* ─── Hero Slideshow ─── */
-  function initHeroSlideshow() {
-    const container = document.getElementById('hero-slideshow');
-    if (!container) return;
-    const imgA = container.querySelector('[data-slideshow-a]');
-    const imgB = container.querySelector('[data-slideshow-b]');
-    const list = (container.getAttribute('data-images') || '').split('|').map(s => s.trim()).filter(Boolean);
-    if (!imgA || !imgB || list.length < 2) return;
-
-    let index = 0;
-    let showingA = true;
-
-    function swap() {
-      index = (index + 1) % list.length;
-      const visible = showingA ? imgA : imgB;
-      const hidden = showingA ? imgB : imgA;
-      hidden.setAttribute('src', list[index]);
-      visible.style.opacity = '0';
-      hidden.style.opacity = '1';
-      hidden.style.zIndex = '2';
-      visible.style.zIndex = '1';
-      showingA = !showingA;
-    }
-
-    setTimeout(swap, 2000);
-    setInterval(swap, 5000);
-  }
-
   /* ─── Mobile Navigation ─── */
   function initMobileNav() {
     const toggle = document.getElementById('mobile-toggle');
@@ -492,6 +488,20 @@
     });
   }
 
+  /* ─── Spline viewer: “Built with Spline” rozeti (shadow içi #logo) ─── */
+  function initSplineBrandingHide() {
+    document.querySelectorAll('spline-viewer').forEach((viewer) => {
+      const hide = () => {
+        try {
+          const logo = viewer.shadowRoot && viewer.shadowRoot.querySelector('#logo');
+          if (logo) logo.style.setProperty('display', 'none', 'important');
+        } catch (_) { /* ignore */ }
+      };
+      viewer.addEventListener('load-complete', hide);
+      hide();
+    });
+  }
+
   /* ─── Navbar Scroll Enhancement ─── */
   function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
@@ -512,11 +522,11 @@
     initParticles();
     initScrollAnimations();
     initNumberTicker();
-    initHeroSlideshow();
     initMobileNav();
     initSmoothScroll();
     initActiveNavHighlight();
     initSpotlightEffect();
     initNavbarScroll();
+    initSplineBrandingHide();
   });
 })();

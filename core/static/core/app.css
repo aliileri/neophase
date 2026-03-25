@@ -1,7 +1,7 @@
 /* ============================================
    NeoPhase — 21st.dev Inspired Design System
    Light Theme + Modern Component Aesthetics
-   Animated borders, shimmer, bento grid, marquee
+   Animated borders, shimmer, bento grid
    ============================================ */
 
 /* ---------- CSS Variables ---------- */
@@ -419,63 +419,6 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
-/* ---------- MARQUEE (21st.dev logo scroll) ---------- */
-.marquee-container {
-  position: relative;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-}
-
-.marquee-track {
-  display: flex;
-  gap: 3rem;
-  animation: marqueeScroll 30s linear infinite;
-  width: max-content;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@keyframes marqueeScroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.25rem 2.5rem;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-card);
-  min-width: 180px;
-  height: 90px;
-  flex-shrink: 0;
-  transition: all var(--transition);
-}
-
-.marquee-item:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
-}
-
-.marquee-item img {
-  max-height: 44px;
-  max-width: 140px;
-  object-fit: contain;
-  opacity: 0.55;
-  filter: grayscale(100%);
-  transition: all var(--transition);
-}
-
-.marquee-item:hover img {
-  opacity: 1;
-  filter: grayscale(0%);
-}
-
 /* ==========================================
    LAYOUT SECTIONS
    ========================================== */
@@ -594,10 +537,11 @@ h1, h2, h3, h4, h5, h6 {
 .hero {
   position: relative;
   z-index: 1;
-  padding: 5rem 0 4rem;
-  overflow: hidden;
+  padding: 3.25rem 0 4rem;
+  overflow-x: clip;
+  overflow-y: visible;
 }
-@media (min-width: 768px) { .hero { padding: 6rem 0 5rem; } }
+@media (min-width: 768px) { .hero { padding: 4.25rem 0 5rem; } }
 
 .hero-grid {
   display: grid;
@@ -606,6 +550,90 @@ h1, h2, h3, h4, h5, h6 {
 }
 @media (min-width: 768px) {
   .hero-grid { grid-template-columns: 1.1fr 0.9fr; gap: 3.5rem; }
+}
+
+.hero-grid--single {
+  grid-template-columns: 1fr;
+  max-width: 44rem;
+}
+@media (min-width: 768px) {
+  .hero-grid--single {
+    grid-template-columns: 1fr;
+  }
+}
+.hero-grid--single .hero-description {
+  max-width: none;
+}
+
+/* Hero + Spline: metin solda, 3D sağda (geniş sütun + viewport sağına kadar genişlik) */
+.hero-grid--with-spline {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  max-width: none;
+}
+.hero-grid--with-spline .hero-copy {
+  min-width: 0;
+}
+@media (min-width: 1024px) {
+  .hero-grid--with-spline {
+    /* Yazı sütunu geniş, 3D daha dar + sağa taşma ile doluyor */
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    gap: 1.25rem;
+    align-items: stretch;
+  }
+}
+@media (min-width: 1280px) {
+  .hero-grid--with-spline {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 1rem;
+  }
+}
+.hero-spline {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  min-height: 320px;
+  height: clamp(320px, 58vh, 600px);
+  border-radius: var(--radius-md, 10px);
+  overflow: hidden;
+  background: transparent;
+}
+@media (min-width: 1024px) {
+  .hero-spline {
+    min-height: 480px;
+    height: min(72vh, 720px);
+    /* Kutu gerçekten genişler + sağ padding ötesine taşar */
+    --hero-bleed: max(0px, (100vw - var(--container)) / 2 + 2rem);
+    width: calc(100% + var(--hero-bleed));
+    max-width: none;
+    margin-right: calc(-1 * var(--hero-bleed));
+    align-self: stretch;
+    /* Sağa yapışık panel: büyük beyaz “çerçeve” hissi azalır */
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+.hero-spline spline-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+}
+/* Sahne sağa: ölçek + hafif sağa kaydır */
+@media (min-width: 1024px) {
+  .hero-spline spline-viewer {
+    transform: translateX(4%) scale(1.24);
+    transform-origin: 100% 50%;
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (min-width: 1280px) {
+  .hero-spline spline-viewer {
+    transform: translateX(5%) scale(1.28);
+    transform-origin: 100% 48%;
+  }
 }
 
 .hero h1 {
@@ -622,6 +650,10 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 520px;
   margin-bottom: 1.75rem;
 }
+/* Spline’lı hero: başlık + gövde metni daha geniş kolon kullanır */
+.hero-grid--with-spline .hero-description {
+  max-width: min(40rem, 100%);
+}
 
 .hero-actions {
   display: flex;
@@ -634,40 +666,6 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-/* Hero visual */
-.hero-visual-wrapper {
-  position: relative;
-}
-
-.hero-visual-wrapper .glow-bg {
-  position: absolute;
-  inset: -20%;
-  background: radial-gradient(circle at 50% 50%, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.08) 30%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero-visual {
-  position: relative;
-  z-index: 1;
-  border-radius: var(--radius-2xl);
-  overflow: hidden;
-  border: 1px solid var(--border-default);
-  background: var(--bg-tertiary);
-  min-height: 260px;
-  box-shadow: var(--shadow-xl);
-}
-@media (min-width: 768px) { .hero-visual { min-height: 340px; } }
-
-.hero-visual img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.8s ease;
 }
 
 /* ---------- SECTIONS ---------- */
@@ -720,24 +718,6 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--border-subtle);
   border: none;
 }
-
-/* ---------- INFO BANNER ---------- */
-.info-banner {
-  margin-top: 3rem;
-  padding: 1.75rem 2rem;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  text-align: center;
-}
-
-.info-banner p {
-  color: var(--text-secondary);
-  font-size: 0.9375rem;
-  line-height: 1.8;
-}
-
-.info-banner strong { color: var(--text-primary); }
 
 /* ---------- OUTLINE BUTTON ---------- */
 .btn-outline {
@@ -934,6 +914,94 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.8125rem;
   color: var(--text-secondary);
   font-weight: 500;
+}
+
+.stat-label--long {
+  font-size: 0.75rem;
+  line-height: 1.45;
+  max-width: 16rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-number--static {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+.what-lead {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0.25rem;
+}
+
+.cta-section {
+  padding: 3rem 0 4rem;
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+}
+
+.container--narrow {
+  max-width: 40rem;
+}
+
+.cta-panel {
+  text-align: center;
+}
+
+.cta-panel h2 {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+
+.cta-desc {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.contact-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  text-align: left;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+
+.contact-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.contact-list li:last-child {
+  border-bottom: none;
+}
+
+.contact-list i {
+  width: 1.25rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.contact-list a {
+  color: var(--accent);
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.contact-list a:hover {
+  text-decoration: underline;
 }
 
 /* ==========================================
