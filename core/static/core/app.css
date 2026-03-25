@@ -70,9 +70,7 @@ body {
 /* Splash açıkken iOS scroll sorununu önle */
 body.splash-open {
   overflow: hidden;
-  position: fixed;
-  width: 100%;
-  height: 100%;
+  height: 100dvh;
 }
 
 /* ---------- Layout ---------- */
@@ -87,10 +85,9 @@ body.splash-open {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
   height: 100%;
+  height: 100dvh;
   z-index: 10000;
   background: #050510;
   display: flex;

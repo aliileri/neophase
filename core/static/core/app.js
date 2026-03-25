@@ -205,8 +205,8 @@
     const main = document.getElementById('main');
     if (!splash || !navbar || !main) return;
 
-    // Skip splash if already done this session
-    if (sessionStorage.getItem('np-splash-done')) {
+    // Skip splash if already done this session (only on same-page navigation, not fresh loads)
+    if (sessionStorage.getItem('np-splash-done') && document.referrer.includes(location.hostname)) {
       splash.classList.add('splash--done');
       navbar.classList.add('show');
       main.classList.remove('main--hidden');
@@ -214,6 +214,8 @@
       revealAllItems();
       return;
     }
+    // Always clear on fresh visit
+    sessionStorage.removeItem('np-splash-done');
 
     // Lock scroll (iOS fix: use class instead of just overflow)
     document.body.classList.add('splash-open');
