@@ -5,7 +5,6 @@ from django import forms
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from django.conf import settings
 from django.utils import timezone
 from django.core.mail import EmailMessage
 
@@ -76,7 +75,6 @@ def index(request: HttpRequest) -> HttpResponse:
         'year': timezone.now().year,
         'success': success,
         'initial_view': 'cta' if request.method == 'POST' else 'who',
-        'spline_scene_url': settings.SPLINE_SCENE_URL,
     }
     return render(request, 'core/index.html', context)
 

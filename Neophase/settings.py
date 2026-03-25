@@ -81,12 +81,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Spline 3D: ortamda SPLINE_SCENE_URL ile değiştirilebilir
-SPLINE_SCENE_URL = os.environ.get(
-    'SPLINE_SCENE_URL',
-    'https://prod.spline.design/TdAZnGO3ctT4SX1L/scene.splinecode',
-).strip()
-
 
 
 # Email configuration
