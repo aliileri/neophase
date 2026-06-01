@@ -6,14 +6,14 @@ const WA_URL =
   'https://wa.me/4915229003063?text=Hallo%20Sevo%2C%20ich%20m%C3%B6chte%20eine%20unverbindliche%20Anfrage%20stellen.'
 
 export default function HeroSection() {
-  const sectionRef  = useRef<HTMLElement>(null)
-  const videoRef    = useRef<HTMLVideoElement>(null)
-  const canvasRef   = useRef<HTMLCanvasElement>(null)
-  const stageRef    = useRef<HTMLDivElement>(null)
+  const sectionRef     = useRef<HTMLElement>(null)
+  const videoRef       = useRef<HTMLVideoElement>(null)
+  const canvasRef      = useRef<HTMLCanvasElement>(null)
+  const stageRef       = useRef<HTMLDivElement>(null)
   const rafChromaRef   = useRef<number>(0)
   const rafParallaxRef = useRef<number>(0)
 
-  // ── 1. Canvas Chroma-Key RAF loop ──────────────────────────────────
+  // ── 1. Canvas chroma-key: saturation-based gray removal ────────────
   useEffect(() => {
     const video  = videoRef.current
     const canvas = canvasRef.current
@@ -27,7 +27,6 @@ export default function HeroSection() {
     const processFrame = () => {
       if (video.currentTime !== lastTime) {
         lastTime = video.currentTime
-
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
 
@@ -37,9 +36,15 @@ export default function HeroSection() {
         for (let i = 0; i < d.length; i += 4) {
           const r = d[i], g = d[i + 1], b = d[i + 2]
 
-          // Feathered key: starts fading at 210, fully transparent at 235+
-          if (r > 210 && g > 210 && b > 210) {
-            const t = Math.min((Math.min(r, g, b) - 210) / 25, 1)
+          // Saturation-based key: neutral grays (low saturation) AND bright
+          const maxC = Math.max(r, g, b)
+          const minC = Math.min(r, g, b)
+          const sat  = maxC > 0 ? (maxC - minC) / maxC : 0
+          const lum  = (r + g + b) / 3
+
+          if (sat < 0.14 && lum > 155) {
+            // Feathered fade: starts at lum 155, fully gone at 210+
+            const t = Math.min((lum - 155) / 55, 1)
             d[i + 3] = Math.round((1 - t) * 255)
           }
         }
@@ -54,7 +59,7 @@ export default function HeroSection() {
     return () => cancelAnimationFrame(rafChromaRef.current)
   }, [])
 
-  // ── 2. GSAP ScrollTrigger scroll-scrub ────────────────────────────
+  // ── 2. GSAP scroll-scrub (CSS sticky — no pin, no layout break) ────
   useEffect(() => {
     if (typeof window === 'undefined') return
 
@@ -71,13 +76,11 @@ export default function HeroSection() {
 
       const setup = () => {
         const duration = video.duration || 3
-
         triggers.push(
           ScrollTrigger.create({
             trigger: section,
             start:   'top top',
-            end:     `+=${window.innerHeight * 2.5}`,
-            pin:     true,
+            end:     'bottom bottom',  // section is 300vh → full scroll range
             scrub:   1.2,
             onUpdate: (self) => {
               video.currentTime = self.progress * duration
@@ -86,17 +89,14 @@ export default function HeroSection() {
         )
       }
 
-      if (video.readyState >= 1) {
-        setup()
-      } else {
-        video.addEventListener('loadedmetadata', setup, { once: true })
-      }
+      if (video.readyState >= 1) setup()
+      else video.addEventListener('loadedmetadata', setup, { once: true })
     })()
 
     return () => triggers.forEach((t) => t.kill())
   }, [])
 
-  // ── 3. Mouse Parallax Tilt ─────────────────────────────────────────
+  // ── 3. Mouse parallax tilt ─────────────────────────────────────────
   useEffect(() => {
     const stage  = stageRef.current
     const canvas = canvasRef.current
@@ -108,12 +108,11 @@ export default function HeroSection() {
 
     const onMove = (e: MouseEvent) => {
       const r  = stage.getBoundingClientRect()
-      const nx = (e.clientX - r.left)  / r.width  - 0.5
-      const ny = (e.clientY - r.top)   / r.height - 0.5
+      const nx = (e.clientX - r.left) / r.width  - 0.5
+      const ny = (e.clientY - r.top)  / r.height - 0.5
       targetX =  ny * 14
       targetY = -nx * 14
     }
-
     const onLeave = () => { targetX = 0; targetY = 0 }
 
     const tick = () => {
@@ -138,11 +137,14 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative min-h-screen bg-navy flex items-center pt-16 overflow-hidden"
-    >
-      {/* Hidden video — source for canvas + scroll scrub */}
+    /*
+     * Tall section (300vh) gives GSAP the scroll range.
+     * The inner sticky div stays fixed in the viewport while user scrolls.
+     * This avoids GSAP pin which breaks grid/flex layouts.
+     */
+    <section ref={sectionRef} className="relative bg-navy" style={{ height: '300vh' }}>
+
+      {/* Hidden video — sole source for canvas + scrub */}
       <video
         ref={videoRef}
         src="/assets/hero-transition.mp4"
@@ -153,72 +155,77 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20 w-full">
+      {/* Sticky viewport — always fills the screen while section scrolls */}
+      <div className="sticky top-0 h-screen flex items-center overflow-hidden pt-16">
 
-        {/* Left: copy */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="order-2 lg:order-1 z-10"
-        >
-          <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-4">
-            Ulm &amp; Umgebung
-          </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-off-white leading-tight mb-6">
-            Alles aus <span className="text-gold">einer Hand!</span>
-          </h1>
-          <p className="text-off-white/60 text-lg mb-8 max-w-md leading-relaxed">
-            Kfz-Service, Hausrenovierung, Gebrauchtwarenhandel und Reinigung —
-            Ihr zuverlässiger Partner in Ulm.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <a
-              href={WA_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gold text-navy font-bold px-8 py-4 rounded text-center hover:bg-gold/90 transition-all duration-200 text-lg"
-            >
-              Unverbindliche Anfrage
-            </a>
-            <a
-              href="tel:+4915229003063"
-              className="border border-off-white/30 text-off-white px-8 py-4 rounded text-center hover:border-gold hover:text-gold transition-all duration-200 text-lg"
-            >
-              ☎ Anrufen
-            </a>
+        {/* Grid: text left, canvas right */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+
+          {/* Left: copy */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="order-2 lg:order-1"
+          >
+            <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-4">
+              Ulm &amp; Umgebung
+            </p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-off-white leading-tight mb-6">
+              Alles aus <span className="text-gold">einer Hand!</span>
+            </h1>
+            <p className="text-off-white/60 text-lg mb-8 max-w-md leading-relaxed">
+              Kfz-Service, Hausrenovierung, Gebrauchtwarenhandel und Reinigung —
+              Ihr zuverlässiger Partner in Ulm.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                href={WA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gold text-navy font-bold px-8 py-4 rounded text-center hover:bg-gold/90 transition-all duration-200 text-lg"
+              >
+                Unverbindliche Anfrage
+              </a>
+              <a
+                href="tel:+4915229003063"
+                className="border border-off-white/30 text-off-white px-8 py-4 rounded text-center hover:border-gold hover:text-gold transition-all duration-200 text-lg"
+              >
+                ☎ Anrufen
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right: 3D canvas stage */}
+          <div
+            ref={stageRef}
+            className="order-1 lg:order-2 flex items-center justify-center"
+            style={{ perspective: '1200px' }}
+          >
+            <canvas
+              ref={canvasRef}
+              width={1000}
+              height={1000}
+              className="w-full max-w-[560px] h-auto"
+              style={{
+                transformOrigin: 'center center',
+                willChange: 'transform',
+                filter: 'drop-shadow(0 8px 60px rgba(212,175,55,0.10))',
+              }}
+            />
           </div>
-        </motion.div>
-
-        {/* Right: 3D canvas stage */}
-        <div
-          ref={stageRef}
-          className="order-1 lg:order-2 flex items-center justify-center"
-          style={{ perspective: '1200px' }}
-        >
-          <canvas
-            ref={canvasRef}
-            width={1000}
-            height={1000}
-            className="w-full max-w-[520px] h-auto"
-            style={{
-              transformOrigin: 'center center',
-              willChange: 'transform',
-              // subtle ambient glow matching navy bg
-              filter: 'drop-shadow(0 0 40px rgba(212,175,55,0.08))',
-            }}
-          />
         </div>
-      </div>
 
-      {/* Scroll cue */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none">
-        <span className="text-off-white/30 text-xs tracking-widest uppercase">Scroll</span>
-        <div className="text-off-white/30 animate-bounce">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+        {/* Scroll cue */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 pointer-events-none">
+          <span className="text-off-white/25 text-xs tracking-widest uppercase">Scroll</span>
+          <div className="text-off-white/25 animate-bounce">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
+
       </div>
     </section>
   )
