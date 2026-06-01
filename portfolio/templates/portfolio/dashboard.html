@@ -72,9 +72,7 @@
               </td>
               <td class="text-end">{{ row.asset.quantity }}</td>
               <td class="text-end">
-                {% if row.price %}
-                  {{ row.asset.quantity|floatformat:0 }}×{{ row.price.price_eur|floatformat:2 }}
-                {% else %}—{% endif %}
+                {% if row.value_eur %}{{ row.value_eur|floatformat:2 }}{% else %}—{% endif %}
               </td>
               <td class="text-center">
                 {% if row.decision == "AL" %}

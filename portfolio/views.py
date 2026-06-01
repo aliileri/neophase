@@ -27,9 +27,13 @@ def dashboard(request):
             price_obj = DailyPrice.objects.filter(asset=asset).first()
 
         decision_data = analysis.get(asset.symbol, {})
+        value_eur = None
+        if price_obj is not None:
+            value_eur = round(float(asset.quantity) * float(price_obj.price_eur), 2)
         asset_rows.append({
             "asset": asset,
             "price": price_obj,
+            "value_eur": value_eur,
             "decision": decision_data.get("decision", ""),
             "rationale": decision_data.get("rationale", ""),
         })

@@ -22,6 +22,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         today = date.today()
+        if not settings.FINNHUB_API_KEY:
+            self.stderr.write(self.style.ERROR("FINNHUB_API_KEY ortam değişkeni ayarlanmamış"))
+        if not settings.ANTHROPIC_API_KEY:
+            self.stderr.write(self.style.ERROR("ANTHROPIC_API_KEY ortam değişkeni ayarlanmamış"))
         self.stdout.write(f"[morning_brief] {today} başladı")
 
         # 1. Döviz kurları
@@ -152,7 +156,9 @@ class Command(BaseCommand):
             # XAUUSD → USD/oz, EUR/USD kuruna böl
             if eur_usd is None:
                 return None
-            result = self._finnhub_quote(symbol)
+            # Map common gold symbols to Finnhub's format
+            finnhub_symbol = "OANDA:XAU_USD" if symbol.upper() in ("XAUUSD", "XAU_USD", "XAU/USD") else symbol
+            result = self._finnhub_quote(finnhub_symbol)
             if result is None:
                 return None
             price_usd, change_pct = result
