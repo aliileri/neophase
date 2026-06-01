@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from datetime import date
 
 import requests
@@ -81,23 +82,9 @@ class Command(BaseCommand):
     # ------------------------------------------------------------------ #
 
     def _finnhub_price(self, symbol: str) -> float | None:
-        """Finnhub quote endpoint'inden mevcut fiyatı döner. Hata → None."""
-        try:
-            r = requests.get(
-                FINNHUB_BASE,
-                params={"symbol": symbol, "token": settings.FINNHUB_API_KEY},
-                timeout=10,
-            )
-            r.raise_for_status()
-            data = r.json()
-            price = data.get("c")
-            if not price:
-                logger.warning("Finnhub %s: fiyat boş (%s)", symbol, data)
-                return None
-            return float(price)
-        except Exception as exc:
-            logger.error("Finnhub %s hatası: %s", symbol, exc)
-            return None
+        """Finnhub'dan sadece mevcut fiyatı döner. Kur çekmek için kullanılır."""
+        result = self._finnhub_quote(symbol)
+        return result[0] if result is not None else None
 
     def _finnhub_quote(self, symbol: str) -> tuple[float, float | None] | None:
         """(price, change_pct) döner. Hata → None."""
@@ -110,7 +97,7 @@ class Command(BaseCommand):
             r.raise_for_status()
             data = r.json()
             price = data.get("c")
-            if not price:
+            if price is None:
                 logger.warning("Finnhub %s: fiyat boş", symbol)
                 return None
             change_pct = data.get("dp")
@@ -181,8 +168,9 @@ class Command(BaseCommand):
         if symbol.endswith(".L"):
             if eur_gbp is None:
                 return None
-            # LSE hisseler genellikle pence cinsinden gelir (÷100 gerekebilir)
-            # Finnhub bazen GBP bazen GBp döner; 100'den büyükse pence varsay
+            # LSE prices: Finnhub returns GBp (pence) for many UK stocks.
+            # Heuristic: divide by 100 if price > 100. Verify actual Finnhub output
+            # for your specific symbols — some LSE ETFs (e.g. VGWD.L) may be USD-denominated.
             price_gbp = raw_price / 100 if raw_price > 100 else raw_price
             return price_gbp / eur_gbp, change_pct
 
@@ -202,6 +190,7 @@ class Command(BaseCommand):
     def _claude_analysis(self, prices: dict[Asset, tuple[float, float | None]]) -> dict:
         """Tüm fiyatları Claude'a gönder, web_search ile analiz yaptır."""
         try:
+            text = ""  # always defined before json.loads
             import anthropic
 
             price_lines = []
@@ -236,23 +225,22 @@ class Command(BaseCommand):
             )
 
             # İçerik bloklarından metin topla
-            text = ""
             for block in response.content:
                 if hasattr(block, "text"):
                     text += block.text
 
             # JSON parse et
             text = text.strip()
-            # Bazen ```json ... ``` içinde gelir
-            if text.startswith("```"):
-                lines = text.split("\n")
-                text = "\n".join(lines[1:-1])
+            # Extract JSON object from response (handles ```json fences and leading prose)
+            json_match = re.search(r'\{.*\}', text, re.DOTALL)
+            if json_match:
+                text = json_match.group(0)
 
             return json.loads(text)
 
         except json.JSONDecodeError as exc:
             logger.error("Claude yanıtı JSON parse edilemedi: %s", exc)
-            return {"raw": text if "text" in dir() else "", "error": "json_parse"}
+            return {"raw": text, "error": "json_parse"}
         except Exception as exc:
             logger.error("Claude analizi hatası: %s", exc)
             return {"error": str(exc)}
