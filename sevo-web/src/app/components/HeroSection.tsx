@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 const WA_URL =
   'https://wa.me/4915229003063?text=Hallo%20Sevo%2C%20ich%20m%C3%B6chte%20eine%20unverbindliche%20Anfrage%20stellen.'
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? ''
+
 export default function HeroSection() {
   const stageRef       = useRef<HTMLDivElement>(null)
   const tiltRef        = useRef<HTMLDivElement>(null)
@@ -107,12 +109,12 @@ export default function HeroSection() {
             style={{ transformOrigin: 'center center' }}
           >
             <video
-              src="/assets/hero-transition.mp4"
+              src={`${BASE}/assets/hero-transition.mp4`}
               autoPlay
               muted
               loop
               playsInline
-              poster="/assets/hero.png"
+              poster={`${BASE}/assets/hero.png`}
               className="w-full h-auto max-h-[80vh] object-contain select-none pointer-events-none rounded-2xl"
             />
           </div>
