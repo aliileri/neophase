@@ -5,6 +5,15 @@ import { motion } from 'framer-motion'
 const WA_URL =
   'https://wa.me/4915229003063?text=Hallo%20Sevo%2C%20ich%20m%C3%B6chte%20eine%20unverbindliche%20Anfrage%20stellen.'
 
+// Internal canvas resolution. 600 stays crisp at the ~560px display size
+// while cutting per-frame pixel work by ~64% vs 1000 → kills the jank.
+const SIZE = 600
+
+// Radial feather so the rectangular video edges melt into the navy
+// background instead of reading as an isolated box.
+const FEATHER_MASK =
+  'radial-gradient(ellipse 76% 76% at 50% 44%, #000 48%, rgba(0,0,0,0.55) 66%, transparent 82%)'
+
 export default function HeroSection() {
   const sectionRef     = useRef<HTMLElement>(null)
   const videoRef       = useRef<HTMLVideoElement>(null)
@@ -13,7 +22,7 @@ export default function HeroSection() {
   const rafChromaRef   = useRef<number>(0)
   const rafParallaxRef = useRef<number>(0)
 
-  // ── 1. Canvas chroma-key: saturation-based gray removal ────────────
+  // ── 1. Canvas chroma-key: saturation-based neutral removal ─────────
   useEffect(() => {
     const video  = videoRef.current
     const canvas = canvasRef.current
@@ -25,26 +34,26 @@ export default function HeroSection() {
     let lastTime = -1
 
     const processFrame = () => {
-      if (video.currentTime !== lastTime) {
+      // Only reprocess when the frame actually advanced (idle = free).
+      if (video.currentTime !== lastTime && video.readyState >= 2) {
         lastTime = video.currentTime
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+        ctx.clearRect(0, 0, SIZE, SIZE)
+        ctx.drawImage(video, 0, 0, SIZE, SIZE)
 
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        const imageData = ctx.getImageData(0, 0, SIZE, SIZE)
         const d = imageData.data
 
         for (let i = 0; i < d.length; i += 4) {
           const r = d[i], g = d[i + 1], b = d[i + 2]
-
-          // Saturation-based key: neutral grays (low saturation) AND bright
           const maxC = Math.max(r, g, b)
           const minC = Math.min(r, g, b)
           const sat  = maxC > 0 ? (maxC - minC) / maxC : 0
           const lum  = (r + g + b) / 3
 
-          if (sat < 0.14 && lum > 155) {
-            // Feathered fade: starts at lum 155, fully gone at 210+
-            const t = Math.min((lum - 155) / 55, 1)
+          // Neutral (low-saturation) AND bright → it's the studio backdrop.
+          // Coloured / golden / navy model pixels are high-sat → kept.
+          if (sat < 0.16 && lum > 140) {
+            const t = Math.min((lum - 140) / 60, 1) // feather 140 → 200
             d[i + 3] = Math.round((1 - t) * 255)
           }
         }
@@ -59,10 +68,9 @@ export default function HeroSection() {
     return () => cancelAnimationFrame(rafChromaRef.current)
   }, [])
 
-  // ── 2. GSAP scroll-scrub (CSS sticky — no pin, no layout break) ────
+  // ── 2. GSAP scroll-scrub (CSS sticky, no pin → layout stays intact) ─
   useEffect(() => {
     if (typeof window === 'undefined') return
-
     const triggers: Array<{ kill: () => void }> = []
 
     ;(async () => {
@@ -80,7 +88,7 @@ export default function HeroSection() {
           ScrollTrigger.create({
             trigger: section,
             start:   'top top',
-            end:     'bottom bottom',  // section is 300vh → full scroll range
+            end:     'bottom bottom',
             scrub:   1.2,
             onUpdate: (self) => {
               video.currentTime = self.progress * duration
@@ -96,7 +104,7 @@ export default function HeroSection() {
     return () => triggers.forEach((t) => t.kill())
   }, [])
 
-  // ── 3. Mouse parallax tilt ─────────────────────────────────────────
+  // ── 3. Mouse parallax tilt (idle-aware to avoid pointless writes) ───
   useEffect(() => {
     const stage  = stageRef.current
     const canvas = canvasRef.current
@@ -104,27 +112,38 @@ export default function HeroSection() {
 
     let targetX = 0, targetY = 0
     let currentX = 0, currentY = 0
-    let running = true
+    let running = false
+
+    const start = () => {
+      if (running) return
+      running = true
+      tick()
+    }
+
+    const tick = () => {
+      currentX += (targetX - currentX) * 0.08
+      currentY += (targetY - currentY) * 0.08
+      canvas.style.transform =
+        `rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg)`
+
+      // Settle → stop the loop until the next interaction.
+      if (Math.abs(targetX - currentX) < 0.01 && Math.abs(targetY - currentY) < 0.01) {
+        running = false
+        return
+      }
+      rafParallaxRef.current = requestAnimationFrame(tick)
+    }
 
     const onMove = (e: MouseEvent) => {
       const r  = stage.getBoundingClientRect()
       const nx = (e.clientX - r.left) / r.width  - 0.5
       const ny = (e.clientY - r.top)  / r.height - 0.5
-      targetX =  ny * 14
-      targetY = -nx * 14
+      targetX =  ny * 12
+      targetY = -nx * 12
+      start()
     }
-    const onLeave = () => { targetX = 0; targetY = 0 }
+    const onLeave = () => { targetX = 0; targetY = 0; start() }
 
-    const tick = () => {
-      if (!running) return
-      currentX += (targetX - currentX) * 0.07
-      currentY += (targetY - currentY) * 0.07
-      canvas.style.transform =
-        `rotateX(${currentX.toFixed(3)}deg) rotateY(${currentY.toFixed(3)}deg)`
-      rafParallaxRef.current = requestAnimationFrame(tick)
-    }
-
-    tick()
     stage.addEventListener('mousemove', onMove)
     stage.addEventListener('mouseleave', onLeave)
 
@@ -137,11 +156,6 @@ export default function HeroSection() {
   }, [])
 
   return (
-    /*
-     * Tall section (300vh) gives GSAP the scroll range.
-     * The inner sticky div stays fixed in the viewport while user scrolls.
-     * This avoids GSAP pin which breaks grid/flex layouts.
-     */
     <section ref={sectionRef} className="relative bg-navy" style={{ height: '300vh' }}>
 
       {/* Hidden video — sole source for canvas + scrub */}
@@ -155,10 +169,8 @@ export default function HeroSection() {
         aria-hidden="true"
       />
 
-      {/* Sticky viewport — always fills the screen while section scrolls */}
+      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen flex items-center overflow-hidden pt-16">
-
-        {/* Grid: text left, canvas right */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
 
           {/* Left: copy */}
@@ -199,18 +211,29 @@ export default function HeroSection() {
           {/* Right: 3D canvas stage */}
           <div
             ref={stageRef}
-            className="order-1 lg:order-2 flex items-center justify-center"
+            className="order-1 lg:order-2 relative flex items-center justify-center"
             style={{ perspective: '1200px' }}
           >
+            {/* Ambient radial glow — anchors the asset into the scene */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  'radial-gradient(circle at 50% 46%, rgba(212,175,55,0.14) 0%, rgba(37,99,235,0.06) 38%, transparent 68%)',
+                filter: 'blur(8px)',
+              }}
+            />
             <canvas
               ref={canvasRef}
-              width={1000}
-              height={1000}
-              className="w-full max-w-[560px] h-auto"
+              width={SIZE}
+              height={SIZE}
+              className="relative w-full max-w-[560px] h-auto"
               style={{
                 transformOrigin: 'center center',
                 willChange: 'transform',
-                filter: 'drop-shadow(0 8px 60px rgba(212,175,55,0.10))',
+                maskImage: FEATHER_MASK,
+                WebkitMaskImage: FEATHER_MASK,
               }}
             />
           </div>
