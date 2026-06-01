@@ -24,11 +24,11 @@ export default function ServiceCard({ icon, title, description, whatsappText }: 
       whileHover={{ scale: 1.03, rotateX: 4, rotateY: -4 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       style={{ transformStyle: 'preserve-3d' }}
-      className="bg-navy border border-off-white/10 rounded-xl p-6 flex flex-col gap-4 border-t-[3px] border-t-gold"
+      className="bg-white border border-navy/5 rounded-xl p-6 flex flex-col gap-4 border-t-[3px] border-t-gold shadow-[0_8px_30px_rgba(10,25,47,0.06)] hover:shadow-[0_18px_50px_rgba(10,25,47,0.13)]"
     >
       <span className="text-4xl" role="img" aria-label={title}>{icon}</span>
-      <h3 className="text-off-white font-bold text-xl">{title}</h3>
-      <p className="text-off-white/55 text-sm leading-relaxed flex-1">{description}</p>
+      <h3 className="text-navy font-bold text-xl">{title}</h3>
+      <p className="text-navy/55 text-sm leading-relaxed flex-1">{description}</p>
       <a
         href={`${WA_BASE}${encodeURIComponent(whatsappText)}`}
         target="_blank"

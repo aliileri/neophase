@@ -41,33 +41,33 @@ function Star() {
 
 export default function ReviewsSection() {
   return (
-    <section id="bewertungen" className="bg-[#060f1e] py-24">
+    <section id="bewertungen" className="bg-white py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-off-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy mb-4">
             Was unsere Kunden sagen
           </h2>
           <div className="flex items-center justify-center gap-1 mb-2" aria-label="5 von 5 Sternen">
             {Array.from({ length: 5 }).map((_, i) => <Star key={i} />)}
           </div>
-          <p className="text-off-white/40 text-sm">5.0 · Über 50 zufriedene Kunden in Ulm</p>
+          <p className="text-navy/50 text-sm">5.0 · Über 50 zufriedene Kunden in Ulm</p>
         </div>
 
         <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible">
           {REVIEWS.map((r) => (
             <article
               key={r.name}
-              className="min-w-[275px] md:min-w-0 snap-start bg-off-white/5 backdrop-blur-sm border border-off-white/10 rounded-xl p-6 flex flex-col gap-3"
+              className="min-w-[275px] md:min-w-0 snap-start bg-[#f5f7fa] border border-navy/5 rounded-xl p-6 flex flex-col gap-3 shadow-[0_6px_24px_rgba(10,25,47,0.05)]"
             >
               <div className="flex gap-0.5" aria-label="5 Sterne">
                 {Array.from({ length: 5 }).map((_, i) => <Star key={i} />)}
               </div>
-              <p className="text-off-white/80 text-sm italic leading-relaxed flex-1">
+              <p className="text-navy/75 text-sm italic leading-relaxed flex-1">
                 &ldquo;{r.text}&rdquo;
               </p>
-              <div className="mt-auto pt-3 border-t border-off-white/10">
-                <p className="text-off-white font-semibold text-sm">{r.name}</p>
-                <p className="text-off-white/40 text-xs">{r.location} · {r.service}</p>
+              <div className="mt-auto pt-3 border-t border-navy/10">
+                <p className="text-navy font-semibold text-sm">{r.name}</p>
+                <p className="text-navy/40 text-xs">{r.location} · {r.service}</p>
               </div>
             </article>
           ))}

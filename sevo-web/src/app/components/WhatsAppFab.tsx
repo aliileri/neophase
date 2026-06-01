@@ -12,7 +12,7 @@ function WhatsAppIcon() {
 export default function WhatsAppFab() {
   return (
     <div className="fixed bottom-6 right-4 z-50 flex flex-col items-end gap-2">
-      <span className="hidden sm:block bg-navy/90 text-off-white/70 text-xs px-3 py-1.5 rounded-full border border-off-white/10 whitespace-nowrap">
+      <span className="hidden sm:block bg-white text-navy/70 text-xs px-3 py-1.5 rounded-full border border-navy/10 shadow-md whitespace-nowrap">
         Schnellanfrage via WhatsApp
       </span>
       <a

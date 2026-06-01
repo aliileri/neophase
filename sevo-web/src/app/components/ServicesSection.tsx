@@ -33,13 +33,13 @@ const SERVICES = [
 
 export default function ServicesSection() {
   return (
-    <section id="leistungen" className="bg-navy py-24">
+    <section id="leistungen" className="bg-[#f5f7fa] py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-off-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy mb-4">
             Unsere Leistungen
           </h2>
-          <p className="text-off-white/40 max-w-xl mx-auto">
+          <p className="text-navy/50 max-w-xl mx-auto">
             Vier Kernbereiche — ein Ansprechpartner. Alles aus einer Hand in Ulm.
           </p>
         </div>

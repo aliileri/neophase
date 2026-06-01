@@ -22,12 +22,12 @@ const PARTICLES = [
 
 export default function CtaSection() {
   return (
-    <section className="relative bg-navy py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-[#fbf3da] via-white to-[#f5f7fa] py-32 overflow-hidden border-y border-gold/20">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {PARTICLES.map((p, i) => (
           <div
             key={i}
-            className="absolute rounded-full bg-gold/20 animate-pulse"
+            className="absolute rounded-full bg-gold/40 animate-pulse"
             style={{
               width: p.size,
               height: p.size,
@@ -41,11 +41,11 @@ export default function CtaSection() {
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-off-white mb-4">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-navy mb-4">
           Bereit für Ihren{' '}
           <span className="text-gold">nächsten Auftrag?</span>
         </h2>
-        <p className="text-off-white/50 text-lg mb-10">
+        <p className="text-navy/60 text-lg mb-10">
           Wir sind in Ulm und Umgebung für Sie da.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

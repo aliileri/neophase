@@ -15,27 +15,27 @@ export default function ImpressumModal({ open, onClose }: Props) {
       aria-modal="true"
       aria-labelledby="impressum-title"
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-navy/50 backdrop-blur-sm" />
       <div
-        className="relative bg-[#0d2240] border border-gold/20 rounded-2xl p-8 max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl"
+        className="relative bg-white border border-gold/30 rounded-2xl p-8 max-w-lg w-full max-h-[80vh] overflow-y-auto shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-off-white/40 hover:text-off-white transition-colors text-3xl leading-none"
+          className="absolute top-4 right-4 text-navy/40 hover:text-navy transition-colors text-3xl leading-none"
           aria-label="Schließen"
         >
           ×
         </button>
-        <h2 id="impressum-title" className="text-gold font-bold text-2xl mb-6">Impressum</h2>
-        <div className="text-off-white/70 text-sm space-y-4 leading-relaxed">
+        <h2 id="impressum-title" className="text-navy font-bold text-2xl mb-6">Impressum</h2>
+        <div className="text-navy/70 text-sm space-y-4 leading-relaxed">
           <div>
-            <p className="text-off-white font-semibold mb-1">Angaben gemäß § 5 TMG</p>
+            <p className="text-navy font-semibold mb-1">Angaben gemäß § 5 TMG</p>
             <p>Sevo Dienstleistungen</p>
             <p>Ulm, Baden-Württemberg, Deutschland</p>
           </div>
           <div>
-            <p className="text-off-white font-semibold mb-1">Kontakt</p>
+            <p className="text-navy font-semibold mb-1">Kontakt</p>
             <p>
               Telefon:{' '}
               <a href="tel:+4915229003063" className="text-gold hover:underline">
@@ -55,20 +55,20 @@ export default function ImpressumModal({ open, onClose }: Props) {
             </p>
           </div>
           <div>
-            <p className="text-off-white font-semibold mb-1">
+            <p className="text-navy font-semibold mb-1">
               Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
             </p>
             <p>Sevo Dienstleistungen, Ulm</p>
           </div>
           <div>
-            <p className="text-off-white font-semibold mb-1">Haftungsausschluss</p>
+            <p className="text-navy font-semibold mb-1">Haftungsausschluss</p>
             <p>
               Die Inhalte dieser Webseite wurden sorgfältig erstellt. Für die Richtigkeit,
               Vollständigkeit und Aktualität der Inhalte übernehmen wir keine Gewähr.
             </p>
           </div>
           <div>
-            <p className="text-off-white font-semibold mb-1">Streitschlichtung</p>
+            <p className="text-navy font-semibold mb-1">Streitschlichtung</p>
             <p>
               Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung
               (OS) bereit: https://ec.europa.eu/consumers/odr. Wir nehmen nicht an einem

@@ -16,16 +16,16 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 w-full z-[200] transition-all duration-300 ${
-        scrolled ? 'bg-navy/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <span className="text-gold font-extrabold text-2xl tracking-widest">SEVO</span>
+        <span className="text-navy font-extrabold text-2xl tracking-widest">SEVO</span>
         <a
           href={WA_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="border border-gold text-gold hover:bg-gold hover:text-navy transition-all duration-200 px-4 py-2 text-sm font-semibold rounded"
+          className="bg-gold text-navy hover:bg-gold/90 transition-all duration-200 px-4 py-2 text-sm font-semibold rounded shadow-sm"
         >
           Jetzt Anfragen
         </a>
