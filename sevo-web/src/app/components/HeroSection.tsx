@@ -113,8 +113,7 @@ export default function HeroSection() {
               loop
               playsInline
               poster="/assets/hero.png"
-              className="w-full h-auto max-h-[80vh] object-contain select-none pointer-events-none"
-              style={{ mixBlendMode: 'multiply', filter: 'brightness(1.13) contrast(1.02)' }}
+              className="w-full h-auto max-h-[80vh] object-contain select-none pointer-events-none rounded-2xl"
             />
           </div>
         </div>
